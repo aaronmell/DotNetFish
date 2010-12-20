@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildImage.cs" />
+    <Compile Include="MessageResult.cs" />
     <Compile Include="Tiler.cs">
       <SubType>Form</SubType>
     </Compile>

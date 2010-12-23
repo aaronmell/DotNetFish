@@ -99,8 +99,8 @@ namespace MapTiler
             saveFileDialog.OverwritePrompt = true;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = "Save Map";
-            saveFileDialog.DefaultExt = ".bmp";
-            saveFileDialog.Filter = "Bitmap Files (*.bmp)|*.bmp";
+            saveFileDialog.DefaultExt = ".dfm";
+            saveFileDialog.Filter = "DotNetFish Map (.dfm)|*.dfm";
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using GMap.NET;
-using System.Globalization;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 
@@ -24,16 +21,7 @@ namespace MapTiler
             InitializeComponent();
 
             if (!DesignMode)
-            {
-                // add your custom map db provider
-                //GMap.NET.CacheProviders.MySQLPureImageCache ch = new GMap.NET.CacheProviders.MySQLPureImageCache();
-                //ch.ConnectionString = @"server=sql2008;User Id=trolis;Persist Security Info=True;database=gmapnetcache;password=trolis;";
-                //MainMap.Manager.ImageCacheSecond = ch;
-
-                // set your proxy here if need
-                //MainMap.Manager.Proxy = new WebProxy("10.2.0.100", 8080);
-                //MainMap.Manager.Proxy.Credentials = new NetworkCredential("ogrenci@bilgeadam.com", "bilgeada");
-
+            {   
                 // set cache mode only if no internet avaible
                 try
                 {
@@ -63,7 +51,6 @@ namespace MapTiler
 
                 // map events
                 MainMap.OnCurrentPositionChanged += new CurrentPositionChanged(MainMap_OnCurrentPositionChanged);               
-                MainMap.MouseMove += new MouseEventHandler(MainMap_MouseMove);
                 MainMap.MouseDown += new MouseEventHandler(MainMap_MouseDown);
                 MainMap.MouseUp += new MouseEventHandler(MainMap_MouseUp);
                                 
@@ -99,61 +86,9 @@ namespace MapTiler
             if (e.Button == MouseButtons.Left)
             {
                 _isMouseDown = true;
-
                 _startPosition = MainMap.FromLocalToLatLng(e.X, e.Y);
-                
-
-                //if (currentMarker.IsVisible)
-                //{
-                //    currentMarker.Position = MainMap.FromLocalToLatLng(e.X, e.Y);
-
-                //    var px = MainMap.Projection.FromLatLngToPixel(currentMarker.Position.Lat, currentMarker.Position.Lng, (int)MainMap.Zoom);
-                //    var tile = MainMap.Projection.FromPixelToTileXY(px);
-
-                //    Debug.WriteLine("marker: " + currentMarker.LocalPosition + " | geo: " + currentMarker.Position + " | px: " + px + " | tile: " + tile);
-                //}
             }
-        }
-
-        // move current marker with left holding
-        void MainMap_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && _isMouseDown)
-            {
-                //if (CurentRectMarker == null)
-                //{
-                //    if (currentMarker.IsVisible)
-                //    {
-                //        currentMarker.Position = MainMap.FromLocalToLatLng(e.X, e.Y);
-                //    }
-                //}
-                //else // move rect marker
-                //{
-                //    PointLatLng pnew = MainMap.FromLocalToLatLng(e.X, e.Y);
-
-                //    int? pIndex = (int?)CurentRectMarker.Tag;
-                //    if (pIndex.HasValue)
-                //    {
-                //        if (pIndex < polygon.Points.Count)
-                //        {
-                //            polygon.Points[pIndex.Value] = pnew;
-                //            MainMap.UpdatePolygonLocalPosition(polygon);
-                //        }
-                //    }
-
-                //    if (currentMarker.IsVisible)
-                //    {
-                //        currentMarker.Position = pnew;
-                //    }
-                //    CurentRectMarker.Position = pnew;
-
-                //    if (CurentRectMarker.InnerMarker != null)
-                //    {
-                //        CurentRectMarker.InnerMarker.Position = pnew;
-                //    }
-                //}
-            }
-        }
+        }        
 
         #endregion     
 
@@ -176,10 +111,7 @@ namespace MapTiler
                 else
                 {
                     MessageBox.Show("You must select a region. Use SHIFT + Left Mouse Button to select a region");
-                }
-
-                
-                
+                }  
             }
         }
 
@@ -189,8 +121,6 @@ namespace MapTiler
             buildImage.BackgroundWorker.ProgressChanged +=new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
             buildImage.BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);           
             buildImage.BackgroundWorker.RunWorkerAsync();
-          
-           
         }
 
         void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

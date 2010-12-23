@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using System.Drawing;
 using GMap.NET;
 using GMap.NET.WindowsForms;
-using System.IO;
-using System.Windows;
-using System.Drawing;
-using System.ComponentModel;
 
 
 namespace MapTiler

@@ -15,12 +15,13 @@ namespace MapBuilder
 
         public LevelBuilder()
         {
-            maptiles = new BitmapImage(new Uri(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\maptiles.png"));
+            //maptiles = new Bitmap(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\maptiles.png"));
         } 
 
         public void BuildWorldObject(string filename)
         {
-            BitmapImage originalMap = new BitmapImage(new Uri(filename));
+            //BitmapImage originalMap = new BitmapImage(new Uri(filename));
+             
         }
     }
 }

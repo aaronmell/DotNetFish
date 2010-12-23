@@ -80,8 +80,7 @@ namespace MapTiler
                             {
                                 using (tile)
                                 {
-                                    gfx.DrawImage(tile.Img, x * 256, (tilesHigh - y - 1) * 256);                                    
-                                   
+                                    gfx.DrawImage(tile.Img, x * 256, (tilesHigh - y - 1) * 256); 
                                 }
                             }
                         }

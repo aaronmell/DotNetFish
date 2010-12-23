@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using System.IO;
 
 namespace MapTiler
 {
@@ -39,7 +40,8 @@ namespace MapTiler
                 MainMap.MapType = MapType.GoogleMap;
                 MainMap.MinZoom = 1;
                 MainMap.MaxZoom = 15;
-                MainMap.Zoom = 10; 
+                MainMap.Zoom = 10;
+                
 
                 _top = new GMapOverlay(MainMap, "top");
                 MainMap.Overlays.Add(_top);
@@ -101,6 +103,7 @@ namespace MapTiler
             saveFileDialog.Title = "Save Map";
             saveFileDialog.DefaultExt = ".dfm";
             saveFileDialog.Filter = "DotNetFish Map (.dfm)|*.dfm";
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

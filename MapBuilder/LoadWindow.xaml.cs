@@ -25,39 +25,33 @@ namespace MapBuilder
 
         private void uxNewLevel_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            //dlg.FileName = "DotNetFish Level"; // Default file name
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();           
             dlg.DefaultExt = ".dfm"; // Default file extension
             dlg.Filter = "DotNetFish Map (.dfm)|*.dfm"; // Filter files by extension
 
-            // Show open file dialog box
             Nullable<bool> result = dlg.ShowDialog();
 
-            // Process open file dialog box results
             if (result == true)
             {
-                // Open document
                 string filename = dlg.FileName;
+                LevelBuilder levelBuilder = new LevelBuilder();
+                levelBuilder.BuildWorldObject(filename);
             }
         }       
 
         private void uxLoadLevel_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            //dlg.FileName = "DotNetFish Level"; // Default file name
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();            
             dlg.DefaultExt = ".dfl"; // Default file extension
-            dlg.Filter = "DotNetFish Level (.dfl)|*.dfl"; // Filter files by extension
+            dlg.Filter = "DotNetFish Level (.dfl)|*.dfl";
 
-            // Show open file dialog box
             Nullable<bool> result = dlg.ShowDialog();
-
-            // Process open file dialog box results
+          
             if (result == true)
             {
                 // Open document
                 string filename = dlg.FileName;
             }
-
         }
     }
 }

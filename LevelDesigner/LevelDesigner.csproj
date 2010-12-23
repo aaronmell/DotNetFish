@@ -8,8 +8,8 @@
     <ProjectGuid>{635E39BF-3EE4-4B27-B571-1847E5C2C9C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MapBuilder</RootNamespace>
-    <AssemblyName>MapBuilder</AssemblyName>
+    <RootNamespace>LevelDesigner</RootNamespace>
+    <AssemblyName>LevelDesigner</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -67,7 +67,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LevelBuilder.cs" />
     <Compile Include="LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>

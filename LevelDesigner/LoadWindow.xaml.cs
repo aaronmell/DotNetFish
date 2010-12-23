@@ -34,8 +34,8 @@ namespace MapBuilder
             if (result == true)
             {
                 string filename = dlg.FileName;
-                LevelBuilder levelBuilder = new LevelBuilder();
-                levelBuilder.BuildWorldObject(filename);
+                //LevelBuilder levelBuilder = new LevelBuilder();
+                //levelBuilder.BuildWorldObject(filename);
             }
         }       
 

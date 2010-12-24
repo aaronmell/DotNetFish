@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LevelBuilder;
 
 namespace MapBuilder
 {
@@ -34,8 +35,8 @@ namespace MapBuilder
             if (result == true)
             {
                 string filename = dlg.FileName;
-                //LevelBuilder levelBuilder = new LevelBuilder();
-                //levelBuilder.BuildWorldObject(filename);
+                LevelBuilder.BuildLevel buildLevel = new BuildLevel();
+                buildLevel.Build(filename);
             }
         }       
 

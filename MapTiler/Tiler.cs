@@ -12,8 +12,7 @@ namespace MapTiler
     public partial class Tiler : Form
     {
         private GMapMarker _center;
-        private GMapOverlay _top;
-        private bool _isMouseDown;
+        private GMapOverlay _top;       
         private PointLatLng _startPosition;
         private PointLatLng _endPosition;        
 
@@ -77,8 +76,7 @@ namespace MapTiler
         void MainMap_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            {
-                _isMouseDown = false;
+            {                
                 _endPosition = MainMap.FromLocalToLatLng(e.X, e.Y);
             }
         }
@@ -87,7 +85,6 @@ namespace MapTiler
         {
             if (e.Button == MouseButtons.Left)
             {
-                _isMouseDown = true;
                 _startPosition = MainMap.FromLocalToLatLng(e.X, e.Y);
             }
         }        

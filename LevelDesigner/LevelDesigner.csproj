@@ -99,6 +99,16 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameObjects\GameObjects.csproj">
+      <Project>{692D0A8C-CC5E-4573-8F40-40D25AA85F31}</Project>
+      <Name>GameObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LevelBuilder\LevelBuilder.csproj">
+      <Project>{67CDE3F2-CC2F-4E24-95A8-9A18D0534B91}</Project>
+      <Name>LevelBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,8 +8,8 @@
     <ProjectGuid>{67CDE3F2-CC2F-4E24-95A8-9A18D0534B91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TileBuilder</RootNamespace>
-    <AssemblyName>TileBuilder</AssemblyName>
+    <RootNamespace>LevelBuilder</RootNamespace>
+    <AssemblyName>LevelBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

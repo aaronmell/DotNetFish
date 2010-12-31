@@ -1,3 +1,9 @@
-
-/MapBuilder/bin
-/MapBuilder/obj
+/LevelBuilder/bin
+/LevelBuilder/obj
+/MapTiler/obj
+/MapTiler/bin
+/GameObjects/bin
+/GameObjects/obj
+/LevelDesigner/bin
+/LevelDesigner/obj
+*.suo

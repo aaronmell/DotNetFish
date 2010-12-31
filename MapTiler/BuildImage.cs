@@ -118,80 +118,142 @@ namespace MapTiler
 
         private Bitmap ColorTile(Bitmap bitmap)
         {
-            //TO reduce the processing time when coloring, we want to check the edges of the tile for water. If all of the tile is water we can return a white bitmap
-            //If none of the tiles are water, we can return a black bitmap. We only need to check every pixel if there is water and land. This will also clean up
-            //any small tiles of land/water since we are only checking the edge.
+            //To reduce the processing time when coloring we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.
+            //We will check each edge of the tile for water and land. If only water is found we will set the tile to white. If only land is found we will set the tile 
+            //to black. If both are found then we will change the values depending on which is which.
+            BitmapData bmpData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb);
+            
+            //This is a pointere that referenece the location of the first pixel of data 
+            System.IntPtr Scan0 = bmpData.Scan0;
 
-            bool HasLand = false;
-            bool HasWater = false;
+            //calculate the number of bytes
+            int bytes = bmpData.Stride * bitmap.Height;
 
-            //Check the Top and bottom row\
+            //An array of bytes. Just remember that each pixel format has a different number of bytes.
+            //In our case, the number of bytes is 4 per pixel or RGBA. 
+            byte[] rgbValues = new byte[bytes];
+
+            //Safely copying the data to a managed array
+            System.Runtime.InteropServices.Marshal.Copy(Scan0,
+                           rgbValues, 0, bytes);
+
+
+            bool hasWater = false;
+            bool hasLand = false;
+            bool retval;
+
+            //Loop though all of the pixels on the Y edge
             for (int y = 0; y < bitmap.Height; y+=255)
             {
-                for (int x = 0; x < bitmap.Width; x+=3 )
+                for (int x = 0; x < bitmap.Width; x+=5)
                 {
-                    if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
-                    {
-                        HasWater = true;                    
-                    }
-                    else
-                    {
-                        HasLand = true;
-                    }
-                    if (HasLand && HasWater)
+                    int position = (y * bmpData.Stride) + (x * 4);
+
+                    retval = IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+
+                    if (retval == true)
+                        hasWater = true;
+                    else 
+                        hasLand = true; 
+
+                    if (hasLand && hasWater)
                         break;
                 }
-
-                if (HasLand && HasWater)
+                    if (hasLand && hasWater)
                         break;
             }
 
-            for (int x = 0; x < bitmap.Width; x+=255 )
+            //Loop though all of the pixels on the X edge
+            if (!hasLand & !hasWater)
+            {
+                for (int x = 0; x < bitmap.Width; x+=255)
                 {
-                    for (int y = 0; y < bitmap.Height; y+=3)
+                    for (int y = 0; y < bitmap.Height; y+=5)
                     {
+                        int position = (y * bmpData.Stride) + (x * 4);
 
-                        if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
-                        {
-                            HasWater = true;
-                        }
+                        retval = IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+
+                        if (retval == true)
+                            hasWater = true;
                         else
-                        {
-                            HasLand = true;
-                        }
-                        if (HasLand && HasWater)
+                            hasLand = true;                      
+
+                        if (hasLand && hasWater)
                             break;
                     }
 
-                if (HasLand && HasWater)
-                        break;
+                    if (hasLand && hasWater)
+                            break;
+                }
             }
 
-
-            if (HasLand && !HasWater)
-                return _blackTile;
-            else if (!HasLand && HasWater)
-                return _whiteTile;
-            else
+            if (hasLand && hasWater)
             {
-                for (int x = 0; x < bitmap.Width; x++)
-                {
-                    for (int y = 0; y < bitmap.Height; y++)
-                    {
-                        if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
-                        {
-                            bitmap.SetPixel(x, y, Color.White);
-                        }
-                        else
-                        {
-                            bitmap.SetPixel(x, y, Color.Black);
-                        }
-                    }                   
-                }             
+                PaintTile(bitmap.Height,bitmap.Width,ref rgbValues,bmpData.Stride);
+                //Save the manipulated data back to the bitmap.
+                System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, Scan0, bytes);
+                bitmap.UnlockBits(bmpData);
                 return bitmap;
             }
-        }        
 
+            else
+            {
+                bitmap.UnlockBits(bmpData);
+
+                if (hasLand)
+                    return _blackTile;
+                else
+                    return _whiteTile;
+            }
+        }
+
+        /// <summary>
+        /// Given RGB values determines if it is water or not. This might be unsafe depending on the map used.
+        /// </summary>
+        /// <param name="blue"></param>
+        /// <param name="green"></param>
+        /// <param name="red"></param>
+        /// <returns></returns>
+        private bool IsWater(byte blue, byte green, byte red)
+        {
+            if (blue == 204 && green == 179 && red == 153)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Paints a tile that has both water and land to black and white
+        /// </summary>
+        /// <param name="height"></param>
+        /// <param name="width"></param>
+        /// <param name="rgbValues"></param>
+        /// <param name="stride"></param>
+        private void PaintTile(int height, int width, ref byte[] rgbValues, int stride)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    int position = (y * stride) + (x * 4);
+
+                    if (rgbValues[position] == 204 && rgbValues[position + 1] == 179 && rgbValues[position + 2] == 153)
+                        rgbValues[position] = rgbValues[position + 1] = rgbValues[position + 2] = 255;
+                    else
+                        rgbValues[position] = rgbValues[position + 1] = rgbValues[position + 2] = 0;
+                }
+            }
+        }               
+
+        /// <summary>
+        /// Gets the end tile of the selected region Bottom Right
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         private GPoint getEndTile(List<GPoint> points)
         {
             int x = int.MinValue;
@@ -205,6 +267,11 @@ namespace MapTiler
             return new GPoint(x, y);
         }
 
+        /// <summary>
+        /// Gets the start tile of the selected region. Top left
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         private GPoint getStartTile(List<GPoint> points)
         {
             int x = int.MaxValue;

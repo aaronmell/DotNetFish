@@ -26,7 +26,7 @@ namespace LevelBuilder
          
            _dfmImage = new Bitmap(filename);
            _levelImage = new Bitmap(_dfmImage.Width, _dfmImage.Height);
-           _mapTiles = new Bitmap(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\maptiles.png");
+           _mapTiles = new Bitmap(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\maptiles8x8.png");
             
             ProcessMap();
            _levelImage.Save("level.bmp");
@@ -54,7 +54,7 @@ namespace LevelBuilder
                     {
                         if (row.Count() > 0 && row[c] != "" && row[c+1] != "")
                         {
-                            Point startPoint = new Point(columnCount * 64, rowCount * 64);
+                            Point startPoint = new Point(columnCount * 8, rowCount * 8);
                             int edge1 = int.Parse(row[c]);
                             int edge2 = int.Parse(row[c + 1]);
                             GraphicTile tile = new GraphicTile  { TileStartPoint = startPoint, ShoreEdgePoints = new List<int> { edge1, edge2 } };
@@ -82,19 +82,19 @@ namespace LevelBuilder
 
         private void ProcessMap()
         {
-            for (int x = 0; x < _dfmImage.Width / 64; x++)
+            for (int x = 0; x < _dfmImage.Width / 8; x++)
             {
-                for (int y = 0; y < _dfmImage.Height / 64; y++)
+                for (int y = 0; y < _dfmImage.Height / 8; y++)
                 {
-                    Rectangle rect = new Rectangle(0,0, 64, 64);
+                    Rectangle rect = new Rectangle(0,0, 8, 8);
 
-                    using (Bitmap bmpTile = new Bitmap(64,64))
+                    using (Bitmap bmpTile = new Bitmap(8,8,PixelFormat.Format1bppIndexed))
                     {
                         using (Graphics gfx = Graphics.FromImage(bmpTile))
                         {
-                            gfx.DrawImage(_dfmImage, rect, x * 64, y * 64,64, 64, GraphicsUnit.Pixel);
+                            gfx.DrawImage(_dfmImage, rect, x * 8, y * 8,8, 8, GraphicsUnit.Pixel);
                             //bmpTile.Save("Test.bmp");
-                            BitmapData tile = bmpTile.LockBits(new Rectangle(0,0,64,64), ImageLockMode.ReadOnly, bmpTile.PixelFormat);
+                            BitmapData tile = bmpTile.LockBits(new Rectangle(0,0,8,8), ImageLockMode.ReadOnly, bmpTile.PixelFormat);
 
                             int color = GetColor(tile);
                             GraphicTile tileToUse;
@@ -114,7 +114,7 @@ namespace LevelBuilder
                             }
 
                             bmpTile.UnlockBits(tile);
-                            DrawTile(x*64,y*64, tileToUse);
+                            DrawTile(x*8,y*8, tileToUse);
                         }
                     }
                 }
@@ -126,8 +126,8 @@ namespace LevelBuilder
         {
             using (Graphics gfx = Graphics.FromImage(_levelImage))
             {
-                Rectangle rect = new Rectangle(x, y, 64, 64);
-                gfx.DrawImage(_mapTiles, rect, tileToUse.TileStartPoint.X, tileToUse.TileStartPoint.Y, 64, 64, GraphicsUnit.Pixel);                   
+                Rectangle rect = new Rectangle(x, y, 8, 8);
+                gfx.DrawImage(_mapTiles, rect, tileToUse.TileStartPoint.X, tileToUse.TileStartPoint.Y, 8, 8, GraphicsUnit.Pixel);                   
             }
         }           
 
@@ -143,7 +143,7 @@ namespace LevelBuilder
             IntPtr ptr = tile.Scan0;
 
             // Declare an array to hold the bytes of the bitmap.
-            int bytes  = Math.Abs(tile.Stride) * 64;
+            int bytes  = Math.Abs(tile.Stride) * 8;
             byte[] rgbValues = new byte[bytes];
 
             // Copy the RGB values into the array.

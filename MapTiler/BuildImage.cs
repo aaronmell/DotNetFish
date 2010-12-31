@@ -14,6 +14,10 @@ namespace MapTiler
         private BackgroundWorker _backgroundWorker;
         private List<PointLatLng> _points;
         private string _filename;
+        private Bitmap _blackTile;
+        private Bitmap _whiteTile;
+
+
 
         public BackgroundWorker BackgroundWorker
         {
@@ -28,6 +32,21 @@ namespace MapTiler
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
             _filename = filename;
             _points = points;
+            _blackTile = new Bitmap(256, 256);
+            _whiteTile = new Bitmap(256, 256);
+
+            using (Graphics gfx = Graphics.FromImage(_blackTile))
+            {
+                SolidBrush b = new SolidBrush(Color.Black);
+                gfx.FillRectangle(b, new Rectangle(0, 0,256, 256));
+            }
+
+            using (Graphics gfx = Graphics.FromImage(_whiteTile))
+            {
+                SolidBrush b = new SolidBrush(Color.White);
+                gfx.FillRectangle(b, new Rectangle(0, 0, 256, 256));
+            }
+
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
             _backgroundWorker.DoWork += new DoWorkEventHandler(_backgroundWorker_DoWork);           
@@ -40,7 +59,7 @@ namespace MapTiler
             MapType type = MapType.GoogleMap;
             PureProjection prj = null;
             int maxZoom;
-            int zoom = 15;
+            int zoom = 19;
             GMaps.Instance.AdjustProjection(type, ref prj, out maxZoom);
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
@@ -58,8 +77,8 @@ namespace MapTiler
 
             int tilesHigh = startTile.Y - endTile.Y;
             int tilesWide = endTile.X - startTile.X;
-
-            _backgroundWorker.ReportProgress(1, "Stitching Tiles ");
+            int tilesprocessed = 0;
+            
             //Loop through each tile and add it to the bitmap
             using (Bitmap bmp = new Bitmap(tilesWide * 256, tilesHigh * 256))
             {
@@ -67,6 +86,9 @@ namespace MapTiler
                 {
                     for (int y = 0; y < tilesHigh; y++)
                     {
+                        tilesprocessed++;
+                        _backgroundWorker.ReportProgress(1, "Stitching Tile: " + tilesprocessed + " of " + tilesHigh*tilesWide );
+                        
                         using (Graphics gfx = Graphics.FromImage(bmp))
                         {
                             Exception ex;
@@ -81,35 +103,94 @@ namespace MapTiler
                             {
                                 using (tile)
                                 {
-                                    gfx.DrawImage(tile.Img, x * 256, (tilesHigh - y - 1) * 256); 
+                                    using (Bitmap bitmap = new Bitmap(tile.Img))
+                                    {
+                                        gfx.DrawImage(ColorTile(bitmap), x * 256, (tilesHigh - y - 1) * 256); 
+                                    }                                    
                                 }
                             }
                         }
                     }
+                }                         
+                bmp.Save(_filename,ImageFormat.Jpeg);                    
+            }                
+        }
+
+        private Bitmap ColorTile(Bitmap bitmap)
+        {
+            //TO reduce the processing time when coloring, we want to check the edges of the tile for water. If all of the tile is water we can return a white bitmap
+            //If none of the tiles are water, we can return a black bitmap. We only need to check every pixel if there is water and land. This will also clean up
+            //any small tiles of land/water since we are only checking the edge.
+
+            bool HasLand = false;
+            bool HasWater = false;
+
+            //Check the Top and bottom row\
+            for (int y = 0; y < bitmap.Height; y+=255)
+            {
+                for (int x = 0; x < bitmap.Width; x+=3 )
+                {
+                    if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
+                    {
+                        HasWater = true;                    
+                    }
+                    else
+                    {
+                        HasLand = true;
+                    }
+                    if (HasLand && HasWater)
+                        break;
                 }
 
-                _backgroundWorker.ReportProgress(1,"Transforming bmp");
-                for (int x = 0; x < bmp.Width; x++)
+                if (HasLand && HasWater)
+                        break;
+            }
+
+            for (int x = 0; x < bitmap.Width; x+=255 )
                 {
-                    for (int y = 0; y < bmp.Height; y++)
+                    for (int y = 0; y < bitmap.Height; y+=3)
                     {
-                        if (bmp.GetPixel(x, y).Name == "ff99b3cc")
+
+                        if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
                         {
-                            bmp.SetPixel(x, y, Color.White);
+                            HasWater = true;
                         }
                         else
                         {
-                            bmp.SetPixel(x, y, Color.Black);
+                            HasLand = true;
                         }
+                        if (HasLand && HasWater)
+                            break;
                     }
-                   
-                }  
-                
-                bmp.Save(_filename,ImageFormat.Bmp);
-                    
-            }                
-        }
-        
+
+                if (HasLand && HasWater)
+                        break;
+            }
+
+
+            if (HasLand && !HasWater)
+                return _blackTile;
+            else if (!HasLand && HasWater)
+                return _whiteTile;
+            else
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        if (bitmap.GetPixel(x, y).Name == "ff99b3cc")
+                        {
+                            bitmap.SetPixel(x, y, Color.White);
+                        }
+                        else
+                        {
+                            bitmap.SetPixel(x, y, Color.Black);
+                        }
+                    }                   
+                }             
+                return bitmap;
+            }
+        }        
 
         private GPoint getEndTile(List<GPoint> points)
         {

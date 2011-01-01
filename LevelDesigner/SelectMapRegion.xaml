@@ -1,0 +1,10 @@
+﻿<Window x:Class="LevelDesigner.SelectMapRegion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+        Title="SelectMapRegion" Height="600" Width="800" ResizeMode="CanMinimize" xmlns:my="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation">
+    <Grid>
+        <my:GMapControl Height="484" HorizontalAlignment="Left" Margin="12,12,0,0" Name="gmapControl" VerticalAlignment="Top" Width="754" />
+        <Button Content="Start" Height="32" HorizontalAlignment="Left" Margin="642,517,0,0" Name="start" VerticalAlignment="Top" Width="124" Click="start_Click" />
+        <Label Content="Select Region Using Shift + LMB" Height="28" HorizontalAlignment="Left" Margin="12,517,0,0" Name="status" VerticalAlignment="Top" />
+    </Grid>
+</Window>

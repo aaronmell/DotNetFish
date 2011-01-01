@@ -1,6 +1,6 @@
 ﻿<Window x:Class="MapBuilder.LoadWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
         Title="Map Builder" Height="137" Width="248">
     <Grid>
         <Button Height="45" HorizontalAlignment="Left" Margin="12,27,0,0" Name="uxLoadLevel" VerticalAlignment="Top" Width="81" Click="uxLoadLevel_Click">

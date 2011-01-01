@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LevelBuilder;
+using LevelDesigner;
 
 namespace MapBuilder
 {
@@ -26,18 +27,21 @@ namespace MapBuilder
 
         private void uxNewLevel_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();           
-            dlg.DefaultExt = ".dfm"; // Default file extension
-            dlg.Filter = "DotNetFish Map (.dfm)|*.dfm"; // Filter files by extension
+            SelectMapRegion selectMapRegion = new SelectMapRegion();
+            selectMapRegion.Show();
+            this.Hide();
+        //    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();           
+        //    dlg.DefaultExt = ".dfm"; // Default file extension
+        //    dlg.Filter = "DotNetFish Map (.dfm)|*.dfm"; // Filter files by extension
 
-            Nullable<bool> result = dlg.ShowDialog();
+        //    Nullable<bool> result = dlg.ShowDialog();
 
-            if (result == true)
-            {
-                string filename = dlg.FileName;
-                LevelBuilder.BuildLevel buildLevel = new BuildLevel();
-                buildLevel.Build(filename);
-            }
+        //    if (result == true)
+        //    {
+        //        string filename = dlg.FileName;
+        //        LevelBuilder.BuildLevel buildLevel = new BuildLevel();
+        //        buildLevel.Build(filename);
+        //    }
         }       
 
         private void uxLoadLevel_Click(object sender, RoutedEventArgs e)

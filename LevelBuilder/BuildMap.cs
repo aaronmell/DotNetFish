@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.ComponentModel;
 using System.Drawing;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using System.Drawing.Imaging;
 
-
-namespace MapTiler
+namespace LevelBuilder
 {
-    public class BuildImage
+    public class BuildMap
     {
         private BackgroundWorker _backgroundWorker;
-        private List<PointLatLng> _points;
-        private string _filename;
+        private List<PointLatLng> _points;        
         private Bitmap _blackTile;
         private Bitmap _whiteTile;
-
-
 
         public BackgroundWorker BackgroundWorker
         {
@@ -27,10 +25,10 @@ namespace MapTiler
             }
         }
 
-        public BuildImage(List<PointLatLng> points, string filename)
+        public BuildMap(List<PointLatLng> points)
         {
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            _filename = filename;
+            //_filename = filename;
             _points = points;
             _blackTile = new Bitmap(256, 256);
             _whiteTile = new Bitmap(256, 256);
@@ -59,10 +57,10 @@ namespace MapTiler
             MapType type = MapType.GoogleMap;
             PureProjection prj = null;
             int maxZoom;
-            int zoom = 19;
+            int zoom = 22;
             GMaps.Instance.AdjustProjection(type, ref prj, out maxZoom);
             GMaps.Instance.Mode = AccessMode.ServerOnly;
-            GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
+            GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();           
 
             //Convert the PointLatLng to GPoints
             List<GPoint> gPoints = new List<GPoint>();
@@ -72,27 +70,28 @@ namespace MapTiler
             }
 
             //Get the Start and End Tile. Start Tile must be upper left tile, and end tile must be lower right
-            GPoint startTile = getStartTile(gPoints);
-            GPoint endTile = getEndTile(gPoints);
+            GPoint gmapStartTile = getGmapStartTile(gPoints);
+            GPoint gmapEndTile = getGmapEndTile(gPoints);
 
-            int tilesHigh = startTile.Y - endTile.Y;
-            int tilesWide = endTile.X - startTile.X;
-            int tilesprocessed = 0;
-            
+            //The gmap tile stuff
+            int gmapTilesHeight = gmapStartTile.Y - gmapEndTile.Y;
+            int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X;
+            int gmapTilesProcessed = 0;          
+
             //Loop through each tile and add it to the bitmap
-            using (Bitmap bmp = new Bitmap(tilesWide * 256, tilesHigh * 256))
+            using (Bitmap bmp = new Bitmap(gmapTilesWidth * 256, gmapTilesHeight * 256))
             {
-                for (int x = 0; x < tilesWide; x++)
+                for (int x = 0; x < gmapTilesWidth; x++)
                 {
-                    for (int y = 0; y < tilesHigh; y++)
+                    for (int y = 0; y < gmapTilesHeight; y++)
                     {
-                        tilesprocessed++;
-                        _backgroundWorker.ReportProgress(1, "Stitching Tile: " + tilesprocessed + " of " + tilesHigh*tilesWide );
+                        gmapTilesProcessed++;
+                        _backgroundWorker.ReportProgress(1, "Stitching Tile: " + gmapTilesProcessed + " of " + gmapTilesHeight*gmapTilesWidth );
                         
                         using (Graphics gfx = Graphics.FromImage(bmp))
                         {
                             Exception ex;
-                            WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(startTile.X + x, startTile.Y - y), zoom, out ex) as WindowsFormsImage;
+                            WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y - y), zoom, out ex) as WindowsFormsImage;
 
                             if (ex != null)
                             {
@@ -105,15 +104,21 @@ namespace MapTiler
                                 {
                                     using (Bitmap bitmap = new Bitmap(tile.Img))
                                     {
-                                        gfx.DrawImage(ColorTile(bitmap), x * 256, (tilesHigh - y - 1) * 256); 
+                                        gfx.DrawImage(ColorTile(bitmap), x * 256, (gmapTilesHeight - y - 1) * 256); 
                                     }                                    
                                 }
                             }
                         }
                     }
                 }                         
-                bmp.Save(_filename,ImageFormat.Jpeg);                    
+                //bmp.Save(_filename,ImageFormat.Jpeg);                    
             }                
+        }
+
+        private int GetNumberofTiles(int maxTiles, int gmapTilesHeight, int gmapTilesWidth)
+        {
+            //if(gmapTilesHeight > 2500 || gmapTiles)
+            return 1;
         }
 
         private Bitmap ColorTile(Bitmap bitmap)
@@ -254,7 +259,7 @@ namespace MapTiler
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>
-        private GPoint getEndTile(List<GPoint> points)
+        private GPoint getGmapEndTile(List<GPoint> points)
         {
             int x = int.MinValue;
             int y = int.MaxValue;
@@ -272,7 +277,7 @@ namespace MapTiler
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>
-        private GPoint getStartTile(List<GPoint> points)
+        private GPoint getGmapStartTile(List<GPoint> points)
         {
             int x = int.MaxValue;
             int y = int.MinValue;
@@ -283,6 +288,6 @@ namespace MapTiler
                 y = p.Y > y ? p.Y : y;
             }
             return new GPoint(x, y);
-        }        
+        }
     }
 }

@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GMap.NET.Core">
-      <HintPath>..\..\gmap\greatmaps_1d91774c5787\GMap.NET.Core\bin\x86\Debug\GMap.NET.Core.dll</HintPath>
+      <HintPath>..\Gmap\GMap.NET.Core.dll</HintPath>
     </Reference>
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>..\Gmap\GMap.NET.WindowsForms.dll</HintPath>

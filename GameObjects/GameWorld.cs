@@ -5,10 +5,12 @@ using System.Text;
 
 namespace GameObjects
 {
-    public class GameWorldObject
+	/// <summary>
+	/// Holds all of the inforamation about the Gameworld itself. 
+	/// </summary>
+    public class GameWorld
     {
-
-        public Array[,] GameMap { get; set; }
+        public MapTile[,] GameMap { get; set; }
 
         public string Name { get; set; }
 

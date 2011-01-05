@@ -12,16 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MapBuilder
+namespace LevelDesigner.Controls
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for MapCanvas.xaml
+	/// </summary>
+	public partial class MapCanvas : UserControl
+	{
+		public MapCanvas()
+		{
+			InitializeComponent();
+		}
+	}
 }

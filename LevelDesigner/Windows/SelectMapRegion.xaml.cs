@@ -14,6 +14,7 @@ using GMap.NET;
 using GMap.NET.WindowsPresentation;
 using LevelBuilder;
 using System.ComponentModel;
+using GameObjects;
 
 namespace LevelDesigner
 {
@@ -43,8 +44,9 @@ namespace LevelDesigner
             gmapControl.Position = new PointLatLng(35.2276723549358, -97.22351074);
             gmapControl.MapType = MapType.GoogleMap;
             gmapControl.MinZoom = 1;
-            gmapControl.MaxZoom = 15;
+            gmapControl.MaxZoom = 22;
             gmapControl.Zoom = 10;
+			//gmapControl.ShowTileGridLines = true;
 
             gmapControl.MouseUp += new MouseButtonEventHandler(gmapControl_MouseUp);
             gmapControl.MouseDown += new MouseButtonEventHandler(gmapControl_MouseDown);
@@ -97,8 +99,9 @@ namespace LevelDesigner
                  MessageBox.Show("Error. Details: " + (e.Error as Exception).ToString());  
              }  
              else
-             {  
-                 MessageBox.Show("The Tiling has been completed successfully");  
+             {
+				 EditLevel editLevel = new EditLevel((GameWorld)e.Result);
+				 editLevel.Show();
              }
              status.Content = "";
         }

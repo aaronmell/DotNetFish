@@ -61,29 +61,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SelectMapRegion.xaml.cs">
+    <Compile Include="Controls\MapCanvas.xaml.cs">
+      <DependentUpon>MapCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditLevel.xaml.cs">
+      <DependentUpon>EditLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectMapRegion.xaml.cs">
       <DependentUpon>SelectMapRegion.xaml</DependentUpon>
     </Compile>
-    <Page Include="LoadWindow.xaml">
+    <Page Include="Controls\MapCanvas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Windows\EditLevel.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoadWindow.xaml.cs">
+    <Compile Include="Windows\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="SelectMapRegion.xaml">
+    <Page Include="Windows\SelectMapRegion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

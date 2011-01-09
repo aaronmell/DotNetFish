@@ -61,19 +61,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\MapCanvas.xaml.cs">
-      <DependentUpon>MapCanvas.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MapCanvas.cs" />
     <Compile Include="Windows\EditLevel.xaml.cs">
       <DependentUpon>EditLevel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SelectMapRegion.xaml.cs">
       <DependentUpon>SelectMapRegion.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\MapCanvas.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\EditLevel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,9 +1,9 @@
 ﻿<Window x:Class="LevelDesigner.EditLevel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:src="clr-namespace:LevelDesigner.Controls"
+		xmlns:src="clr-namespace:LevelDesigner"
         Title="EditLevel" Height="768" Width="1024">
     <Grid>
-		<src:MapCanvas Margin="12,12,290,217"></src:MapCanvas>
+		<src:MapCanvas x:Name="mapCanvas" Margin="12,12,198,173"></src:MapCanvas>
 	</Grid>
 </Window>

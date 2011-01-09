@@ -9,6 +9,7 @@ using GMap.NET.WindowsForms;
 using System.Drawing.Imaging;
 using GameObjects;
 using System.Diagnostics;
+using System.IO;
 
 namespace LevelBuilder
 {
@@ -45,9 +46,7 @@ namespace LevelBuilder
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
             _backgroundWorker.DoWork += new DoWorkEventHandler(_backgroundWorker_DoWork);
-        }
-
-		
+        }	
 
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)  
         {
@@ -101,7 +100,11 @@ namespace LevelBuilder
                         {
                             using (Bitmap bitmap = new Bitmap(tile.Img))
                             {
-								CreateNewMapTile(x,y, bitmap);							
+								//foreach (string s in Directory.GetFiles("tiles"))
+								//{
+								//    File.Delete(s);
+								//}
+								ProcessGmapTiles(x,y, bitmap);							
                             }                                    
                         }
                     }                        
@@ -111,7 +114,7 @@ namespace LevelBuilder
 			e.Result = _gameWorld;
         }
 
-		private void CreateNewMapTile(int gameworldX, int gameworldY, Bitmap bitmap)
+		private void ProcessGmapTiles(int gameworldX, int gameworldY, Bitmap bitmap)
 		{		
 			const int tileSize = 16;
 			//The bitmap coming in is 256x256 This needs to be broken down further into 16x16 sized
@@ -126,7 +129,7 @@ namespace LevelBuilder
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 						{
 							gfx.DrawImage(bitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
-							smallBmp.Save("tiles\\tile" + tileX + tileY + ".jpg");
+							//smallBmp.Save("tiles\\tile" + tileX + tileY + ".jpg");
 						}
 
 						//To reduce the processing time when determining the tile type we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.
@@ -153,58 +156,11 @@ namespace LevelBuilder
 
 						bool hasWater = false;
 						bool hasLand = false;
-						bool retval;
-
-						//Loop though all of the pixels on the Y edge
-						for (int y = 0; y < tileSize; y += tileSize - 1)
-						{
-							for (int x = 0; x < tileSize; x += 1)
-							{
-								int position = (y * bmpData.Stride) + (x * 4);
-
-								retval = IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
-
-								if (retval == true)
-									hasWater = true;
-								else
-									hasLand = true;
-
-								if (hasLand && hasWater)
-									break;
-							}
-							if (hasLand && hasWater)
-								break;
-						}
-
-						//Loop though all of the pixels on the X edge
-						if (!hasLand & !hasWater)
-						{
-							for (int x = 0; x < tileSize; x += tileSize - 1)
-							{
-								for (int y = 0; y < tileSize; y += 1)
-								{
-									int position = (y * bmpData.Stride) + (x * 4);
-
-									retval = IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
-
-									if (retval == true)
-										hasWater = true;
-									else
-										hasLand = true;
-
-									if (hasLand && hasWater)
-										break;
-								}
-
-								if (hasLand && hasWater)
-									break;
-							}
-						}
+						CheckEdges(bmpData.Stride, rgbValues,tileSize, out hasWater, out hasLand);
 
 						if (hasLand && hasWater)
 						{
 							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = DetermineTiletoUse(bmpData, rgbValues, tileSize);
-
 						}
 						else
 						{
@@ -213,59 +169,115 @@ namespace LevelBuilder
 							else
 								_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.WaterTile);
 						}
-
 						smallBmp.UnlockBits(bmpData);
 					}					
 				}
 			}
 		}
 
+		private void CheckEdges(int stride, byte[] rgbValues, int tileSize, out bool hasWater, out bool hasLand)
+		{
+			hasWater = false;
+			hasLand = false;
+			bool retval;
+			//Loop though all of the pixels on the Y edge
+			for (int y = 0; y < tileSize; y++)
+			{
+				for (int x = 0; x < tileSize; x++)
+				{
+					int position = (y * stride) + (x * 4);
+
+					Color color = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+					retval = IsWater(color);
+
+					if (retval == true)
+						hasWater = true;
+					else
+						hasLand = true;
+
+					if (hasLand && hasWater)
+						break;
+
+					//only check the left and right edges.
+					if (y != 0 && y != tileSize - 1)
+						x+= tileSize - 2;
+				}
+				if (hasLand && hasWater)
+					return;
+			}
+		}
+
 		private MapTile DetermineTiletoUse(BitmapData bmpData, byte[] rgbValues,int tileSize)
 		{
-
 			List<Point> edgePoints = new List<Point>();
-			bool startWater; 
+			
 			//Loop though all of the pixels on the Y edge
-			for (int y = 0; y < tileSize; y += tileSize - 1)
+			for (int y = 0; y < tileSize; y+=tileSize - 1)
 			{
-				startWater = IsWater(rgbValues[(y * bmpData.Stride)], rgbValues[(y * bmpData.Stride)+1], rgbValues[(y * bmpData.Stride)+2]);
-				for (int x = 0; x < tileSize; x += 1)
+				Color newColor = new Color();
+				Color previousColor = new Color();
+				for (int x = 0; x < tileSize; x++)
 				{
 					int position = (y * bmpData.Stride) + (x * 4);
-					
 
-					if ((startWater && !IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2])) ||
-							!startWater && IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]))
+					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+
+					if (previousColor != new Color() && IsLandWaterTransition(newColor,previousColor))
 					{
-						if (y == 0)
-							edgePoints.Add(new Point(x, y));
-						else 
-							edgePoints.Add(new Point(x,y));
-						break;
+						edgePoints.Add(new Point(x, y));						
 					}
+					previousColor = newColor;
 				}
 			}
-
-			for (int x = 0; x < tileSize; x += tileSize - 1)
+			
+			//Loop though all of the pixels on the X edge
+			for (int x = 0; x < tileSize; x+=tileSize - 1)
 			{
-				startWater = IsWater(rgbValues[(x * 4)], rgbValues[(x * 4) + 1], rgbValues[(x * 4) + 2]);
-				for (int y = 0; y < tileSize; y += 1)
-				{
-					int position = (y * bmpData.Stride) + (x * 4);				
+				Color newColor = new Color();
+				Color previousColor = new Color();
 
-					if ((startWater && !IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2])) ||
-							!startWater && IsWater(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]))
+				for (int y = 0; y < tileSize; y++)
+				{
+					int position = (y * bmpData.Stride) + (x * 4);
+
+					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+
+					if (previousColor != new Color() && IsLandWaterTransition(newColor, previousColor))
 					{
-						if (x == 0)
-							edgePoints.Add(new Point(x, y));
-						else
-							edgePoints.Add(new Point(x, y));
-						break;
+						edgePoints.Add(new Point(x, y));
 					}
+					previousColor = newColor;
 				}
 			}
+			if (edgePoints.Count == 2)
+				return GetTileThatMatches(edgePoints);
+			else
+				return new MapTile(_mapGraphicsTileSet.ErrorTile);
+		}
 
-			return GetTileThatMatches(edgePoints);
+		private bool IsLandWaterTransition(Color newColor, Color previousColor)
+		{
+			bool isNewColorWater = IsWater(newColor);
+			bool isPreviousColorWater = IsWater(previousColor);
+
+			if (isNewColorWater && !isPreviousColorWater || isPreviousColorWater && !isNewColorWater)
+				return true;
+			else
+				return false;
+
+		}
+
+		private bool IsWater(Color color)
+		{		
+			if (color.R == 153 && color.B == 204 && color.G == 179)
+				return true;
+			else
+				return false;
+		}
+
+		private  Color SetColor(byte blue, byte green, byte red)
+		{
+			return Color.FromArgb(255,red,green,blue);	
 		}
 
 		private MapTile GetTileThatMatches(List<Point> edgePoints)
@@ -313,58 +325,15 @@ namespace LevelBuilder
 				}				
 			}
 
-			if (tileEdgePoints.Count > 2)
+			if (tileEdgePoints.Count != 2)
 			{
 				//This could occur still, so lets continue to check for it just in case, so we can find any errors.
-				throw new Exception("Uh oh, we have a tile with more than 2 edges");
-			}			
-			
-			return _mapGraphicsTileSet.GetMatchingTile(tileEdgePoints);
+				throw new Exception("Uh oh, we have a tile with the wrong number of edges");
+			}
+
+			return _mapGraphicsTileSet.GetMatchingTile(new System.Windows.Point(tileEdgePoints[0],tileEdgePoints[1]));
 		} 
-
-        /// <summary>
-        /// Given RGB values determines if it is water or not. This might be unsafe depending on the map used.
-        /// </summary>
-        /// <param name="blue"></param>
-        /// <param name="green"></param>
-        /// <param name="red"></param>
-        /// <returns></returns>
-        private bool IsWater(byte blue, byte green, byte red)
-        {
-            if (blue == 204 && green == 179 && red == 153)
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Paints a tile that has both water and land to black and white
-        /// </summary>
-        /// <param name="height"></param>
-        /// <param name="width"></param>
-        /// <param name="rgbValues"></param>
-        /// <param name="stride"></param>
-        private void PaintTile(int height, int width, ref byte[] rgbValues, int stride)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    int position = (y * stride) + (x * 4);
-
-                    if (rgbValues[position] == 204 && rgbValues[position + 1] == 179 && rgbValues[position + 2] == 153)
-                        rgbValues[position] = rgbValues[position + 1] = rgbValues[position + 2] = 255;
-                    else
-                        rgbValues[position] = rgbValues[position + 1] = rgbValues[position + 2] = 0;
-                }
-            }
-        }               
-
-        /// <summary>
-        /// Gets the end tile of the selected region Bottom Right
-        /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
+               
         private GPoint getGmapEndTile(List<GPoint> points)
         {
             int x = int.MinValue;
@@ -395,5 +364,5 @@ namespace LevelBuilder
             }
             return new GPoint(x, y);
         }
-    }
+	}
 }

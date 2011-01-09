@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using System.Windows;
 
 namespace GameObjects
 {
@@ -10,9 +10,9 @@ namespace GameObjects
 	public class MapGraphicsTile
 	{
 		/// <summary>
-		/// A list containing two points that represent the points on the tile where the shore's edge is at
+		/// A point that contains the two edges of the tile.
 		/// </summary>
-		public List<int> ShoreEdgePoints { get; set; }
+		public Point ShoreEdgePoint { get; set; }
 
 		/// <summary>
 		/// Represents the Starting Point of the Tile on the Maptiles.Png

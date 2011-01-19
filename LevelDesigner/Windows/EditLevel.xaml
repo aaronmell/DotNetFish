@@ -4,6 +4,6 @@
 		xmlns:src="clr-namespace:LevelDesigner"
         Title="EditLevel" Height="768" Width="1024">
     <Grid>
-		<src:MapCanvas x:Name="mapCanvas" Margin="12,12,198,173"></src:MapCanvas>
+		<src:MapCanvas x:Name="mapCanvas" Margin="12,29,198,173"></src:MapCanvas>		
 	</Grid>
 </Window>

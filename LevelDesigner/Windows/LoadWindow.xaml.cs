@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LevelBuilder;
 using LevelDesigner;
+using GameObjects;
 
 namespace MapBuilder
 {
@@ -29,19 +30,7 @@ namespace MapBuilder
         {
             SelectMapRegion selectMapRegion = new SelectMapRegion();
             selectMapRegion.Show();
-            this.Hide();
-        //    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();           
-        //    dlg.DefaultExt = ".dfm"; // Default file extension
-        //    dlg.Filter = "DotNetFish Map (.dfm)|*.dfm"; // Filter files by extension
-
-        //    Nullable<bool> result = dlg.ShowDialog();
-
-        //    if (result == true)
-        //    {
-        //        string filename = dlg.FileName;
-        //        LevelBuilder.BuildLevel buildLevel = new BuildLevel();
-        //        buildLevel.Build(filename);
-        //    }
+            this.Hide();        
         }       
 
         private void uxLoadLevel_Click(object sender, RoutedEventArgs e)
@@ -56,6 +45,9 @@ namespace MapBuilder
             {
                 // Open document
                 string filename = dlg.FileName;
+				GameWorld gameWorld = LevelBuilder.FileIO.LoadMap(filename);
+				EditLevel editLevel = new EditLevel(gameWorld);
+				editLevel.Show();
             }
         }
     }

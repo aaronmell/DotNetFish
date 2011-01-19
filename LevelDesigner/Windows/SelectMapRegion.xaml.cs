@@ -24,7 +24,8 @@ namespace LevelDesigner
     public partial class SelectMapRegion : Window
     {
         private PointLatLng _startPosition;
-        private PointLatLng _endPosition; 
+        private PointLatLng _endPosition;
+		private string _filename;
 
         public SelectMapRegion()
         {
@@ -74,12 +75,23 @@ namespace LevelDesigner
         private void start_Click(object sender, RoutedEventArgs e)
         {
             if (gmapControl.SelectedArea.Size.HeightLat > 0 && gmapControl.SelectedArea.Size.WidthLng > 0)
-            {
+			{
+				Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+				dlg.DefaultExt = ".dfl"; // Default file extension
+				dlg.Filter = "DotNetFish Map (.dfl)|*.dfl"; // Filter files by extension
+
+				Nullable<bool> result = dlg.ShowDialog();
+
+				if (result == true)
+				{
+					_filename = dlg.FileName;
+					BuildMap BuildMap = new BuildMap(new List<PointLatLng> { _startPosition, _endPosition });
+					BuildMap.BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
+					BuildMap.BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+					BuildMap.BackgroundWorker.RunWorkerAsync();					
+				}
                 
-                BuildMap BuildMap = new BuildMap(new List<PointLatLng> { _startPosition, _endPosition });
-                BuildMap.BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
-                BuildMap.BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
-                BuildMap.BackgroundWorker.RunWorkerAsync();
+                
             }
             else
             {
@@ -100,7 +112,10 @@ namespace LevelDesigner
              }  
              else
              {
-				 EditLevel editLevel = new EditLevel((GameWorld)e.Result);
+				 GameWorld gameWorld = (GameWorld)e.Result;
+
+				 LevelBuilder.FileIO.SaveMap(_filename, gameWorld) ;
+				 EditLevel editLevel = new EditLevel(gameWorld);
 				 editLevel.Show();
              }
              status.Content = "";

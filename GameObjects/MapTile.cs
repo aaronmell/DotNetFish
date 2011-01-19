@@ -10,6 +10,7 @@ namespace GameObjects
 	/// <summary>
 	/// Holds all of the information needed on one tile of the map on the game world
 	/// </summary>
+	[Serializable()]
     public class MapTile
     {
 		private MapGraphicsTile _graphicsTile;

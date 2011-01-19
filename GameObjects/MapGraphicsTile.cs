@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace GameObjects
 {
-
+	[Serializable()]
 	public class MapGraphicsTile
 	{
 		/// <summary>

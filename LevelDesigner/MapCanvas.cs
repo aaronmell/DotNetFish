@@ -40,21 +40,39 @@ namespace LevelDesigner
 		private void DrawTiles(System.Windows.Media.DrawingContext dc)
 		{
 
-			//int tilesWide = (int)(this.Width / 64) + 1;
-			//int tilesHigh = (int)(this.Height / 64) + 1;
-			//int startX = (int)_currentTile.X - (tilesWide / 2);
-			//int endX = startX + tilesWide;
+			int tilesWide = (int)(this.ActualWidth / 64) + 1;
+			int tilesHigh = (int)(this.ActualHeight/ 64) + 1;
+			int startX = (int)_currentTile.X - (tilesWide / 2);
+			int endX = startX + tilesWide;
 
-			//int startY = (int)_currentTile.Y - (tilesHigh / 2);
-			//int endY = startX + tilesHigh;
+			int startY = (int)_currentTile.Y - (tilesHigh / 2);
+			int endY = startY + tilesHigh;
 
-			//for (int x = startX; x < endX; x++)
-			//{
-			//    for (int y = startY; y < endY; y++)
-			//    {
-			//        dc.DrawImage(_tileSet[_gameWorld.GameMap[x,y].GraphicsTile.TileStartPoint],new Rect(0,0,64,64);
-			//    }
-			//}
+            if (startX < 0)
+                startX = 0;
+
+            if (startY < 0)
+                startY = 0;
+
+            if (endX > _gameWorld.GameMap.GetUpperBound(0))
+                endX = _gameWorld.GameMap.GetUpperBound(0);
+
+            if (endY > _gameWorld.GameMap.GetUpperBound(1))
+                endY = _gameWorld.GameMap.GetUpperBound(1);
+
+            int CountX = 0;
+            int CountY = 0;
+
+			for (int x = startX; x < endX; x++)
+			{
+			    for (int y = startY; y < endY; y++)
+			    {
+			        dc.DrawImage(_tileSet[_gameWorld.GameMap[x,y].GraphicsTile.TileStartPoint],new Rect(CountX * 64,CountY*64,64,64));
+                    CountY++;
+			    }
+                CountY = 0;
+                CountX++;
+			}
 
 
 		}	

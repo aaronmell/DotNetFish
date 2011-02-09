@@ -103,10 +103,8 @@ namespace GameObjects
 								_errorTile = tile;
 							}
 
-							else
-							{
-								_mapTiles.Add(tile);
-							}
+							_mapTiles.Add(tile);
+							
 							columnCount++;
 						}
 					}

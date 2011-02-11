@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using GameObjects;
 using System.Diagnostics;
 using System.IO;
+using System.Security.AccessControl;
 
 namespace LevelBuilder
 {
@@ -78,6 +79,9 @@ namespace LevelBuilder
 			_gameWorld.GameMap = new MapTile[gmapTilesWidth * 16, gmapTilesHeight * 16];
 
 #if DEBUG
+            if (!Directory.Exists("C:\\tiles"))
+                Directory.CreateDirectory("C:\\Tiles");
+
 			foreach (string s in Directory.GetFiles("c:\\tiles"))
 			{
 				File.Delete(s);

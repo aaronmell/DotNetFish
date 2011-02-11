@@ -30,22 +30,10 @@ namespace LevelDesigner
 			mapCanvas.LoadWorld(gameWorld,new Point(gameWorld.GameMap.GetUpperBound(0) / 2,gameWorld.GameMap.GetLength(0) /2), mapGraphicsTileSet);
 		}
 
-		protected override void OnKeyDown(KeyEventArgs e)
-		{
-			base.OnKeyDown(e);
-			Point newTile = mapCanvas.CurrentTile;
-			if (e.Key == Key.Down)			
-				newTile.Y+=1;			
-			if (e.Key == Key.Up)
-				newTile.Y-=1;
-			if (e.Key == Key.Left)
-				newTile.X-=1;
-			if (e.Key == Key.Right)
-				newTile.X+=1;
-			
-			mapCanvas.CurrentTile = newTile;
-			mapCanvas.InvalidateVisual();
-			//mapCanvas.
-		}
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            mapCanvas.MoveCanvas(e.Key);
+        }
 	}
 }

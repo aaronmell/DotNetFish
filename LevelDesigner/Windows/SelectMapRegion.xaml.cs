@@ -47,7 +47,7 @@ namespace LevelDesigner
             gmapControl.MinZoom = 1;
             gmapControl.MaxZoom = 22;
             gmapControl.Zoom = 10;
-			//gmapControl.ShowTileGridLines = true;
+			gmapControl.ShowTileGridLines = true;
 
             gmapControl.MouseUp += new MouseButtonEventHandler(gmapControl_MouseUp);
             gmapControl.MouseDown += new MouseButtonEventHandler(gmapControl_MouseDown);

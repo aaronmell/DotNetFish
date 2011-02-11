@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using GameObjects;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Globalization;
+using System.Windows.Media;
 
 namespace LevelDesigner
 {
@@ -28,7 +30,9 @@ namespace LevelDesigner
 			{
 				return _gameWorld;
 			}
-		}	
+		}
+
+		public Point CurrentTile { get { return _currentTile; } set { _currentTile = value; } }
 
 		protected override void OnRender(System.Windows.Media.DrawingContext dc)
 		{
@@ -54,11 +58,27 @@ namespace LevelDesigner
             if (startY < 0)
                 startY = 0;
 
-            if (endX > _gameWorld.GameMap.GetUpperBound(0))
-                endX = _gameWorld.GameMap.GetUpperBound(0);
+			if (endX > _gameWorld.GameMap.GetUpperBound(0))
+			{
+				endX = _gameWorld.GameMap.GetUpperBound(0);
+				startX = endX - tilesWide;
+			}
+			else if (startX < 0)
+			{
+				startX = 0;
+				endX = tilesWide;
+			}
 
-            if (endY > _gameWorld.GameMap.GetUpperBound(1))
-                endY = _gameWorld.GameMap.GetUpperBound(1);
+			if (endY > _gameWorld.GameMap.GetUpperBound(1))
+			{
+				endY = _gameWorld.GameMap.GetUpperBound(1);
+				startY = endY - tilesHigh;
+			}
+			else if (startY < 0)
+			{
+				startY = 0;
+				endY = tilesHigh;
+			}                
 
             int CountX = 0;
             int CountY = 0;
@@ -68,7 +88,19 @@ namespace LevelDesigner
 			    for (int y = startY; y < endY; y++)
 			    {
 			        dc.DrawImage(_tileSet[_gameWorld.GameMap[x,y].GraphicsTile.TileStartPoint],new Rect(CountX * 64,CountY*64,64,64));
-                    CountY++;
+#if DEBUG
+					dc.DrawText(
+						new System.Windows.Media.FormattedText(
+							"X:" + x + " Y:" + y,
+							CultureInfo.CurrentCulture,
+							FlowDirection.LeftToRight,
+							new System.Windows.Media.Typeface("arial"),
+							12,
+							new SolidColorBrush(Color.FromRgb(255, 0, 20))
+						),
+						new Point((CountX * 64), (CountY * 64) + 31));
+#endif
+					CountY++;
 			    }
                 CountY = 0;
                 CountX++;

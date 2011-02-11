@@ -77,6 +77,12 @@ namespace LevelBuilder
 
 			_gameWorld.GameMap = new MapTile[gmapTilesWidth * 16, gmapTilesHeight * 16];
 
+#if DEBUG
+			foreach (string s in Directory.GetFiles("c:\\tiles"))
+			{
+				File.Delete(s);
+			}
+#endif
 
             //Loop through each tile and add it to the array         
             for (int x = 0; x < gmapTilesWidth; x++)
@@ -100,10 +106,7 @@ namespace LevelBuilder
                         {
                             using (Bitmap bitmap = new Bitmap(tile.Img))
                             {
-								//foreach (string s in Directory.GetFiles("tiles"))
-								//{
-								//    File.Delete(s);
-								//}
+
 								ProcessGmapTiles(x,y, bitmap);							
                             }                                    
                         }
@@ -129,8 +132,12 @@ namespace LevelBuilder
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 						{
 							gfx.DrawImage(bitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
-							//smallBmp.Save("tiles\\tile" + tileX + tileY + ".jpg");
+							
 						}
+
+#if DEBUG
+						smallBmp.Save("C:\\tiles\\tile" + ((gameworldX * tileSize) + tileX) + "-" + ((gameworldY * tileSize) + tileY) + ".jpg");
+#endif
 
 						//To reduce the processing time when determining the tile type we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.
 						//We will check each edge of the tile for water and land. If only water is found we will set the tile to the water tile. If only land is found we will set the tile 
@@ -160,6 +167,7 @@ namespace LevelBuilder
 
 						if (hasLand && hasWater)
 						{
+
 							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = DetermineTiletoUse(bmpData, rgbValues, tileSize);
 						}
 						else

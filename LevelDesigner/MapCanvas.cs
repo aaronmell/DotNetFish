@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Globalization;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace LevelDesigner
 {
@@ -16,13 +17,19 @@ namespace LevelDesigner
 		private GameWorld _gameWorld;
 		private Point _currentTile;
 		private Dictionary<Point,BitmapSource> _tileSet;
+        private int _tilesWide;
+        private int _tilesHigh;
+        private int _mapWidth;
+        private int _mapHeight;
 
 		public void LoadWorld(GameWorld gameWorld, Point startPoint, MapGraphicsTileSet mapGraphicsTileSet)
 		{
 			_gameWorld = gameWorld;
 			_currentTile = startPoint;
-			_tileSet = mapGraphicsTileSet.GetTileImages();
-		}
+			_tileSet = mapGraphicsTileSet.GetTileImages();           
+            _mapWidth = _gameWorld.GameMap.GetUpperBound(0);
+            _mapHeight = _gameWorld.GameMap.GetUpperBound(1);
+		}       
 
 		public GameWorld Gameworld
 		{
@@ -32,25 +39,20 @@ namespace LevelDesigner
 			}
 		}
 
-		public Point CurrentTile { get { return _currentTile; } set { _currentTile = value; } }
-
 		protected override void OnRender(System.Windows.Media.DrawingContext dc)
 		{
 			base.OnRender(dc);
 
 			DrawTiles(dc);
 		}
-
+        
 		private void DrawTiles(System.Windows.Media.DrawingContext dc)
 		{
+            _tilesWide = (int)(this.ActualWidth / 64) + 1;
+            _tilesHigh = (int)(this.ActualHeight / 64) + 1;
 
-			int tilesWide = (int)(this.ActualWidth / 64) + 1;
-			int tilesHigh = (int)(this.ActualHeight/ 64) + 1;
-			int startX = (int)_currentTile.X - (tilesWide / 2);
-			int endX = startX + tilesWide;
-
-			int startY = (int)_currentTile.Y - (tilesHigh / 2);
-			int endY = startY + tilesHigh;
+			int startX = (int)_currentTile.X - (_tilesWide / 2);
+			int startY = (int)_currentTile.Y - (_tilesHigh / 2);
 
             if (startX < 0)
                 startX = 0;
@@ -58,26 +60,29 @@ namespace LevelDesigner
             if (startY < 0)
                 startY = 0;
 
-			if (endX > _gameWorld.GameMap.GetUpperBound(0))
+            int endX = startX + _tilesWide;
+            int endY = startY + _tilesHigh;
+
+            if (endX > _mapWidth)
 			{
-				endX = _gameWorld.GameMap.GetUpperBound(0);
-				startX = endX - tilesWide;
+                endX = _mapWidth;
+				startX = endX - _tilesWide;
 			}
 			else if (startX < 0)
 			{
 				startX = 0;
-				endX = tilesWide;
+				endX = _tilesWide;
 			}
 
-			if (endY > _gameWorld.GameMap.GetUpperBound(1))
+            if (endY > _mapHeight)
 			{
-				endY = _gameWorld.GameMap.GetUpperBound(1);
-				startY = endY - tilesHigh;
+                endY = _mapHeight;
+				startY = endY - _tilesHigh;
 			}
 			else if (startY < 0)
 			{
 				startY = 0;
-				endY = tilesHigh;
+				endY = _tilesHigh;
 			}                
 
             int CountX = 0;
@@ -107,6 +112,20 @@ namespace LevelDesigner
 			}
 
 
-		}	
-	}
+		}
+
+        internal void MoveCanvas(System.Windows.Input.Key key)
+        {
+            if (key == Key.Down && (int)_currentTile.Y + (_tilesHigh / 2) + 1 < _mapHeight)			
+				_currentTile.Y+=1;
+            if (key == Key.Up && (int)_currentTile.Y - (_tilesHigh / 2) - 1 > 0)
+				_currentTile.Y-=1;
+			if (key == Key.Left && (int)_currentTile.X - (_tilesWide / 2) -1 > 0)
+				_currentTile.X-=1;
+            if (key == Key.Right && (int)_currentTile.X + (_tilesWide / 2) + 1 < _mapWidth)
+				_currentTile.X+=1;			
+			
+			this.InvalidateVisual();
+        }
+    }
 }

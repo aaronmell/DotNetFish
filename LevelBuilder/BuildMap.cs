@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using GameObjects;
 using System.Diagnostics;
 using System.IO;
+using System.Security.AccessControl;
 
 namespace LevelBuilder
 {
@@ -71,7 +72,7 @@ namespace LevelBuilder
             GPoint gmapEndTile = getGmapEndTile(gPoints);
 
             //The gmap tile stuff
-            int gmapTilesHeight = gmapStartTile.Y - gmapEndTile.Y + 1;
+            int gmapTilesHeight = gmapEndTile.Y - gmapStartTile.Y + 1;
             int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X + 1;
             int gmapTilesProcessed = 0;
 
@@ -350,12 +351,12 @@ namespace LevelBuilder
         private GPoint getGmapEndTile(List<GPoint> points)
         {
             int x = int.MinValue;
-            int y = int.MaxValue;
+            int y = int.MinValue;
 
             foreach (GPoint p in points)
             {
                 x = p.X > x ? p.X : x;
-                y = p.Y < y ? p.Y : y;
+                y = p.Y > y ? p.Y : y;
             }
             return new GPoint(x, y);
         }
@@ -368,12 +369,12 @@ namespace LevelBuilder
         private GPoint getGmapStartTile(List<GPoint> points)
         {
             int x = int.MaxValue;
-            int y = int.MinValue;
+            int y = int.MaxValue;
 
             foreach (GPoint p in points)
             {
                 x = p.X < x ? p.X : x;
-                y = p.Y > y ? p.Y : y;
+                y = p.Y < y ? p.Y : y;
             }
             return new GPoint(x, y);
         }

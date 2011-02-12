@@ -78,6 +78,9 @@ namespace LevelBuilder
 			_gameWorld.GameMap = new MapTile[gmapTilesWidth * 16, gmapTilesHeight * 16];
 
 #if DEBUG
+			if (!Directory.Exists("C:\\tiles"))
+				Directory.CreateDirectory("C:\\tiles");
+
 			foreach (string s in Directory.GetFiles("c:\\tiles"))
 			{
 				File.Delete(s);
@@ -106,7 +109,9 @@ namespace LevelBuilder
                         {
                             using (Bitmap bitmap = new Bitmap(tile.Img))
                             {
-
+#if DEBUG
+								bitmap.Save("C:\\tiles\\Largetile" + x + "-" + y + ".jpg");
+#endif
 								ProcessGmapTiles(x,y, bitmap);							
                             }                                    
                         }
@@ -136,7 +141,7 @@ namespace LevelBuilder
 						}
 
 #if DEBUG
-						smallBmp.Save("C:\\tiles\\tile" + ((gameworldX * tileSize) + tileX) + "-" + ((gameworldY * tileSize) + tileY) + ".jpg");
+						smallBmp.Save("C:\\tiles\\smalltile" + ((gameworldX * tileSize) + tileX) + "-" + ((gameworldY * tileSize) + tileY) + ".jpg");
 #endif
 
 						//To reduce the processing time when determining the tile type we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.

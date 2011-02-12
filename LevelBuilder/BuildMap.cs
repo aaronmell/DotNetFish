@@ -97,7 +97,7 @@ namespace LevelBuilder
                     _backgroundWorker.ReportProgress(1, "Generating Tile: " + gmapTilesProcessed + " of " + gmapTilesHeight*gmapTilesWidth );
                         
                     Exception ex;
-                    WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y - y), zoom, out ex) as WindowsFormsImage;
+                    WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
 
                     if (ex != null)
                     {

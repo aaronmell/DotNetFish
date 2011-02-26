@@ -23,6 +23,7 @@ namespace GameObjects
 		private MapGraphicsTile _waterTile;
         private MapGraphicsTile _landTile;
 		private MapGraphicsTile _errorTile;
+		private System.Windows.Point _errorPoint;
 
 		public List<MapGraphicsTile> MapTiles
 		{
@@ -56,12 +57,21 @@ namespace GameObjects
 			}
 		}
 
+		public System.Windows.Point ErrorPoint
+		{
+			get
+			{
+				return _errorPoint;
+			}
+		}
+
 		public MapGraphicsTileSet(string filename, int tileWidth, int tileHeight)
 		{
 			_filename = filename;
 			_tileWidth = tileWidth;
 			_tileHeight = tileHeight;
 			_mapTiles = new List<MapGraphicsTile>();
+			_errorPoint = new System.Windows.Point(-1, -1);
 			LoadMapTileSet();
 		}
 
@@ -113,16 +123,29 @@ namespace GameObjects
 			}			
 		}
 
-		public MapTile GetMatchingTile(System.Windows.Point tileEdgePoint)
+		public MapTile GetMatchingTile(MapGraphicsTile mapGraphicsTile)
 		{
-			foreach (MapGraphicsTile tile in _mapTiles)
-			{
-				if (tile.ShoreEdgePoint == tileEdgePoint || tile.ShoreEdgePoint == new System.Windows.Point(tileEdgePoint.Y,tileEdgePoint.X))
-				{
-					return new MapTile(tile);
-				}
-			}
-			return new MapTile(_errorTile);
+			//Getting a list of matching tiles. In the future we will have several tiles
+			//That might fit, so we will take a random one from the list. 
+			List<MapGraphicsTile> matchingTiles = _mapTiles.FindAll(
+				instance => instance.ShoreEdgePoint == mapGraphicsTile.ShoreEdgePoint ||
+				instance.ShoreEdgePoint == new System.Windows.Point(mapGraphicsTile.ShoreEdgePoint.Y, mapGraphicsTile.ShoreEdgePoint.X));
+
+			if (matchingTiles.Count == 0)
+				return new MapTile(_errorTile);
+
+			Random rnd = new Random();
+			return new MapTile(matchingTiles[rnd.Next(0, matchingTiles.Count)]);
+
+
+			//foreach (MapGraphicsTile tile in _mapTiles)
+			//{
+			//    if (tile.ShoreEdgePoint == tileEdgePoint || tile.ShoreEdgePoint == )
+			//    {
+			//        return new MapTile(tile);
+			//    }
+			//}
+			
 		}
 
 		public Dictionary<System.Windows.Point,BitmapSource> GetTileImages()

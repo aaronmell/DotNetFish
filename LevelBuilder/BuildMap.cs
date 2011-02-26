@@ -11,6 +11,7 @@ using GameObjects;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
+using Point = System.Windows.Point;
 
 namespace LevelBuilder
 {
@@ -140,7 +141,6 @@ namespace LevelBuilder
 							gfx.DrawImage(bitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
 							
 						}
-
 #if DEBUG
 						smallBmp.Save("C:\\tiles\\smalltile" + ((gameworldX * tileSize) + tileX) + "-" + ((gameworldY * tileSize) + tileY) + ".jpg");
 #endif
@@ -173,8 +173,10 @@ namespace LevelBuilder
 
 						if (hasLand && hasWater)
 						{
-
-							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = DetermineTiletoUse(bmpData, rgbValues, tileSize);
+							MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
+							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize);
+							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
+							
 						}
 						else
 						{
@@ -221,20 +223,31 @@ namespace LevelBuilder
 			}
 		}
 
-		private MapTile DetermineTiletoUse(BitmapData bmpData, byte[] rgbValues,int tileSize)
+		private MapGraphicsTile GenerateMapGraphicsTile(BitmapData bmpData, byte[] rgbValues,int tileSize)
 		{
+			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 			List<Point> edgePoints = new List<Point>();
-			
+			MapTileSide[] mapTileSides = new MapTileSide[4];
+			int count = 0;
 			//Loop though all of the pixels on the Y edge
 			for (int y = 0; y < tileSize; y+=tileSize - 1)
 			{
+				//Using these two values to determine if the edge is water, land, or both
+				bool hasLand = false;
+				bool hasWater = false;
+
 				Color newColor = new Color();
 				Color previousColor = new Color();
 				for (int x = 0; x < tileSize; x++)
 				{
 					int position = (y * bmpData.Stride) + (x * 4);
-
 					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+
+					if (!hasLand && !IsWater(newColor))
+						hasLand = true;
+
+					if (!hasWater && IsWater(newColor))
+						hasWater = true;
 
 					if (previousColor != new Color() && IsLandWaterTransition(newColor,previousColor))
 					{
@@ -242,14 +255,28 @@ namespace LevelBuilder
 					}
 					previousColor = newColor;
 				}
+				mapTileSides[count] = GetTileSides(count, hasLand, hasWater);				
+				count++;
 			}
 			
 			//Loop though all of the pixels on the X edge
 			for (int x = 0; x < tileSize; x+=tileSize - 1)
 			{
+				//Using these two values to determine if the edge is water, land, or both
+				bool hasLand = false;
+				bool hasWater = false;
+
 				Color newColor = new Color();
 				Color previousColor = new Color();
 
+				if (!hasLand && !IsWater(newColor))
+					hasLand = true;
+
+				if (!hasWater && IsWater(newColor))
+					hasWater = true;
+
+				//Starting and ending the count early. Because we dont want to check the first and
+				//last positions twice.
 				for (int y = 0; y < tileSize; y++)
 				{
 					int position = (y * bmpData.Stride) + (x * 4);
@@ -262,11 +289,50 @@ namespace LevelBuilder
 					}
 					previousColor = newColor;
 				}
+				mapTileSides[count] = GetTileSides(count, hasLand, hasWater);		
+				count++;
 			}
 			if (edgePoints.Count == 2)
-				return GetTileThatMatches(edgePoints);
+				mapGraphicsTile.ShoreEdgePoint = ConvertEdgeCoordinatesToEdgePoint(edgePoints);
 			else
-				return new MapTile(_mapGraphicsTileSet.ErrorTile);
+				mapGraphicsTile.ShoreEdgePoint = _mapGraphicsTileSet.ErrorPoint;
+
+			mapGraphicsTile.TileSides = mapTileSides;
+			return mapGraphicsTile;
+		}
+
+		private MapTileSide GetTileSides(int count, bool hasLand, bool hasWater)
+		{
+			MapTileSide mapTileSide = new MapTileSide();
+
+			switch (count)
+			{
+				case 0:
+					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Up;
+					break;
+				case 1:
+					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Down;
+					break;
+				case 2:
+					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Left;
+					break;
+				case 3:
+					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Right;
+					break;
+				case 4:
+					throw new ArgumentOutOfRangeException("Count was greater than 3");
+			}
+
+			if (hasLand && hasWater)
+				mapTileSide.EdgeType = Enums.EdgeType.Both;
+			else if (hasLand)
+				mapTileSide.EdgeType = Enums.EdgeType.Land;
+			else if (hasWater)
+				mapTileSide.EdgeType = Enums.EdgeType.Water;
+			else
+				throw new ArgumentOutOfRangeException("tile Doesn't have land or water");
+
+			return mapTileSide;
 		}
 
 		private bool IsLandWaterTransition(Color newColor, Color previousColor)
@@ -274,7 +340,7 @@ namespace LevelBuilder
 			bool isNewColorWater = IsWater(newColor);
 			bool isPreviousColorWater = IsWater(previousColor);
 
-			if (isNewColorWater && !isPreviousColorWater || isPreviousColorWater && !isNewColorWater)
+			if (isNewColorWater != isPreviousColorWater)
 				return true;
 			else
 				return false;
@@ -283,7 +349,10 @@ namespace LevelBuilder
 
 		private bool IsWater(Color color)
 		{		
-			if (color.R == 153 && color.B == 204 && color.G == 179)
+			if (color.R == 153 && color.B == 204 && color.G == 179 ||
+				color.R == 175 && color.B == 207 && color.G == 189||
+				color.R == 196 && color.B == 210 && color.G == 204||
+				color.R == 217 && color.B == 217 && color.G == 217)
 				return true;
 			else
 				return false;
@@ -294,13 +363,12 @@ namespace LevelBuilder
 			return Color.FromArgb(255,red,green,blue);	
 		}
 
-		private MapTile GetTileThatMatches(List<Point> edgePoints)
+		private Point ConvertEdgeCoordinatesToEdgePoint(List<Point> edgePoints)
 		{
 			List<byte> tileEdgePoints = new List<byte>();
 
 			foreach (Point p in edgePoints)
 			{
-
 				if (p.X == 0)
 				{
 					if (p.Y <= 4)
@@ -345,7 +413,8 @@ namespace LevelBuilder
 				throw new Exception("Uh oh, we have a tile with the wrong number of edges");
 			}
 
-			return _mapGraphicsTileSet.GetMatchingTile(new System.Windows.Point(tileEdgePoints[0],tileEdgePoints[1]));
+			//return _mapGraphicsTileSet.GetMatchingTile(new System.Windows.Point(tileEdgePoints[0],tileEdgePoints[1]));
+			return new Point(tileEdgePoints[0], tileEdgePoints[1]);
 		} 
                
         private GPoint getGmapEndTile(List<GPoint> points)

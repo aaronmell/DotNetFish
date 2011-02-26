@@ -10,10 +10,21 @@ namespace GameObjects
 	/// </summary>
     public class Enums
     {
-       public enum TileType
-       {
-           Land = 1,
-           Water = 2
-       }
-    }
+		public enum TileEdgeDirection
+		{
+			Up = 1,
+			Right = 2,
+			Down = 3,
+			Left = 4
+		}
+
+		public enum EdgeType
+		{
+			Water = 1,
+			Land = 2,
+			Both = 3,
+		}
+	}
+
+	
 }

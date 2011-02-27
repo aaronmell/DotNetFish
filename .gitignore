@@ -7,3 +7,5 @@
 /LevelDesigner/bin
 /LevelDesigner/obj
 *.suo
+/MapTileBuilder/obj
+/MapTileBuilder/bin

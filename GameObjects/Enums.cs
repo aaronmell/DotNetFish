@@ -20,9 +20,9 @@ namespace GameObjects
 
 		public enum EdgeType
 		{
-			Water = 1,
+			Both = 1,
 			Land = 2,
-			Both = 3,
+			Water = 3	
 		}
 	}
 

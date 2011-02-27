@@ -1,0 +1,35 @@
+﻿<Window x:Class="MapTileBuilder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="476" Width="530">
+    <Grid>
+		<Label Content="1" Height="28" HorizontalAlignment="Left" Margin="185,220,0,0" Name="label10" VerticalAlignment="Top" />
+		<Label Content="2" Height="28" Margin="236,220,245,0" Name="label12" VerticalAlignment="Top" />
+		<Label Content="3" Height="28" HorizontalAlignment="Right" Margin="0,220,190,0" Name="label11" VerticalAlignment="Top" Width="22" />
+		<Label Content="4" Height="28" HorizontalAlignment="Left" Margin="315,192,0,0" Name="label7" VerticalAlignment="Top" />
+		<Label Content="5" Height="28" HorizontalAlignment="Left" Margin="315,142,0,0" Name="label9" VerticalAlignment="Top" />
+		<Label Content="6" Height="28" HorizontalAlignment="Left" Margin="315,92,0,0" Name="label8" VerticalAlignment="Top" />
+		<Label Content="7" Height="28" Margin="0,65,190,0" Name="label5" VerticalAlignment="Top" HorizontalAlignment="Right" Width="22" />
+		<Label Content="8" Height="28" Margin="236,65,245,0" Name="label6" VerticalAlignment="Top" />
+		<Label Content="9" Height="28" HorizontalAlignment="Left" Margin="185,65,0,0" Name="label4" VerticalAlignment="Top" />
+		<Label Content="10" Height="28" HorizontalAlignment="Left" Margin="157,92,0,0" Name="label2" VerticalAlignment="Top" />
+		<Label Content="11" Height="28" HorizontalAlignment="Left" Margin="157,142,0,0" Name="label3" VerticalAlignment="Top" />
+		<Label Content="12" Height="28" HorizontalAlignment="Left" Margin="157,192,0,0" Name="label1" VerticalAlignment="Top" />
+		<ComboBox Height="22" HorizontalAlignment="Left" Margin="20,142,0,0" Name="left" VerticalAlignment="Top" Width="120" IsReadOnly="True" ItemsSource="{Binding}" />
+		<ComboBox Height="22" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,142,12,0" Name="right" VerticalAlignment="Top" Width="120" />
+		<ComboBox Height="22" HorizontalAlignment="Left" IsReadOnly="True" Margin="193,25,0,0" Name="top" VerticalAlignment="Top" Width="120" />
+		<ComboBox Height="22" HorizontalAlignment="Left" IsReadOnly="True" Margin="193,289,0,0" Name="bottom" VerticalAlignment="Top" Width="120" />
+		<TextBox Height="23" HorizontalAlignment="Left" Margin="20,368,0,0" Name="edge1" VerticalAlignment="Top" Width="24" Text="-1" TextAlignment="Center" />
+		<TextBox Height="23" HorizontalAlignment="Right" Margin="0,368,409,0" Name="edge2" VerticalAlignment="Top" Width="24" Text="-1" TextAlignment="Center" />
+		<Label Content="Edge 1" Height="28" HorizontalAlignment="Left" Margin="11,342,0,0" Name="label13" VerticalAlignment="Top" />
+		<Label Content="Edge 2" Height="28" HorizontalAlignment="Left" Margin="62,342,0,0" Name="label14" VerticalAlignment="Top" />
+		<Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="421,402,0,0" Name="next" VerticalAlignment="Top" Width="75" />
+		<Label Content="0,0 = Land 13,13 = Water 14,14 = Error" Height="28" HorizontalAlignment="Left" Margin="19,397,0,0" Name="label15" VerticalAlignment="Top" />
+		<Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="340,402,0,0" Name="previous" VerticalAlignment="Top" Width="75" IsEnabled="False" />
+		<Label Content="Top Edge" Height="28" HorizontalAlignment="Left" Margin="193,0,0,0" Name="label16" VerticalAlignment="Top" />
+		<Label Content="Left Edge" Height="28" HorizontalAlignment="Left" Margin="20,108,0,0" Name="label17" VerticalAlignment="Top" />
+		<Label Content="Right Edge" Height="28" HorizontalAlignment="Left" Margin="371,108,0,0" Name="label18" VerticalAlignment="Top" />
+		<Label Content="Bottom Edge" Height="28" HorizontalAlignment="Left" Margin="195,255,0,0" Name="label19" VerticalAlignment="Top" />
+		<Image Height="128" HorizontalAlignment="Left" Margin="185,92,0,0" Name="tile" Stretch="Fill" VerticalAlignment="Top" Width="124" />
+	</Grid>
+</Window>

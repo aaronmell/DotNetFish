@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.Windows;
+using System.Xml.Serialization;
 
 namespace GameObjects
 {
@@ -73,55 +74,37 @@ namespace GameObjects
 			_mapTiles = new List<MapGraphicsTile>();
 			_errorPoint = new System.Windows.Point(-1, -1);
 			LoadMapTileSet();
+			SetSpecialTiles();
 		}
 
-		/// <summary>
-		/// Loads the Map Tiles from a csv file into a dictionary for retrieval. 
-		/// </summary>		
-		private void LoadMapTileSet()
+		private void SetSpecialTiles()
 		{
-			using (StreamReader readFile = new StreamReader(_filename))
-			{
-				string line;
-				string[] row;
-				int rowCount = 0;
+			_errorTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 14
+					&& instance.ShoreEdgePoint.Y == 0);
 
-				while ((line = readFile.ReadLine()) != null)
-				{
-					row = line.Split(',');
-					int columnCount = 0;
+			_landTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 0
+					&& instance.ShoreEdgePoint.Y == 0);
 
-					for (int c = 0; c < row.Count(); c += 2)
-					{
-						if (row.Count() > 0 && row[c] != "" && row[c + 1] != "")
-						{
-							System.Windows.Point startPoint = new System.Windows.Point(columnCount * _tileWidth, rowCount * _tileHeight);
-							int edge1 = int.Parse(row[c]);
-							int edge2 = int.Parse(row[c + 1]);
-							MapGraphicsTile tile = new MapGraphicsTile { TileStartPoint = startPoint, ShoreEdgePoint = new System.Windows.Point(edge1, edge2)};
-
-							if (edge1 == 0 && edge2 == 0)
-							{
-								_landTile = tile;
-							}
-							else if (edge1 == 13 && edge2 == 13)
-							{
-								_waterTile = tile;
-							}
-							else if (edge1 == 14 && edge2 == 14)
-							{
-								_errorTile = tile;
-							}
-
-							_mapTiles.Add(tile);
-							
-							columnCount++;
-						}
-					}
-					rowCount++;
-				}
-			}			
+			_waterTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 13
+					&& instance.ShoreEdgePoint.Y == 13);
 		}
+
+		public static void SaveTileSet(List<MapGraphicsTile> mapGraphicsTile, string filename)
+		{
+			XmlSerializer serializer = new XmlSerializer(typeof(List<MapGraphicsTile>));
+			TextWriter textWriter = new StreamWriter(filename);
+			serializer.Serialize(textWriter, mapGraphicsTile);
+			textWriter.Close();		
+		}
+
+		public void LoadMapTileSet()
+		{
+			XmlSerializer deserializer = new XmlSerializer(typeof(List<MapGraphicsTile>));
+			TextReader textReader = new StreamReader(_filename);
+			
+			_mapTiles = (List<MapGraphicsTile>)deserializer.Deserialize(textReader);
+			textReader.Close();
+		}		
 
 		public MapTile GetMatchingTile(MapGraphicsTile mapGraphicsTile)
 		{
@@ -136,16 +119,6 @@ namespace GameObjects
 
 			Random rnd = new Random();
 			return new MapTile(matchingTiles[rnd.Next(0, matchingTiles.Count)]);
-
-
-			//foreach (MapGraphicsTile tile in _mapTiles)
-			//{
-			//    if (tile.ShoreEdgePoint == tileEdgePoint || tile.ShoreEdgePoint == )
-			//    {
-			//        return new MapTile(tile);
-			//    }
-			//}
-			
 		}
 
 		public Dictionary<System.Windows.Point,BitmapSource> GetTileImages()

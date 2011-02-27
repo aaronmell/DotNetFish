@@ -42,7 +42,7 @@ namespace LevelBuilder
         {
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
             _points = points;
-			_mapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.csv", 64, 64);
+			_mapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.xml");
 			_gameWorld = new GameWorld();
 			
             _backgroundWorker.WorkerReportsProgress = true;

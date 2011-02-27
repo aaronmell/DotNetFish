@@ -18,9 +18,7 @@ namespace GameObjects
 	public class MapGraphicsTileSet
 	{
 		private List <MapGraphicsTile> _mapTiles;
-		private string _filename;
-		private int _tileWidth;
-		private int _tileHeight;
+		private string _filename;		
 		private MapGraphicsTile _waterTile;
         private MapGraphicsTile _landTile;
 		private MapGraphicsTile _errorTile;
@@ -66,21 +64,19 @@ namespace GameObjects
 			}
 		}
 
-		public MapGraphicsTileSet(string filename, int tileWidth, int tileHeight)
+		public MapGraphicsTileSet(string filename)
 		{
-			_filename = filename;
-			_tileWidth = tileWidth;
-			_tileHeight = tileHeight;
+			_filename = filename;			
 			_mapTiles = new List<MapGraphicsTile>();
 			_errorPoint = new System.Windows.Point(-1, -1);
-			LoadMapTileSet();
+			_mapTiles = LoadMapTileSet(_filename);
 			SetSpecialTiles();
 		}
 
 		private void SetSpecialTiles()
 		{
 			_errorTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 14
-					&& instance.ShoreEdgePoint.Y == 0);
+					&& instance.ShoreEdgePoint.Y == 14);
 
 			_landTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 0
 					&& instance.ShoreEdgePoint.Y == 0);
@@ -94,16 +90,18 @@ namespace GameObjects
 			XmlSerializer serializer = new XmlSerializer(typeof(List<MapGraphicsTile>));
 			TextWriter textWriter = new StreamWriter(filename);
 			serializer.Serialize(textWriter, mapGraphicsTile);
-			textWriter.Close();		
+			textWriter.Close();
 		}
 
-		public void LoadMapTileSet()
+		public static List<MapGraphicsTile> LoadMapTileSet(string filename)
 		{
+			List<MapGraphicsTile> mapTiles = new List<MapGraphicsTile>();
 			XmlSerializer deserializer = new XmlSerializer(typeof(List<MapGraphicsTile>));
-			TextReader textReader = new StreamReader(_filename);
+			TextReader textReader = new StreamReader(filename);
 			
-			_mapTiles = (List<MapGraphicsTile>)deserializer.Deserialize(textReader);
+			mapTiles = (List<MapGraphicsTile>)deserializer.Deserialize(textReader);
 			textReader.Close();
+			return mapTiles;
 		}		
 
 		public MapTile GetMatchingTile(MapGraphicsTile mapGraphicsTile)
@@ -127,7 +125,7 @@ namespace GameObjects
 			
 			if (_mapTiles.Count == 0)
 			{
-				LoadMapTileSet();
+				_mapTiles = LoadMapTileSet(_filename);
 			}
 			BitmapImage map = new BitmapImage(new Uri(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles64x64.png"));
 

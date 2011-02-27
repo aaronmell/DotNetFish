@@ -68,8 +68,7 @@ namespace MapTileBuilder
 			{
 				LoadValues();
 				DrawImageOnCanvas(_currentPoint);
-			}
-						
+			}						
 		}
 
 		private void SaveFile()
@@ -104,7 +103,31 @@ namespace MapTileBuilder
 				bottom.SelectedIndex = (int)mapGraphicsTile.TileSides[1].EdgeType - 1;
 				left.SelectedIndex = (int)mapGraphicsTile.TileSides[2].EdgeType - 1;
 				right.SelectedIndex = (int)mapGraphicsTile.TileSides[3].EdgeType - 1;
-			}			
+			}
+			else
+			{
+				edge1.Text = GetNextEdgeValue(int.Parse(edge1.Text));
+				edge2.Text = GetNextEdgeValue(int.Parse(edge2.Text));
+
+				int tempIndex = left.SelectedIndex;
+				left.SelectedIndex = bottom.SelectedIndex;
+				bottom.SelectedIndex = right.SelectedIndex;
+				right.SelectedIndex = top.SelectedIndex;
+				top.SelectedIndex = tempIndex;
+			}
+		}
+
+		private string GetNextEdgeValue(int edgeValue)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				edgeValue--;
+
+				if (edgeValue < 1)
+					edgeValue = 12;
+			}
+
+			return edgeValue.ToString();
 		}
 
 		private MapTileSide[] GetTileSides()
@@ -173,16 +196,24 @@ namespace MapTileBuilder
 
 		private void LoadFile()
 		{
-			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();            
-            dlg.DefaultExt = ".png"; // Default file extension
-            dlg.Filter = "Graphics File (.png)|*.png";
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "Valid Files (.png, *.xml)|*.png;*.xml";
 
             Nullable<bool> result = dlg.ShowDialog();
           
             if (result == true)
             {
 				_filename = dlg.FileName;
-				_tileImage = new BitmapImage(new Uri(_filename));
+				if (_filename.Contains(".xml"))
+				{
+					MapGraphicsTileSet mapGraphicsTileSet = new MapGraphicsTileSet(_filename);
+					_graphicsTiles = mapGraphicsTileSet.MapTiles.ToDictionary(instance => instance.TileStartPoint);
+					LoadValues();
+					_tileImage = new BitmapImage(new Uri(_filename.Replace(".xml",".png")));
+				
+				}				
+				else
+					_tileImage = new BitmapImage(new Uri(_filename));
 				
 				DrawImageOnCanvas(_currentPoint);
             }

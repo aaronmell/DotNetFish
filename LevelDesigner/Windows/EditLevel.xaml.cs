@@ -25,7 +25,7 @@ namespace LevelDesigner
 		public EditLevel(GameWorld gameWorld)
 		{			
 			InitializeComponent();
-			MapGraphicsTileSet mapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.csv", 64, 64);
+			MapGraphicsTileSet mapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.xml");
 
 			mapCanvas.LoadWorld(gameWorld,new Point(gameWorld.GameMap.GetUpperBound(0) / 2,gameWorld.GameMap.GetLength(0) /2), mapGraphicsTileSet);
 		}

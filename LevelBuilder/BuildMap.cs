@@ -21,6 +21,8 @@ namespace LevelBuilder
         private List<PointLatLng> _points;
 		private GameWorld _gameWorld;
 		private MapGraphicsTileSet _mapGraphicsTileSet;
+		private int _gameWorldWidth;
+		private int _gameWorldHeight;
 
         public BackgroundWorker BackgroundWorker
         {
@@ -77,7 +79,9 @@ namespace LevelBuilder
             int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X + 1;
             int gmapTilesProcessed = 0;
 
-			_gameWorld.GameMap = new MapTile[gmapTilesWidth * 16, gmapTilesHeight * 16];
+			_gameWorldWidth = gmapTilesWidth * 16;
+			_gameWorldHeight = gmapTilesHeight * 16;
+			_gameWorld.GameMap = new MapTile[_gameWorldWidth, _gameWorldHeight];
 
 #if DEBUG
 			if (!Directory.Exists("C:\\tiles"))
@@ -175,6 +179,7 @@ namespace LevelBuilder
 						{
 							MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize);
+							mapGraphicsTile = GenerateTileSides(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
 							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
 							
 						}
@@ -189,6 +194,27 @@ namespace LevelBuilder
 					}					
 				}
 			}
+		}
+
+		private MapGraphicsTile GenerateTileSides(MapGraphicsTile mapGraphicsTile, int x, int y)
+		{
+			//Left Side
+			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)			
+				mapGraphicsTile.LeftEdgeType = _gameWorld.GameMap[x - 1, y].GraphicsTile.RightEdgeType;
+
+			//Top Side
+			if (y - 1 > 0 && _gameWorld.GameMap[x, y - 1] != null && _gameWorld.GameMap[x, y - 1].GraphicsTile != null)
+				mapGraphicsTile.TopEdgeType = _gameWorld.GameMap[x, y - 1].GraphicsTile.BottomEdgeType;
+				
+			//right Side
+			if (x + 1 < _gameWorldWidth && _gameWorld.GameMap[x + 1, y] != null && _gameWorld.GameMap[x + 1, y].GraphicsTile != null)
+				mapGraphicsTile.RightEdgeType = _gameWorld.GameMap[x + 1, y].GraphicsTile.LeftEdgeType;
+
+			//Bottom Side
+			if (y + 1 < _gameWorldHeight && _gameWorld.GameMap[x, y + 1] != null && _gameWorld.GameMap[x, y + 1].GraphicsTile != null)
+				mapGraphicsTile.BottomEdgeType = _gameWorld.GameMap[x, y + 1].GraphicsTile.TopEdgeType;
+
+			return mapGraphicsTile;
 		}
 
 		private void CheckEdges(int stride, byte[] rgbValues, int tileSize, out bool hasWater, out bool hasLand)
@@ -227,8 +253,6 @@ namespace LevelBuilder
 		{
 			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 			List<Point> edgePoints = new List<Point>();
-			MapTileSide[] mapTileSides = new MapTileSide[4];
-			int count = 0;
 			//Loop though all of the pixels on the Y edge
 			for (int y = 0; y < tileSize; y+=tileSize - 1)
 			{
@@ -255,8 +279,12 @@ namespace LevelBuilder
 					}
 					previousColor = newColor;
 				}
-				mapTileSides[count] = GetTileSides(count, hasLand, hasWater);				
-				count++;
+
+				if (y == 0)
+					mapGraphicsTile.TopEdgeType = GetTileEdgeType(hasLand, hasWater);
+				else
+					mapGraphicsTile.BottomEdgeType = GetTileEdgeType(hasLand, hasWater);
+
 			}
 			
 			//Loop though all of the pixels on the X edge
@@ -267,13 +295,7 @@ namespace LevelBuilder
 				bool hasWater = false;
 
 				Color newColor = new Color();
-				Color previousColor = new Color();
-
-				if (!hasLand && !IsWater(newColor))
-					hasLand = true;
-
-				if (!hasWater && IsWater(newColor))
-					hasWater = true;
+				Color previousColor = new Color();				
 
 				//Starting and ending the count early. Because we dont want to check the first and
 				//last positions twice.
@@ -283,56 +305,45 @@ namespace LevelBuilder
 
 					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
 
+					if (!hasLand && !IsWater(newColor))
+						hasLand = true;
+
+					if (!hasWater && IsWater(newColor))
+						hasWater = true;
+
 					if (previousColor != new Color() && IsLandWaterTransition(newColor, previousColor))
 					{
 						edgePoints.Add(new Point(x, y));
 					}
 					previousColor = newColor;
 				}
-				mapTileSides[count] = GetTileSides(count, hasLand, hasWater);		
-				count++;
+
+				if (x == 0)
+					mapGraphicsTile.LeftEdgeType = GetTileEdgeType(hasLand, hasWater);
+				else
+					mapGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
+				
 			}
 			if (edgePoints.Count == 2)
 				mapGraphicsTile.ShoreEdgePoint = ConvertEdgeCoordinatesToEdgePoint(edgePoints);
 			else
 				mapGraphicsTile.ShoreEdgePoint = _mapGraphicsTileSet.ErrorPoint;
 
-			mapGraphicsTile.TileSides = mapTileSides;
+			
 			return mapGraphicsTile;
 		}
 
-		private MapTileSide GetTileSides(int count, bool hasLand, bool hasWater)
-		{
-			MapTileSide mapTileSide = new MapTileSide();
-
-			switch (count)
-			{
-				case 0:
-					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Up;
-					break;
-				case 1:
-					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Down;
-					break;
-				case 2:
-					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Left;
-					break;
-				case 3:
-					mapTileSide.EdgeDirection = Enums.TileEdgeDirection.Right;
-					break;
-				case 4:
-					throw new ArgumentOutOfRangeException("Count was greater than 3");
-			}
+		private GameObjects.Enums.EdgeType GetTileEdgeType(bool hasLand, bool hasWater)
+		{			
 
 			if (hasLand && hasWater)
-				mapTileSide.EdgeType = Enums.EdgeType.Both;
+				return Enums.EdgeType.Both;
 			else if (hasLand)
-				mapTileSide.EdgeType = Enums.EdgeType.Land;
+				return Enums.EdgeType.Land;
 			else if (hasWater)
-				mapTileSide.EdgeType = Enums.EdgeType.Water;
+				return Enums.EdgeType.Water;
 			else
 				throw new ArgumentOutOfRangeException("tile Doesn't have land or water");
-
-			return mapTileSide;
 		}
 
 		private bool IsLandWaterTransition(Color newColor, Color previousColor)

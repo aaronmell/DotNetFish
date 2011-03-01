@@ -110,7 +110,11 @@ namespace GameObjects
 			//That might fit, so we will take a random one from the list. 
 			List<MapGraphicsTile> matchingTiles = _mapTiles.FindAll(
 				instance => instance.ShoreEdgePoint == mapGraphicsTile.ShoreEdgePoint ||
-				instance.ShoreEdgePoint == new System.Windows.Point(mapGraphicsTile.ShoreEdgePoint.Y, mapGraphicsTile.ShoreEdgePoint.X));
+				instance.ShoreEdgePoint == new System.Windows.Point(mapGraphicsTile.ShoreEdgePoint.Y, mapGraphicsTile.ShoreEdgePoint.X) &&
+				instance.LeftEdgeType == mapGraphicsTile.LeftEdgeType &&
+				instance.RightEdgeType == mapGraphicsTile.RightEdgeType &&
+				instance.TopEdgeType == mapGraphicsTile.TopEdgeType &&
+				instance.BottomEdgeType == mapGraphicsTile.BottomEdgeType);
 
 			if (matchingTiles.Count == 0)
 				return new MapTile(_errorTile);

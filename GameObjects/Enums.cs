@@ -10,14 +10,6 @@ namespace GameObjects
 	/// </summary>
     public class Enums
     {
-		public enum TileEdgeDirection
-		{
-			Up = 1,
-			Right = 2,
-			Down = 3,
-			Left = 4
-		}
-
 		public enum EdgeType
 		{
 			Both = 1,

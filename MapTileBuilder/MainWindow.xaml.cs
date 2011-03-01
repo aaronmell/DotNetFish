@@ -84,9 +84,9 @@ namespace MapTileBuilder
 			{
 				ShoreEdgePoint = new Point(int.Parse(edge1.Text), int.Parse(edge2.Text)),
 				TileStartPoint = _currentPoint,
-				TileSides = GetTileSides()
+				
 			};
-
+			mapGraphicsTile = GetTileSides(mapGraphicsTile);
 			_graphicsTiles[_currentPoint] = mapGraphicsTile;
 		}
 
@@ -99,10 +99,10 @@ namespace MapTileBuilder
 				edge1.Text = mapGraphicsTile.ShoreEdgePoint.X.ToString();
 				edge2.Text = mapGraphicsTile.ShoreEdgePoint.Y.ToString();
 
-				top.SelectedIndex = (int)mapGraphicsTile.TileSides[0].EdgeType - 1;
-				bottom.SelectedIndex = (int)mapGraphicsTile.TileSides[1].EdgeType - 1;
-				left.SelectedIndex = (int)mapGraphicsTile.TileSides[2].EdgeType - 1;
-				right.SelectedIndex = (int)mapGraphicsTile.TileSides[3].EdgeType - 1;
+				top.SelectedIndex = (int)mapGraphicsTile.TopEdgeType - 1;
+				bottom.SelectedIndex = (int)mapGraphicsTile.BottomEdgeType - 1;
+				left.SelectedIndex = (int)mapGraphicsTile.LeftEdgeType - 1;
+				right.SelectedIndex = (int)mapGraphicsTile.RightEdgeType - 1;
 			}
 			else
 			{
@@ -130,35 +130,14 @@ namespace MapTileBuilder
 			return edgeValue.ToString();
 		}
 
-		private MapTileSide[] GetTileSides()
+		private MapGraphicsTile GetTileSides(MapGraphicsTile mapGraphicsTile)
 		{
-			MapTileSide[] mapTileSides = new MapTileSide[4];
+			mapGraphicsTile.TopEdgeType = (Enums.EdgeType)top.SelectedIndex + 1;
+			mapGraphicsTile.BottomEdgeType = (Enums.EdgeType)bottom.SelectedIndex + 1;
+			mapGraphicsTile.LeftEdgeType = (Enums.EdgeType)left.SelectedIndex + 1;
+			mapGraphicsTile.RightEdgeType = (Enums.EdgeType)right.SelectedIndex + 1;
 
-			mapTileSides[0] = new MapTileSide
-			{
-				EdgeDirection = Enums.TileEdgeDirection.Up,
-				EdgeType = (Enums.EdgeType)top.SelectedIndex + 1
-			};
-
-			mapTileSides[1] = new MapTileSide
-			{
-				EdgeDirection = Enums.TileEdgeDirection.Down,
-				EdgeType = (Enums.EdgeType)bottom.SelectedIndex + 1
-			};
-
-			mapTileSides[2] = new MapTileSide
-			{
-				EdgeDirection = Enums.TileEdgeDirection.Left,
-				EdgeType = (Enums.EdgeType)left.SelectedIndex + 1
-			};
-
-			mapTileSides[3] = new MapTileSide
-			{
-				EdgeDirection = Enums.TileEdgeDirection.Right,
-				EdgeType = (Enums.EdgeType)right.SelectedIndex + 1
-			};
-
-			return mapTileSides;
+			return mapGraphicsTile;
 		}
 
 		void previous_Click(object sender, RoutedEventArgs e)

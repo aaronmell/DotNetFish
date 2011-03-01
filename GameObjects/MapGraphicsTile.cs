@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using EdgeType = GameObjects.Enums.EdgeType;
 
 namespace GameObjects
 {
 	[Serializable()]
 	public class MapGraphicsTile
-	{
-		private MapTileSide[] _mapTileSide;
+	{		
 		/// <summary>
 		/// A point that contains the two edges of the tile.
 		/// </summary>
@@ -20,19 +20,9 @@ namespace GameObjects
 		/// </summary>
 		public Point TileStartPoint { get; set; }
 
-		public MapTileSide[] TileSides
-		{
-			get
-			{
-				if (_mapTileSide == null)
-					_mapTileSide = new MapTileSide[4];
-
-				return _mapTileSide;
-			}
-			set
-			{
-				_mapTileSide = value;
-			}
-		}
+		public EdgeType TopEdgeType { get; set; }
+		public EdgeType BottomEdgeType { get; set; }
+		public EdgeType LeftEdgeType { get; set; }
+		public EdgeType RightEdgeType { get; set; }
 	}
 }

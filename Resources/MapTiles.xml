@@ -9,10 +9,10 @@
       <X>0</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -23,10 +23,10 @@
       <X>64</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -37,10 +37,10 @@
       <X>128</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -51,10 +51,10 @@
       <X>192</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -65,10 +65,10 @@
       <X>256</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -79,10 +79,10 @@
       <X>320</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -93,10 +93,10 @@
       <X>384</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -107,10 +107,10 @@
       <X>448</X>
       <Y>0</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -121,10 +121,10 @@
       <X>0</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -135,10 +135,10 @@
       <X>64</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -149,10 +149,10 @@
       <X>128</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -163,10 +163,10 @@
       <X>192</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -177,10 +177,10 @@
       <X>256</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -191,10 +191,10 @@
       <X>320</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -205,10 +205,10 @@
       <X>384</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -219,10 +219,10 @@
       <X>448</X>
       <Y>64</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -233,10 +233,10 @@
       <X>0</X>
       <Y>128</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -247,514 +247,514 @@
       <X>64</X>
       <Y>128</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
       <X>7</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>128</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>192</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>10</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>256</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>7</X>
+      <Y>10</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>320</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>7</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>384</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>448</X>
+      <Y>128</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>9</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>0</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>6</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>64</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>3</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>128</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>12</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>192</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>9</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>256</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>6</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>320</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>3</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>384</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>12</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>448</X>
+      <Y>192</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>8</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>0</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>5</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>64</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>2</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>128</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>11</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>192</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>8</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>256</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>5</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>320</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>2</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>384</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>11</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>448</X>
+      <Y>256</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>0</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>64</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>128</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>192</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>256</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>320</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>384</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
+      <Y>4</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>448</X>
+      <Y>320</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>6</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>0</X>
+      <Y>384</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>3</X>
+      <Y>10</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>64</X>
+      <Y>384</Y>
+    </TileStartPoint>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>12</X>
+      <Y>7</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>128</X>
+      <Y>384</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>4</X>
+      <Y>9</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>192</X>
+      <Y>384</Y>
+    </TileStartPoint>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>1</X>
+      <Y>6</Y>
+    </ShoreEdgePoint>
+    <TileStartPoint>
+      <X>256</X>
+      <Y>384</Y>
+    </TileStartPoint>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
+  </MapGraphicsTile>
+  <MapGraphicsTile>
+    <ShoreEdgePoint>
+      <X>10</X>
       <Y>3</Y>
     </ShoreEdgePoint>
     <TileStartPoint>
-      <X>128</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>192</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>10</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>256</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>7</X>
-      <Y>10</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>320</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>7</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>384</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>448</X>
-      <Y>128</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>9</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>0</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>6</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>64</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>3</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>128</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>12</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>192</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>9</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>256</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>6</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>320</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>3</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>384</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>12</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>448</X>
-      <Y>192</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>8</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>0</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>5</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>64</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>2</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>128</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>11</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>192</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>8</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>256</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>5</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>320</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>2</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>384</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>11</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>448</X>
-      <Y>256</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>0</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>64</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>128</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>192</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>256</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>320</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>384</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>4</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>448</X>
-      <Y>320</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>6</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>0</X>
-      <Y>384</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>3</X>
-      <Y>10</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>64</X>
-      <Y>384</Y>
-    </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>12</X>
-      <Y>7</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>128</X>
-      <Y>384</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>4</X>
-      <Y>9</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>192</X>
-      <Y>384</Y>
-    </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>1</X>
-      <Y>6</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
-      <X>256</X>
-      <Y>384</Y>
-    </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
-  </MapGraphicsTile>
-  <MapGraphicsTile>
-    <ShoreEdgePoint>
-      <X>10</X>
-      <Y>6</Y>
-    </ShoreEdgePoint>
-    <TileStartPoint>
       <X>320</X>
       <Y>384</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -765,10 +765,10 @@
       <X>384</X>
       <Y>384</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -779,10 +779,10 @@
       <X>448</X>
       <Y>384</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -793,10 +793,10 @@
       <X>0</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -807,10 +807,10 @@
       <X>64</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -821,10 +821,10 @@
       <X>128</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -835,10 +835,10 @@
       <X>192</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -849,10 +849,10 @@
       <X>256</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -863,10 +863,10 @@
       <X>320</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -877,10 +877,10 @@
       <X>384</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -891,10 +891,10 @@
       <X>448</X>
       <Y>448</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -905,10 +905,10 @@
       <X>0</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -919,10 +919,10 @@
       <X>64</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -933,10 +933,10 @@
       <X>128</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -947,10 +947,10 @@
       <X>192</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -961,10 +961,10 @@
       <X>256</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -975,10 +975,10 @@
       <X>320</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -989,10 +989,10 @@
       <X>384</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1003,10 +1003,10 @@
       <X>448</X>
       <Y>512</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1017,10 +1017,10 @@
       <X>0</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1031,10 +1031,10 @@
       <X>64</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1045,10 +1045,10 @@
       <X>128</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1059,10 +1059,10 @@
       <X>192</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1073,10 +1073,10 @@
       <X>256</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1087,10 +1087,10 @@
       <X>320</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1101,10 +1101,10 @@
       <X>384</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1115,10 +1115,10 @@
       <X>448</X>
       <Y>576</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1129,10 +1129,10 @@
       <X>0</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1143,10 +1143,10 @@
       <X>64</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1157,10 +1157,10 @@
       <X>128</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1171,10 +1171,10 @@
       <X>192</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1185,10 +1185,10 @@
       <X>256</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1199,10 +1199,10 @@
       <X>320</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1213,10 +1213,10 @@
       <X>384</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1227,10 +1227,10 @@
       <X>448</X>
       <Y>640</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1241,10 +1241,10 @@
       <X>0</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1255,10 +1255,10 @@
       <X>64</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1269,10 +1269,10 @@
       <X>128</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1283,10 +1283,10 @@
       <X>192</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1297,10 +1297,10 @@
       <X>256</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1311,10 +1311,10 @@
       <X>320</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1325,10 +1325,10 @@
       <X>384</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1339,10 +1339,10 @@
       <X>448</X>
       <Y>704</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1353,10 +1353,10 @@
       <X>0</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1367,10 +1367,10 @@
       <X>64</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1381,10 +1381,10 @@
       <X>128</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1395,10 +1395,10 @@
       <X>192</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1409,10 +1409,10 @@
       <X>256</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1423,10 +1423,10 @@
       <X>320</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1437,10 +1437,10 @@
       <X>384</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1451,10 +1451,10 @@
       <X>448</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1465,10 +1465,10 @@
       <X>0</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1479,10 +1479,10 @@
       <X>448.47831100499172</X>
       <Y>768</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1493,10 +1493,10 @@
       <X>64</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1507,10 +1507,10 @@
       <X>128</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1521,10 +1521,10 @@
       <X>192</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1535,10 +1535,10 @@
       <X>256</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1549,10 +1549,10 @@
       <X>320</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1563,10 +1563,10 @@
       <X>384</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1577,10 +1577,10 @@
       <X>448</X>
       <Y>832</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1591,10 +1591,10 @@
       <X>0</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1605,10 +1605,10 @@
       <X>64</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1619,10 +1619,10 @@
       <X>128</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1633,10 +1633,10 @@
       <X>192</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1647,10 +1647,10 @@
       <X>256</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1661,10 +1661,10 @@
       <X>320</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1675,10 +1675,10 @@
       <X>384</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1689,10 +1689,10 @@
       <X>448</X>
       <Y>896</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1703,10 +1703,10 @@
       <X>0</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1717,10 +1717,10 @@
       <X>64</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1731,10 +1731,10 @@
       <X>128</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1745,10 +1745,10 @@
       <X>192</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1759,10 +1759,10 @@
       <X>256</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1773,10 +1773,10 @@
       <X>320</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1787,10 +1787,10 @@
       <X>384</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1801,10 +1801,10 @@
       <X>448</X>
       <Y>960</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1815,10 +1815,10 @@
       <X>0</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1829,10 +1829,10 @@
       <X>64</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1843,10 +1843,10 @@
       <X>128</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1857,10 +1857,10 @@
       <X>192</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1871,10 +1871,10 @@
       <X>256</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1885,10 +1885,10 @@
       <X>320</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1899,10 +1899,10 @@
       <X>384</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1913,10 +1913,10 @@
       <X>448</X>
       <Y>1024</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1927,10 +1927,10 @@
       <X>0</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1941,10 +1941,10 @@
       <X>64</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1955,10 +1955,10 @@
       <X>128</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1969,10 +1969,10 @@
       <X>192</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1983,10 +1983,10 @@
       <X>256</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Land</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Land</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Land</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Land</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -1997,10 +1997,10 @@
       <X>320</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Water</TopEdgeType>
-      <BottomEdgeType>Water</BottomEdgeType>
-      <LeftEdgeType>Water</LeftEdgeType>
-      <RightEdgeType>Water</RightEdgeType>
+    <TopEdgeType>Water</TopEdgeType>
+    <BottomEdgeType>Water</BottomEdgeType>
+    <LeftEdgeType>Water</LeftEdgeType>
+    <RightEdgeType>Water</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -2011,10 +2011,10 @@
       <X>384</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -2025,10 +2025,10 @@
       <X>448</X>
       <Y>1088</Y>
     </TileStartPoint>
-      <TopEdgeType>Both</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Both</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Both</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Both</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -2039,10 +2039,10 @@
       <X>448.47831100499172</X>
       <Y>384</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoint>
@@ -2053,9 +2053,9 @@
       <X>384.47831100499172</X>
       <Y>384</Y>
     </TileStartPoint>
-      <TopEdgeType>Land</TopEdgeType>
-      <BottomEdgeType>Both</BottomEdgeType>
-      <LeftEdgeType>Land</LeftEdgeType>
-      <RightEdgeType>Both</RightEdgeType>
+    <TopEdgeType>Land</TopEdgeType>
+    <BottomEdgeType>Both</BottomEdgeType>
+    <LeftEdgeType>Land</LeftEdgeType>
+    <RightEdgeType>Both</RightEdgeType>
   </MapGraphicsTile>
 </ArrayOfMapGraphicsTile>

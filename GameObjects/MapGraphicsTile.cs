@@ -9,7 +9,16 @@ namespace GameObjects
 {
 	[Serializable()]
 	public class MapGraphicsTile
-	{		
+	{
+		public MapGraphicsTile()
+		{
+			ShoreEdgePoints = new List<byte>();
+			TopEdgeType = EdgeType.Undefined;
+			BottomEdgeType = EdgeType.Undefined;
+			LeftEdgeType = EdgeType.Undefined;
+			RightEdgeType = EdgeType.Undefined;
+		}
+		
 		/// <summary>
 		/// A list of integers that makes up the shore edge points
 		/// </summary>
@@ -19,7 +28,6 @@ namespace GameObjects
 		/// Represents the Starting Point of the Tile on the Maptiles.Png
 		/// </summary>
 		public Point TileStartPoint { get; set; }
-
 		public EdgeType TopEdgeType { get; set; }
 		public EdgeType BottomEdgeType { get; set; }
 		public EdgeType LeftEdgeType { get; set; }

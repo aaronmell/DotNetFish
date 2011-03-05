@@ -22,7 +22,7 @@ namespace LevelBuilder
 		private GameWorld _gameWorld;
 		private MapGraphicsTileSet _mapGraphicsTileSet;
 		private int _gameWorldWidth;
-		private int _gameWorldHeight;
+		private int _gameWorldHeight;		
 
         public BackgroundWorker BackgroundWorker
         {
@@ -128,7 +128,7 @@ namespace LevelBuilder
 			e.Result = _gameWorld;
         }
 
-		private void ProcessGmapTiles(int gameworldX, int gameworldY, Bitmap bitmap)
+		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
 		{		
 			const int tileSize = 16;
 			//The bitmap coming in is 256x256 This needs to be broken down further into 16x16 sized
@@ -142,11 +142,11 @@ namespace LevelBuilder
 					{
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 						{
-							gfx.DrawImage(bitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
+							gfx.DrawImage(gmapBitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
 							
 						}
 #if DEBUG
-						smallBmp.Save("C:\\tiles\\smalltile" + ((gameworldX * tileSize) + tileX) + "-" + ((gameworldY * tileSize) + tileY) + ".jpg");
+						smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * tileSize) + tileX) + "-" + ((gmapY * tileSize) + tileY) + ".jpg");
 #endif
 
 						//To reduce the processing time when determining the tile type we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.
@@ -175,53 +175,148 @@ namespace LevelBuilder
 						bool hasLand = false;
 						CheckEdges(bmpData.Stride, rgbValues,tileSize, out hasWater, out hasLand);
 
-						if (hasLand && hasWater)
+
+						MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
+
+						if ((gmapX * tileSize) + tileX == 5 && (gmapY * tileSize) + tileY == 26)
 						{
-							MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
-							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize);
-							mapGraphicsTile = UpdateTileWithNeighbor(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
-							//mapGraphicsTile = GenerateTileSides(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
-							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
-							
+							int me = 1;
+							me = me + 1;
+						}
+
+						//Add the edgepoints that each neighbor tile already has
+						mapGraphicsTile = GetNeighborTileEdgePoints(mapGraphicsTile, (gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY);
+
+						if (hasLand && hasWater)
+						{							
+							//Add any additional tiles that the neighbor didnt have.
+							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize, mapGraphicsTile);							
+						}
+
+						if (hasLand && !hasWater && mapGraphicsTile.ShoreEdgePoints.Count == 0)
+						{
+							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.LandTile);
+
+						}
+						else if (hasWater && !hasLand && mapGraphicsTile.ShoreEdgePoints.Count == 0)
+						{
+							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.WaterTile);
 						}
 						else
 						{
-							if (hasLand)
-								_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.LandTile);
-							else
-								_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.WaterTile);
-						}
+							//Set the Tile edge to the neighbors edge
+							mapGraphicsTile = SetTileEdgeByNeighbor(mapGraphicsTile, (gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY);
+							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
+						}		
+
 						smallBmp.UnlockBits(bmpData);
 					}					
 				}
 			}
 		}
 
-		private MapGraphicsTile UpdateTileWithNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
+		private MapGraphicsTile GetNeighborTileEdgePoints(MapGraphicsTile mapGraphicsTile, int x, int y)
+		{
+			List<byte> foundPoints = new List<byte>();
+			//Left Side
+			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)
+			{
+				foundPoints.AddRange(
+					_gameWorld.GameMap[x - 1, y].GraphicsTile.ShoreEdgePoints.FindAll(
+					instance => instance > 3 && instance < 7));		
+			}
+					
+
+			//Top Side
+			if (y - 1 > 0 && _gameWorld.GameMap[x, y - 1] != null && _gameWorld.GameMap[x, y - 1].GraphicsTile != null)
+				foundPoints.AddRange(
+					_gameWorld.GameMap[x, y - 1].GraphicsTile.ShoreEdgePoints.FindAll(
+					instance => instance > 0 && instance < 4));	
+
+			//right Side
+			if (x + 1 < _gameWorldWidth && _gameWorld.GameMap[x + 1, y] != null && _gameWorld.GameMap[x + 1, y].GraphicsTile != null)
+				foundPoints.AddRange(
+					_gameWorld.GameMap[x + 1, y].GraphicsTile.ShoreEdgePoints.FindAll(
+					instance => instance > 9 && instance < 13));	
+
+			//Bottom Side
+			if (y + 1 < _gameWorldHeight && _gameWorld.GameMap[x, y + 1] != null && _gameWorld.GameMap[x, y + 1].GraphicsTile != null)
+				foundPoints.AddRange(
+					_gameWorld.GameMap[x, y + 1].GraphicsTile.ShoreEdgePoints.FindAll(
+					instance => instance > 6 && instance < 10));
+
+			mapGraphicsTile.ShoreEdgePoints = TranslatePoints(foundPoints);
+
+			return mapGraphicsTile;
+		}
+
+		private List<byte> TranslatePoints(List<byte> foundPoints)
+		{
+			List<byte> translatedPoints = new List<byte>();
+
+			foreach (byte b in foundPoints)
+			{
+				switch (b)
+				{
+					case 1:
+						translatedPoints.Add(9);
+						break;
+					case 2:
+						translatedPoints.Add(8);
+						break;
+					case 3:
+						translatedPoints.Add(7);
+						break;
+					case 4:
+						translatedPoints.Add(12);
+						break;
+					case 5:
+						translatedPoints.Add(11);
+						break;
+					case 6:
+						translatedPoints.Add(10);
+						break;
+					case 7:
+						translatedPoints.Add(3);
+						break;
+					case 8:
+						translatedPoints.Add(2);
+						break;
+					case 9:
+						translatedPoints.Add(1);
+						break;
+					case 10:
+						translatedPoints.Add(6);
+						break;
+					case 11:
+						translatedPoints.Add(5);
+						break;
+					case 12:
+						translatedPoints.Add(4);
+						break;
+				}
+			}
+
+			return translatedPoints;
+		}
+
+		private MapGraphicsTile SetTileEdgeByNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
 		{
 			//Left Side
 			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)
 				mapGraphicsTile.LeftEdgeType = _gameWorld.GameMap[x - 1, y].GraphicsTile.RightEdgeType;
-			else
-				mapGraphicsTile.LeftEdgeType = Enums.EdgeType.Undefined;
 
 			//Top Side
 			if (y - 1 > 0 && _gameWorld.GameMap[x, y - 1] != null && _gameWorld.GameMap[x, y - 1].GraphicsTile != null)
 				mapGraphicsTile.TopEdgeType = _gameWorld.GameMap[x, y - 1].GraphicsTile.BottomEdgeType;
-			else
-				mapGraphicsTile.TopEdgeType = Enums.EdgeType.Undefined;
 
 			//right Side
 			if (x + 1 < _gameWorldWidth && _gameWorld.GameMap[x + 1, y] != null && _gameWorld.GameMap[x + 1, y].GraphicsTile != null)
 				mapGraphicsTile.RightEdgeType = _gameWorld.GameMap[x + 1, y].GraphicsTile.LeftEdgeType;
-			else
-				mapGraphicsTile.RightEdgeType = Enums.EdgeType.Undefined;
 			
 			//Bottom Side
 			if (y + 1 < _gameWorldHeight && _gameWorld.GameMap[x, y + 1] != null && _gameWorld.GameMap[x, y + 1].GraphicsTile != null)
 				mapGraphicsTile.BottomEdgeType = _gameWorld.GameMap[x, y + 1].GraphicsTile.TopEdgeType;
-			else
-				mapGraphicsTile.BottomEdgeType = Enums.EdgeType.Undefined;
 
 			return mapGraphicsTile;
 		}	
@@ -258,13 +353,17 @@ namespace LevelBuilder
 			}
 		}
 
-		private MapGraphicsTile GenerateMapGraphicsTile(BitmapData bmpData, byte[] rgbValues,int tileSize)
-		{
-			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
+		private MapGraphicsTile GenerateMapGraphicsTile(BitmapData bmpData, byte[] rgbValues, int tileSize, MapGraphicsTile currentGraphicsTile)
+		{			
 			List<Point> edgePoints = new List<Point>();
 			//Loop though all of the pixels on the Y edge
 			for (int y = 0; y < tileSize; y+=tileSize - 1)
 			{
+				if (y ==0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance > 6 && instance < 10) > 0)
+					continue;
+				if (y != 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance > 0 && instance < 4) > 0)
+					continue;
+
 				//Using these two values to determine if the edge is water, land, or both
 				bool hasLand = false;
 				bool hasWater = false;
@@ -284,21 +383,31 @@ namespace LevelBuilder
 
 					if (previousColor != new Color() && IsLandWaterTransition(newColor,previousColor))
 					{
-						edgePoints.Add(new Point(x, y));						
+						//If the point is on a corner of the tile, we want to move
+						//it off the corner so the correct Tile Edge is selected. 
+						if (x == 15)
+							edgePoints.Add(new Point(x -1, y));						
+						else
+							edgePoints.Add(new Point(x, y));
 					}
 					previousColor = newColor;
 				}
 
 				if (y == 0)
-					mapGraphicsTile.TopEdgeType = GetTileEdgeType(hasLand, hasWater);
+					currentGraphicsTile.TopEdgeType = GetTileEdgeType(hasLand, hasWater);
 				else
-					mapGraphicsTile.BottomEdgeType = GetTileEdgeType(hasLand, hasWater);
+					currentGraphicsTile.BottomEdgeType = GetTileEdgeType(hasLand, hasWater);
 
 			}
 			
 			//Loop though all of the pixels on the X edge
 			for (int x = 0; x < tileSize; x+=tileSize - 1)
 			{
+				if (x != 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance > 3 && instance < 7) > 0)
+					continue;
+				if (x == 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance > 9 && instance < 13) > 0)
+					continue;
+
 				//Using these two values to determine if the edge is water, land, or both
 				bool hasLand = false;
 				bool hasWater = false;
@@ -322,20 +431,24 @@ namespace LevelBuilder
 
 					if (previousColor != new Color() && IsLandWaterTransition(newColor, previousColor))
 					{
-						edgePoints.Add(new Point(x, y));
+						//If the point is on a corner of the tile, we want to move
+						//it off the corner so the correct Tile Edge is selected. 
+						if (y == 15)
+							edgePoints.Add(new Point(x, y - 1));						
+						else
+							edgePoints.Add(new Point(x, y));
 					}
 					previousColor = newColor;
 				}
 
 				if (x == 0)
-					mapGraphicsTile.LeftEdgeType = GetTileEdgeType(hasLand, hasWater);
+					currentGraphicsTile.LeftEdgeType = GetTileEdgeType(hasLand, hasWater);
 				else
-					mapGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
-				
+					currentGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
 			}			
-				mapGraphicsTile.ShoreEdgePoints = ConvertEdgeCoordinatesToEdgePoints(edgePoints);
+				currentGraphicsTile.ShoreEdgePoints.AddRange(ConvertEdgeCoordinatesToEdgePoints(edgePoints));
 			
-			return mapGraphicsTile;
+			return currentGraphicsTile;
 		}
 
 		private GameObjects.Enums.EdgeType GetTileEdgeType(bool hasLand, bool hasWater)

@@ -104,6 +104,7 @@ namespace LevelDesigner
 							new SolidColorBrush(Color.FromRgb(255, 0, 20))
 						),
 						new Point((CountX * 64), (CountY * 64) + 31));
+					dc.DrawRectangle(null, new Pen(new SolidColorBrush(Color.FromRgb(255, 0, 20)), 1), new Rect(CountX * 64, CountY * 64, 64, 64));
 #endif
 					CountY++;
 			    }
@@ -118,9 +119,9 @@ namespace LevelDesigner
         {
             if (key == Key.Down && (int)_currentTile.Y + (_tilesHigh / 2) + 1 < _mapHeight)			
 				_currentTile.Y+=1;
-            if (key == Key.Up && (int)_currentTile.Y - (_tilesHigh / 2) - 1 > 0)
+            if (key == Key.Up && (int)_currentTile.Y - (_tilesHigh / 2) - 1 >= 0)
 				_currentTile.Y-=1;
-			if (key == Key.Left && (int)_currentTile.X - (_tilesWide / 2) -1 > 0)
+			if (key == Key.Left && (int)_currentTile.X - (_tilesWide / 2) -1 >= 0)
 				_currentTile.X-=1;
             if (key == Key.Right && (int)_currentTile.X + (_tilesWide / 2) + 1 < _mapWidth)
 				_currentTile.X+=1;			

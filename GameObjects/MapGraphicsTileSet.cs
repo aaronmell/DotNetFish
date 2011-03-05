@@ -102,11 +102,8 @@ namespace GameObjects
 
 		public MapTile GetMatchingTile(MapGraphicsTile mapGraphicsTile)
 		{
-			mapGraphicsTile.ShoreEdgePoints.Sort();
-			
 			//Getting a list of matching tiles. In the future we will have several tiles
 			//That might fit, so we will take a random one from the list. 
-
 			var matchingTiles = (from maptile in _mapTiles
 							where
 								maptile.ShoreEdgePoints.OrderBy(i => i).SequenceEqual(mapGraphicsTile.ShoreEdgePoints.OrderBy(i => i)) &&
@@ -115,7 +112,6 @@ namespace GameObjects
 								(mapGraphicsTile.TopEdgeType == Enums.EdgeType.Undefined || maptile.TopEdgeType == mapGraphicsTile.TopEdgeType) &&
 								(mapGraphicsTile.BottomEdgeType == Enums.EdgeType.Undefined || maptile.BottomEdgeType == mapGraphicsTile.BottomEdgeType)
 							select maptile).ToList();
-
 
 			if (matchingTiles.Count == 0)
 				return new MapTile(_errorTile);

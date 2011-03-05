@@ -41,6 +41,14 @@ namespace MapTileBuilder
 			LoadFile();
 
 			_currentPoint = new Point(0, 0);
+
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Edge.ToString());
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Special.ToString());
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Land.ToString());
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Water.ToString());
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Error.ToString());
+			specialTiles.Items.Add(GameObjects.Enums.TileType.Blank.ToString());
+			specialTiles.SelectedIndex = 0;
 		}
 
 		void next_Click(object sender, RoutedEventArgs e)
@@ -82,12 +90,79 @@ namespace MapTileBuilder
 		{
 			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile
 			{
-				ShoreEdgePoint = new Point(int.Parse(edge1.Text), int.Parse(edge2.Text)),
+				//ShoreEdgePoint = new Point(int.Parse(edge1.Text), int.Parse(edge2.Text)),
+				ShoreEdgePoints = GetShoreEdgePoints(),
 				TileStartPoint = _currentPoint,
-				
+				TileType = GetTileType()
 			};
 			mapGraphicsTile = GetTileSides(mapGraphicsTile);
 			_graphicsTiles[_currentPoint] = mapGraphicsTile;
+		}
+
+		private Enums.TileType GetTileType()
+		{
+			switch (specialTiles.SelectedItem.ToString())
+			{
+				case "Edge":
+					return Enums.TileType.Edge;					
+				case "Special":
+					return Enums.TileType.Special;
+				case "Water":
+					return Enums.TileType.Water;
+				case "Land":
+					return Enums.TileType.Land;
+				case "Error":
+					return Enums.TileType.Error;
+				case "Blank":
+					return Enums.TileType.Blank;
+			}
+
+			throw new ArgumentOutOfRangeException("No Tile Type Found");
+		}
+
+		private List<byte> GetShoreEdgePoints()
+		{
+			List<byte> edgePoints = new List<byte>();
+
+			if (specialTiles.SelectedItem.ToString() == GameObjects.Enums.TileType.Edge.ToString())
+			{
+				if ((bool)button1.IsChecked)
+					edgePoints.Add(1);
+
+				if ((bool)button2.IsChecked)
+					edgePoints.Add(2);
+
+				if ((bool)button3.IsChecked)
+					edgePoints.Add(3);
+
+				if ((bool)button4.IsChecked)
+					edgePoints.Add(4);
+
+				if ((bool)button5.IsChecked)
+					edgePoints.Add(5);
+
+				if ((bool)button6.IsChecked)
+					edgePoints.Add(6);
+
+				if ((bool)button7.IsChecked)
+					edgePoints.Add(7);
+
+				if ((bool)button8.IsChecked)
+					edgePoints.Add(8);
+
+				if ((bool)button9.IsChecked)
+					edgePoints.Add(9);
+
+				if ((bool)button10.IsChecked)
+					edgePoints.Add(10);
+
+				if ((bool)button11.IsChecked)
+					edgePoints.Add(11);
+
+				if ((bool)button12.IsChecked)
+					edgePoints.Add(12);
+			}
+			return edgePoints;			
 		}
 
 		private void LoadValues()
@@ -96,8 +171,8 @@ namespace MapTileBuilder
 			{
 				MapGraphicsTile mapGraphicsTile = _graphicsTiles[_currentPoint];
 
-				edge1.Text = mapGraphicsTile.ShoreEdgePoint.X.ToString();
-				edge2.Text = mapGraphicsTile.ShoreEdgePoint.Y.ToString();
+				SetShoreEdgePoints(mapGraphicsTile.ShoreEdgePoints);
+				specialTiles.SelectedValue = mapGraphicsTile.TileType.ToString();
 
 				top.SelectedIndex = (int)mapGraphicsTile.TopEdgeType - 1;
 				bottom.SelectedIndex = (int)mapGraphicsTile.BottomEdgeType - 1;
@@ -106,8 +181,7 @@ namespace MapTileBuilder
 			}
 			else
 			{
-				edge1.Text = GetNextEdgeValue(int.Parse(edge1.Text));
-				edge2.Text = GetNextEdgeValue(int.Parse(edge2.Text));
+				ShiftEdgeValues();
 
 				int tempIndex = left.SelectedIndex;
 				left.SelectedIndex = bottom.SelectedIndex;
@@ -117,17 +191,65 @@ namespace MapTileBuilder
 			}
 		}
 
-		private string GetNextEdgeValue(int edgeValue)
+		
+
+		private void SetShoreEdgePoints(List<byte> shoreEdgePoints)
 		{
-			for (int i = 0; i < 3; i++)
-			{
-				edgeValue--;
+			button1.IsChecked = shoreEdgePoints.Contains(1);
+			button2.IsChecked = shoreEdgePoints.Contains(2);
+			button3.IsChecked = shoreEdgePoints.Contains(3);
+			button4.IsChecked = shoreEdgePoints.Contains(4);
+			button5.IsChecked = shoreEdgePoints.Contains(5);
+			button6.IsChecked = shoreEdgePoints.Contains(6);
+			button7.IsChecked = shoreEdgePoints.Contains(7);
+			button8.IsChecked = shoreEdgePoints.Contains(8);
+			button9.IsChecked = shoreEdgePoints.Contains(9);
+			button10.IsChecked = shoreEdgePoints.Contains(10);
+			button11.IsChecked = shoreEdgePoints.Contains(11);
+			button12.IsChecked = shoreEdgePoints.Contains(12);			
+		}
 
-				if (edgeValue < 1)
-					edgeValue = 12;
-			}
+		private void ShiftEdgeValues()
+		{
+			List<byte> edgePoints = new List<byte>();
 
-			return edgeValue.ToString();
+			if ((bool)button1.IsChecked)
+				edgePoints.Add(10);
+
+			if ((bool)button2.IsChecked)
+				edgePoints.Add(11);
+
+			if ((bool)button3.IsChecked)
+				edgePoints.Add(12);
+
+			if ((bool)button4.IsChecked)
+				edgePoints.Add(1);
+
+			if ((bool)button5.IsChecked)
+				edgePoints.Add(2);
+
+			if ((bool)button6.IsChecked)
+				edgePoints.Add(3);
+
+			if ((bool)button7.IsChecked)
+				edgePoints.Add(4);
+
+			if ((bool)button8.IsChecked)
+				edgePoints.Add(5);
+
+			if ((bool)button9.IsChecked)
+				edgePoints.Add(6);
+
+			if ((bool)button10.IsChecked)
+				edgePoints.Add(7);
+
+			if ((bool)button11.IsChecked)
+				edgePoints.Add(8);
+
+			if ((bool)button12.IsChecked)
+				edgePoints.Add(9);
+
+			SetShoreEdgePoints(edgePoints);	
 		}
 
 		private MapGraphicsTile GetTileSides(MapGraphicsTile mapGraphicsTile)

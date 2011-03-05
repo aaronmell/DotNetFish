@@ -11,10 +11,10 @@ namespace GameObjects
 	public class MapGraphicsTile
 	{		
 		/// <summary>
-		/// A point that contains the two edges of the tile.
+		/// A list of integers that makes up the shore edge points
 		/// </summary>
-		public Point ShoreEdgePoint { get; set; }
-
+		public List<byte> ShoreEdgePoints { get; set; }
+		public GameObjects.Enums.TileType TileType { get; set; }
 		/// <summary>
 		/// Represents the Starting Point of the Tile on the Maptiles.Png
 		/// </summary>

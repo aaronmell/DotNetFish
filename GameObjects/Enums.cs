@@ -14,7 +14,18 @@ namespace GameObjects
 		{
 			Both = 1,
 			Land = 2,
-			Water = 3	
+			Water = 3,
+			Undefined = 4
+		}
+
+		public enum TileType
+		{
+			Edge = 1,
+			Special = 2,
+			Water = 3,
+			Land = 4,
+			Error = 5,
+			Blank = 6
 		}
 	}
 

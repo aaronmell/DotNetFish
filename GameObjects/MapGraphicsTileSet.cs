@@ -75,14 +75,9 @@ namespace GameObjects
 
 		private void SetSpecialTiles()
 		{
-			_errorTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 14
-					&& instance.ShoreEdgePoint.Y == 14);
-
-			_landTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 0
-					&& instance.ShoreEdgePoint.Y == 0);
-
-			_waterTile = _mapTiles.First(instance => instance.ShoreEdgePoint.X == 13
-					&& instance.ShoreEdgePoint.Y == 13);
+			_errorTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Error);
+			_landTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Land);
+			_waterTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Water);
 		}
 
 		public static void SaveTileSet(List<MapGraphicsTile> mapGraphicsTile, string filename)
@@ -101,20 +96,26 @@ namespace GameObjects
 			
 			mapTiles = (List<MapGraphicsTile>)deserializer.Deserialize(textReader);
 			textReader.Close();
+			
 			return mapTiles;
 		}		
 
 		public MapTile GetMatchingTile(MapGraphicsTile mapGraphicsTile)
 		{
+			mapGraphicsTile.ShoreEdgePoints.Sort();
+			
 			//Getting a list of matching tiles. In the future we will have several tiles
 			//That might fit, so we will take a random one from the list. 
-			List<MapGraphicsTile> matchingTiles = _mapTiles.FindAll(
-				instance => instance.ShoreEdgePoint == mapGraphicsTile.ShoreEdgePoint ||
-				instance.ShoreEdgePoint == new System.Windows.Point(mapGraphicsTile.ShoreEdgePoint.Y, mapGraphicsTile.ShoreEdgePoint.X) &&
-				instance.LeftEdgeType == mapGraphicsTile.LeftEdgeType &&
-				instance.RightEdgeType == mapGraphicsTile.RightEdgeType &&
-				instance.TopEdgeType == mapGraphicsTile.TopEdgeType &&
-				instance.BottomEdgeType == mapGraphicsTile.BottomEdgeType);
+
+			var matchingTiles = (from maptile in _mapTiles
+							where
+								maptile.ShoreEdgePoints.OrderBy(i => i).SequenceEqual(mapGraphicsTile.ShoreEdgePoints.OrderBy(i => i)) &&
+								(mapGraphicsTile.LeftEdgeType == Enums.EdgeType.Undefined || maptile.LeftEdgeType == mapGraphicsTile.LeftEdgeType) &&
+								(mapGraphicsTile.RightEdgeType == Enums.EdgeType.Undefined || maptile.RightEdgeType == mapGraphicsTile.RightEdgeType) &&
+								(mapGraphicsTile.TopEdgeType == Enums.EdgeType.Undefined || maptile.TopEdgeType == mapGraphicsTile.TopEdgeType) &&
+								(mapGraphicsTile.BottomEdgeType == Enums.EdgeType.Undefined || maptile.BottomEdgeType == mapGraphicsTile.BottomEdgeType)
+							select maptile).ToList();
+
 
 			if (matchingTiles.Count == 0)
 				return new MapTile(_errorTile);

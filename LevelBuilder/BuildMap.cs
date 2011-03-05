@@ -179,7 +179,8 @@ namespace LevelBuilder
 						{
 							MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize);
-							mapGraphicsTile = GenerateTileSides(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
+							mapGraphicsTile = UpdateTileWithNeighbor(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
+							//mapGraphicsTile = GenerateTileSides(mapGraphicsTile,(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY);
 							_gameWorld.GameMap[(gameworldX * tileSize) + tileX, (gameworldY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
 							
 						}
@@ -196,26 +197,34 @@ namespace LevelBuilder
 			}
 		}
 
-		private MapGraphicsTile GenerateTileSides(MapGraphicsTile mapGraphicsTile, int x, int y)
+		private MapGraphicsTile UpdateTileWithNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
 		{
 			//Left Side
-			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)			
+			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)
 				mapGraphicsTile.LeftEdgeType = _gameWorld.GameMap[x - 1, y].GraphicsTile.RightEdgeType;
+			else
+				mapGraphicsTile.LeftEdgeType = Enums.EdgeType.Undefined;
 
 			//Top Side
 			if (y - 1 > 0 && _gameWorld.GameMap[x, y - 1] != null && _gameWorld.GameMap[x, y - 1].GraphicsTile != null)
 				mapGraphicsTile.TopEdgeType = _gameWorld.GameMap[x, y - 1].GraphicsTile.BottomEdgeType;
-				
+			else
+				mapGraphicsTile.TopEdgeType = Enums.EdgeType.Undefined;
+
 			//right Side
 			if (x + 1 < _gameWorldWidth && _gameWorld.GameMap[x + 1, y] != null && _gameWorld.GameMap[x + 1, y].GraphicsTile != null)
 				mapGraphicsTile.RightEdgeType = _gameWorld.GameMap[x + 1, y].GraphicsTile.LeftEdgeType;
-
+			else
+				mapGraphicsTile.RightEdgeType = Enums.EdgeType.Undefined;
+			
 			//Bottom Side
 			if (y + 1 < _gameWorldHeight && _gameWorld.GameMap[x, y + 1] != null && _gameWorld.GameMap[x, y + 1].GraphicsTile != null)
 				mapGraphicsTile.BottomEdgeType = _gameWorld.GameMap[x, y + 1].GraphicsTile.TopEdgeType;
+			else
+				mapGraphicsTile.BottomEdgeType = Enums.EdgeType.Undefined;
 
 			return mapGraphicsTile;
-		}
+		}	
 
 		private void CheckEdges(int stride, byte[] rgbValues, int tileSize, out bool hasWater, out bool hasLand)
 		{
@@ -323,12 +332,8 @@ namespace LevelBuilder
 				else
 					mapGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
 				
-			}
-			if (edgePoints.Count == 2)
-				mapGraphicsTile.ShoreEdgePoint = ConvertEdgeCoordinatesToEdgePoint(edgePoints);
-			else
-				mapGraphicsTile.ShoreEdgePoint = _mapGraphicsTileSet.ErrorPoint;
-
+			}			
+				mapGraphicsTile.ShoreEdgePoints = ConvertEdgeCoordinatesToEdgePoints(edgePoints);
 			
 			return mapGraphicsTile;
 		}
@@ -374,7 +379,7 @@ namespace LevelBuilder
 			return Color.FromArgb(255,red,green,blue);	
 		}
 
-		private Point ConvertEdgeCoordinatesToEdgePoint(List<Point> edgePoints)
+		private List<byte> ConvertEdgeCoordinatesToEdgePoints(List<Point> edgePoints)
 		{
 			List<byte> tileEdgePoints = new List<byte>();
 
@@ -418,14 +423,7 @@ namespace LevelBuilder
 				}				
 			}
 
-			if (tileEdgePoints.Count != 2)
-			{
-				//This could occur still, so lets continue to check for it just in case, so we can find any errors.
-				throw new Exception("Uh oh, we have a tile with the wrong number of edges");
-			}
-
-			//return _mapGraphicsTileSet.GetMatchingTile(new System.Windows.Point(tileEdgePoints[0],tileEdgePoints[1]));
-			return new Point(tileEdgePoints[0], tileEdgePoints[1]);
+			return tileEdgePoints;
 		} 
                
         private GPoint getGmapEndTile(List<GPoint> points)

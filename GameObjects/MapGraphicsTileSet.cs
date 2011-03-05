@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.Windows;
 using System.Xml.Serialization;
+using GameObjects.Enums;
 
 namespace GameObjects
 {
@@ -21,8 +22,7 @@ namespace GameObjects
 		private string _filename;		
 		private MapGraphicsTile _waterTile;
         private MapGraphicsTile _landTile;
-		private MapGraphicsTile _errorTile;
-		private System.Windows.Point _errorPoint;
+		private MapGraphicsTile _errorTile;		
 
 		public List<MapGraphicsTile> MapTiles
 		{
@@ -36,6 +36,9 @@ namespace GameObjects
 		{
 			get
 			{
+				if (_errorTile == null)
+					SetSpecialTiles();
+
 				return _waterTile;
 			}
 		}
@@ -44,6 +47,9 @@ namespace GameObjects
 		{
 			get
 			{
+				if (_errorTile == null)
+					SetSpecialTiles();
+
 				return _landTile;
 			}
 		}
@@ -51,33 +57,33 @@ namespace GameObjects
 		public MapGraphicsTile ErrorTile 
 		{ 
 			get
-			{ 
-				return _errorTile;
-			}
-		}
-
-		public System.Windows.Point ErrorPoint
-		{
-			get
 			{
-				return _errorPoint;
+ 				if (_errorTile == null)
+					SetSpecialTiles();
+				return _errorTile;
 			}
 		}
 
 		public MapGraphicsTileSet(string filename)
 		{
 			_filename = filename;			
-			_mapTiles = new List<MapGraphicsTile>();
-			_errorPoint = new System.Windows.Point(-1, -1);
+			_mapTiles = new List<MapGraphicsTile>();			
 			_mapTiles = LoadMapTileSet(_filename);
-			SetSpecialTiles();
+			
 		}
 
 		private void SetSpecialTiles()
 		{
-			_errorTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Error);
-			_landTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Land);
-			_waterTile = _mapTiles.First(instance => instance.TileType == Enums.TileType.Water);
+			if (!MapTiles.Exists(instance => instance.TileType == TileType.Error))
+				throw new Exception("TileSet Does not have an error Tile");
+			if (!MapTiles.Exists(instance => instance.TileType == TileType.Land))
+				throw new Exception("TileSet Does not have a Land Tile");
+			if (!MapTiles.Exists(instance => instance.TileType == TileType.Water))
+				throw new Exception("TileSet Does not have a Water Tile");
+
+			_errorTile = _mapTiles.First(instance => instance.TileType == TileType.Error);
+			_landTile = _mapTiles.First(instance => instance.TileType == TileType.Land);
+			_waterTile = _mapTiles.First(instance => instance.TileType == TileType.Water);
 		}
 
 		public static void SaveTileSet(List<MapGraphicsTile> mapGraphicsTile, string filename)

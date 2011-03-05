@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GameObjects;
+using GameObjects.Enums;
 
 namespace MapTileBuilder
 {
@@ -42,12 +43,12 @@ namespace MapTileBuilder
 
 			_currentPoint = new Point(0, 0);
 
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Edge.ToString());
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Special.ToString());
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Land.ToString());
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Water.ToString());
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Error.ToString());
-			specialTiles.Items.Add(GameObjects.Enums.TileType.Blank.ToString());
+			specialTiles.Items.Add(TileType.Edge.ToString());
+			specialTiles.Items.Add(TileType.Special.ToString());
+			specialTiles.Items.Add(TileType.Land.ToString());
+			specialTiles.Items.Add(TileType.Water.ToString());
+			specialTiles.Items.Add(TileType.Error.ToString());
+			specialTiles.Items.Add(TileType.Blank.ToString());
 			specialTiles.SelectedIndex = 0;
 		}
 
@@ -99,22 +100,22 @@ namespace MapTileBuilder
 			_graphicsTiles[_currentPoint] = mapGraphicsTile;
 		}
 
-		private Enums.TileType GetTileType()
+		private TileType GetTileType()
 		{
 			switch (specialTiles.SelectedItem.ToString())
 			{
 				case "Edge":
-					return Enums.TileType.Edge;					
+					return TileType.Edge;					
 				case "Special":
-					return Enums.TileType.Special;
+					return TileType.Special;
 				case "Water":
-					return Enums.TileType.Water;
+					return TileType.Water;
 				case "Land":
-					return Enums.TileType.Land;
+					return TileType.Land;
 				case "Error":
-					return Enums.TileType.Error;
+					return TileType.Error;
 				case "Blank":
-					return Enums.TileType.Blank;
+					return TileType.Blank;
 			}
 
 			throw new ArgumentOutOfRangeException("No Tile Type Found");
@@ -124,7 +125,7 @@ namespace MapTileBuilder
 		{
 			List<byte> edgePoints = new List<byte>();
 
-			if (specialTiles.SelectedItem.ToString() == GameObjects.Enums.TileType.Edge.ToString())
+			if (specialTiles.SelectedItem.ToString() == TileType.Edge.ToString())
 			{
 				if ((bool)button1.IsChecked)
 					edgePoints.Add(1);
@@ -254,10 +255,10 @@ namespace MapTileBuilder
 
 		private MapGraphicsTile GetTileSides(MapGraphicsTile mapGraphicsTile)
 		{
-			mapGraphicsTile.TopEdgeType = (Enums.EdgeType)top.SelectedIndex + 1;
-			mapGraphicsTile.BottomEdgeType = (Enums.EdgeType)bottom.SelectedIndex + 1;
-			mapGraphicsTile.LeftEdgeType = (Enums.EdgeType)left.SelectedIndex + 1;
-			mapGraphicsTile.RightEdgeType = (Enums.EdgeType)right.SelectedIndex + 1;
+			mapGraphicsTile.TopEdgeType = (EdgeType)top.SelectedIndex + 1;
+			mapGraphicsTile.BottomEdgeType = (EdgeType)bottom.SelectedIndex + 1;
+			mapGraphicsTile.LeftEdgeType = (EdgeType)left.SelectedIndex + 1;
+			mapGraphicsTile.RightEdgeType = (EdgeType)right.SelectedIndex + 1;
 
 			return mapGraphicsTile;
 		}
@@ -288,9 +289,9 @@ namespace MapTileBuilder
 		{
 			foreach (ComboBox comboBox in comboBoxes)
 			{
-				comboBox.Items.Add(GameObjects.Enums.EdgeType.Both.ToString());
-				comboBox.Items.Add(GameObjects.Enums.EdgeType.Land.ToString());
-				comboBox.Items.Add(GameObjects.Enums.EdgeType.Water.ToString());
+				comboBox.Items.Add(EdgeType.Both.ToString());
+				comboBox.Items.Add(EdgeType.Land.ToString());
+				comboBox.Items.Add(EdgeType.Water.ToString());
 				comboBox.SelectedIndex = 0;
 			}			
 		}

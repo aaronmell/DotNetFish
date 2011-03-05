@@ -45,7 +45,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
+    <Compile Include="Enums\EdgeType.cs" />
+    <Compile Include="Enums\TileType.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="MapGraphicsTile.cs" />
     <Compile Include="MapTile.cs" />

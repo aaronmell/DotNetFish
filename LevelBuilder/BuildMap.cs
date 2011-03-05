@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using Point = System.Windows.Point;
+using GameObjects.Enums;
 
 namespace LevelBuilder
 {
@@ -178,11 +179,11 @@ namespace LevelBuilder
 
 						MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 
-						if ((gmapX * tileSize) + tileX == 5 && (gmapY * tileSize) + tileY == 26)
-						{
-							int me = 1;
-							me = me + 1;
-						}
+						//if ((gmapX * tileSize) + tileX == 5 && (gmapY * tileSize) + tileY == 26)
+						//{
+						//    int me = 1;
+						//    me = me + 1;
+						//}
 
 						//Add the edgepoints that each neighbor tile already has
 						mapGraphicsTile = GetNeighborTileEdgePoints(mapGraphicsTile, (gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY);
@@ -451,15 +452,15 @@ namespace LevelBuilder
 			return currentGraphicsTile;
 		}
 
-		private GameObjects.Enums.EdgeType GetTileEdgeType(bool hasLand, bool hasWater)
+		private EdgeType GetTileEdgeType(bool hasLand, bool hasWater)
 		{			
 
 			if (hasLand && hasWater)
-				return Enums.EdgeType.Both;
+				return EdgeType.Both;
 			else if (hasLand)
-				return Enums.EdgeType.Land;
+				return EdgeType.Land;
 			else if (hasWater)
-				return Enums.EdgeType.Water;
+				return EdgeType.Water;
 			else
 				throw new ArgumentOutOfRangeException("tile Doesn't have land or water");
 		}

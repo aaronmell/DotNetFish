@@ -19,7 +19,10 @@ namespace LevelBuilder
 {
     public class BuildMap
     {
+		//The default size of the tile we are checking from gmap. we are taking the 16x16 tile and replacing
+		//it with a 64x64 tile. This allows us to get the size map we want. 
 		const int _graphicsTileSize = 16;
+
         private BackgroundWorker _backgroundWorker;
         private List<PointLatLng> _points;
 		private GameWorld _gameWorld;
@@ -57,30 +60,40 @@ namespace LevelBuilder
 
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)  
         {
-            //Gmap Setup stuff
-            MapType type = MapType.GoogleMap;
-            PureProjection prj = null;
-            int maxZoom;
-            int zoom = 22;
-            GMaps.Instance.AdjustProjection(type, ref prj, out maxZoom);
-            GMaps.Instance.Mode = AccessMode.ServerOnly;
-            GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();           
+			e.Cancel = Main();
+			e.Result = _gameWorld;
+        }
 
-            //Convert the PointLatLng to GPoints
-            List<GPoint> gPoints = new List<GPoint>();
-            foreach (PointLatLng p in _points)
-            {
-                gPoints.Add(prj.FromPixelToTileXY(prj.FromLatLngToPixel(p.Lat, p.Lng, zoom)));
-            }
+		/// <summary>
+		/// Main function called by the background worker.
+		/// </summary>
+		/// <returns></returns>
+		private bool Main()
+		{
+			//Gmap Setup stuff
+			MapType type = MapType.GoogleMap;
+			PureProjection prj = null;
+			int maxZoom;
+			int zoom = 22;
+			GMaps.Instance.AdjustProjection(type, ref prj, out maxZoom);
+			GMaps.Instance.Mode = AccessMode.ServerOnly;
+			GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
 
-            //Get the Start and End Tile. Start Tile must be upper left tile, and end tile must be lower right
-            GPoint gmapStartTile = getGmapStartTile(gPoints);
-            GPoint gmapEndTile = getGmapEndTile(gPoints);
+			//Convert the PointLatLng to GPoints
+			List<GPoint> gPoints = new List<GPoint>();
+			foreach (PointLatLng p in _points)
+			{
+				gPoints.Add(prj.FromPixelToTileXY(prj.FromLatLngToPixel(p.Lat, p.Lng, zoom)));
+			}
 
-            //The gmap tile stuff
-            int gmapTilesHeight = gmapEndTile.Y - gmapStartTile.Y + 1;
-            int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X + 1;
-            int gmapTilesProcessed = 0;
+			//Get the Start and End Tile. Start Tile must be upper left tile, and end tile must be lower right
+			GPoint gmapStartTile = getGmapStartTile(gPoints);
+			GPoint gmapEndTile = getGmapEndTile(gPoints);
+
+			//The gmap tile stuff
+			int gmapTilesHeight = gmapEndTile.Y - gmapStartTile.Y + 1;
+			int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X + 1;
+			int gmapTilesProcessed = 0;
 
 			_gameWorldWidth = gmapTilesWidth * 16;
 			_gameWorldHeight = gmapTilesHeight * 16;
@@ -96,41 +109,45 @@ namespace LevelBuilder
 			}
 #endif
 
-            //Loop through each tile and add it to the array         
-            for (int x = 0; x < gmapTilesWidth; x++)
-            {
-                for (int y = 0; y < gmapTilesHeight; y++)
-                {
-                    gmapTilesProcessed++;
-                    _backgroundWorker.ReportProgress(1, "Generating Tile: " + gmapTilesProcessed + " of " + gmapTilesHeight*gmapTilesWidth );
-                        
-                    Exception ex;
-                    WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
+			//Loop through each tile and add it to the array         
+			for (int x = 0; x < gmapTilesWidth; x++)
+			{
+				for (int y = 0; y < gmapTilesHeight; y++)
+				{
+					gmapTilesProcessed++;
+					_backgroundWorker.ReportProgress(1, "Generating Tile: " + gmapTilesProcessed + " of " + gmapTilesHeight * gmapTilesWidth);
 
-                    if (ex != null)
-                    {
-                        e.Cancel = true;
-                        return;  
-                    }                                
-                    else if (tile != null)
-                    {
-                        using (tile)
-                        {
-                            using (Bitmap bitmap = new Bitmap(tile.Img))
-                            {
+					Exception ex;
+					WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
+
+					if (ex != null)
+					{						
+						return true;
+					}
+					else if (tile != null)
+					{
+						using (tile)
+						{
+							using (Bitmap bitmap = new Bitmap(tile.Img))
+							{
 #if DEBUG
 								bitmap.Save("C:\\tiles\\Largetile" + x + "-" + y + ".jpg");
 #endif
-								ProcessGmapTiles(x,y, bitmap);							
-                            }                                    
-                        }
-                    }                        
-                }
-            }
+								ProcessGmapTiles(x, y, bitmap);
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
 
-			e.Result = _gameWorld;
-        }
-
+		/// <summary>
+		/// Processes all of the Large Gmap Tiles
+		/// </summary>
+		/// <param name="gmapX"></param>
+		/// <param name="gmapY"></param>
+		/// <param name="gmapBitmap"></param>
 		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
 		{	
 			//The bitmap coming in is 256x256 This needs to be broken down further into 16x16 sized
@@ -160,6 +177,14 @@ namespace LevelBuilder
 			}
 		}
 
+		/// <summary>
+		/// Processes all of the Tiles and determines if they are an edge or not. Edgetiles get added to the list, and the 
+		/// other tiles get water / land added to them. 
+		/// </summary>
+		/// <param name="bmpData"></param>
+		/// <param name="gameWorldX"></param>
+		/// <param name="gameWorldY"></param>
+		/// <returns></returns>
 		private List<Point> ProcessTile(BmpData bmpData, int gameWorldX, int gameWorldY)
 		{			
 			List<Point> edgeTileLocations = new List<Point>();
@@ -181,6 +206,11 @@ namespace LevelBuilder
 			return edgeTileLocations;
 		}
 
+		/// <summary>
+		/// Process all of the Edge Tiles
+		/// </summary>
+		/// <param name="edgeTilePoints"></param>
+		/// <param name="bmpData"></param>
 		private void ProcessEdgeTiles(List<Point> edgeTilePoints, BmpData bmpData)
 		{
 			foreach (Point gameWorldPoint in edgeTilePoints)
@@ -191,12 +221,18 @@ namespace LevelBuilder
 				//Set the Tile edge to the neighbors edge
 				mapGraphicsTile = SetTileEdgeByNeighbor(mapGraphicsTile, (int)gameWorldPoint.X, (int)gameWorldPoint.Y);
 				//Add any additional tiles that the neighbor didnt have.
-				mapGraphicsTile = GenerateMapGraphicsTile(bmpData, _graphicsTileSize, mapGraphicsTile);
+				mapGraphicsTile.ShoreEdgePoints.AddRange(GenerateMapGraphicsTileEdgePoints(bmpData, _graphicsTileSize, mapGraphicsTile));
 				//Add the tile to the map
 				_gameWorld.GameMap[(int)gameWorldPoint.X, (int)gameWorldPoint.Y] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
 			}
 		}
 
+		/// <summary>
+		/// Gets the edge points from the neighbors
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
 		private MapGraphicsTile GetNeighborTileEdgePoints(int x, int y)
 		{
 			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
@@ -228,12 +264,17 @@ namespace LevelBuilder
 					_gameWorld.GameMap[x, y + 1].GraphicsTile.ShoreEdgePoints.FindAll(
 					instance => instance > 6 && instance < 10));
 
-			mapGraphicsTile.ShoreEdgePoints = TranslatePoints(foundPoints);
+			mapGraphicsTile.ShoreEdgePoints = TranslateNeighborPoints(foundPoints);
 
 			return mapGraphicsTile;
 		}
 
-		private List<byte> TranslatePoints(List<byte> foundPoints)
+		/// <summary>
+		/// Translates the Points that come from a neighbors edge
+		/// </summary>
+		/// <param name="foundPoints"></param>
+		/// <returns></returns>
+		private List<byte> TranslateNeighborPoints(List<byte> foundPoints)
 		{
 			List<byte> translatedPoints = new List<byte>();
 
@@ -283,6 +324,13 @@ namespace LevelBuilder
 			return translatedPoints;
 		}
 
+		/// <summary>
+		/// Sets the Edge of the tile based on the neighbors edge
+		/// </summary>
+		/// <param name="mapGraphicsTile"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
 		private MapGraphicsTile SetTileEdgeByNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
 		{
 			//Left Side
@@ -304,6 +352,13 @@ namespace LevelBuilder
 			return mapGraphicsTile;
 		}	
 
+		/// <summary>
+		/// Checks the Edges of a Tile to determine if the tile contains land,water or both
+		/// </summary>
+		/// <param name="bmpData"></param>
+		/// <param name="tileSize"></param>
+		/// <param name="hasWater"></param>
+		/// <param name="hasLand"></param>
 		private void CheckEdges(BmpData bmpData, int tileSize, out bool hasWater, out bool hasLand)
 		{
 			hasWater = false;
@@ -336,7 +391,14 @@ namespace LevelBuilder
 			}
 		}
 
-		private MapGraphicsTile GenerateMapGraphicsTile(BmpData bmpData, int tileSize, MapGraphicsTile currentGraphicsTile)
+		/// <summary>
+		/// Generates the Edge Points for a MapGraphics Tile
+		/// </summary>
+		/// <param name="bmpData"></param>
+		/// <param name="tileSize"></param>
+		/// <param name="currentGraphicsTile"></param>
+		/// <returns></returns>
+		private List<byte> GenerateMapGraphicsTileEdgePoints(BmpData bmpData, int tileSize, MapGraphicsTile currentGraphicsTile)
 		{			
 			List<Point> edgePoints = new List<Point>();
 			//Loop though all of the pixels on the Y edge
@@ -428,12 +490,16 @@ namespace LevelBuilder
 					currentGraphicsTile.LeftEdgeType = GetTileEdgeType(hasLand, hasWater);
 				else
 					currentGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
-			}			
-				currentGraphicsTile.ShoreEdgePoints.AddRange(ConvertEdgeCoordinatesToEdgePoints(edgePoints));
-			
-			return currentGraphicsTile;
+			}	
+			return ConvertEdgeCoordinatesToEdgePoints(edgePoints);
 		}
 
+		/// <summary>
+		/// Returns the EdgeType of a tile
+		/// </summary>
+		/// <param name="hasLand"></param>
+		/// <param name="hasWater"></param>
+		/// <returns></returns>
 		private EdgeType GetTileEdgeType(bool hasLand, bool hasWater)
 		{			
 
@@ -447,6 +513,12 @@ namespace LevelBuilder
 				throw new ArgumentOutOfRangeException("tile Doesn't have land or water");
 		}
 
+		/// <summary>
+		/// Determines if two colors are a land to water transition
+		/// </summary>
+		/// <param name="newColor"></param>
+		/// <param name="previousColor"></param>
+		/// <returns></returns>
 		private bool IsLandWaterTransition(Color newColor, Color previousColor)
 		{
 			bool isNewColorWater = IsWater(newColor);
@@ -459,6 +531,11 @@ namespace LevelBuilder
 
 		}
 
+		/// <summary>
+		/// Determines if a Color is water based on the color
+		/// </summary>
+		/// <param name="color"></param>
+		/// <returns></returns>
 		private bool IsWater(Color color)
 		{		
 			if (color.R == 153 && color.B == 204 && color.G == 179 ||
@@ -470,11 +547,23 @@ namespace LevelBuilder
 				return false;
 		}
 
+		/// <summary>
+		/// Returns a color based on the RBG values
+		/// </summary>
+		/// <param name="blue"></param>
+		/// <param name="green"></param>
+		/// <param name="red"></param>
+		/// <returns></returns>
 		private  Color SetColor(byte blue, byte green, byte red)
 		{
 			return Color.FromArgb(255,red,green,blue);	
 		}
 
+		/// <summary>
+		/// Converts the X,Y coordinate where there is a shift from land to water into an EdgePoint
+		/// </summary>
+		/// <param name="edgePoints"></param>
+		/// <returns></returns>
 		private List<byte> ConvertEdgeCoordinatesToEdgePoints(List<Point> edgePoints)
 		{
 			List<byte> tileEdgePoints = new List<byte>();
@@ -521,7 +610,12 @@ namespace LevelBuilder
 
 			return tileEdgePoints;
 		} 
-               
+            
+   		/// <summary>
+   		/// Gets to End Gmap Tile (Bottom Right)
+   		/// </summary>
+   		/// <param name="points"></param>
+   		/// <returns></returns>
         private GPoint getGmapEndTile(List<GPoint> points)
         {
             int x = int.MinValue;

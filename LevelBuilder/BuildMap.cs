@@ -13,11 +13,13 @@ using System.IO;
 using System.Security.AccessControl;
 using Point = System.Windows.Point;
 using GameObjects.Enums;
+using System.Collections;
 
 namespace LevelBuilder
 {
     public class BuildMap
     {
+		const int _graphicsTileSize = 16;
         private BackgroundWorker _backgroundWorker;
         private List<PointLatLng> _points;
 		private GameWorld _gameWorld;
@@ -130,94 +132,75 @@ namespace LevelBuilder
         }
 
 		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
-		{		
-			const int tileSize = 16;
+		{	
 			//The bitmap coming in is 256x256 This needs to be broken down further into 16x16 sized
 			//tiles in order to get the proper size of the map
-
-			for (int tileX = 0; tileX < tileSize; tileX++)
+			for (int tileX = 0; tileX < _graphicsTileSize; tileX++)
 			{
-				for (int tileY = 0; tileY < tileSize; tileY++)
+				for (int tileY = 0; tileY < _graphicsTileSize; tileY++)
 				{
-					using (Bitmap smallBmp = new Bitmap(tileSize, tileSize))
+					using (Bitmap smallBmp = new Bitmap(_graphicsTileSize, _graphicsTileSize))
 					{
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 						{
-							gfx.DrawImage(gmapBitmap,new Rectangle(0,0,16,16),tileX * tileSize,tileY * tileSize,16,16,GraphicsUnit.Pixel);
-							
+							gfx.DrawImage(gmapBitmap,new Rectangle(0,0,16,16),tileX * _graphicsTileSize,tileY * _graphicsTileSize,16,16,GraphicsUnit.Pixel);
 						}
 #if DEBUG
-						smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * tileSize) + tileX) + "-" + ((gmapY * tileSize) + tileY) + ".jpg");
+						smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * _graphicsTileSize) + tileX) + "-" + ((gmapY * _graphicsTileSize) + tileY) + ".jpg");
 #endif
+						BmpData bmpData = new BmpData(smallBmp, _graphicsTileSize);
+						
+						List<Point> edgeTileLocations = ProcessTile(bmpData, (gmapX * _graphicsTileSize) + tileX, (gmapY * _graphicsTileSize) + tileY);
+						
+						ProcessEdgeTiles(edgeTileLocations, bmpData);
 
-						//To reduce the processing time when determining the tile type we are going to use BitmapData here and an array, since it is much faster that using getpixel and setpixel.
-						//We will check each edge of the tile for water and land. If only water is found we will set the tile to the water tile. If only land is found we will set the tile 
-						//to the land tile. If both are found then we will call a routine that will figure out which tile to use.
-						BitmapData bmpData = smallBmp.LockBits(
-							new Rectangle(0,0, tileSize, tileSize),
-							ImageLockMode.ReadOnly,
-							PixelFormat.Format32bppArgb);
-
-						//This is a pointere that referenece the location of the first pixel of data 
-						System.IntPtr Scan0 = bmpData.Scan0;
-
-						//calculate the number of bytes
-						int bytes = (bmpData.Stride * bmpData.Height);
-
-						//An array of bytes. Just remember that each pixel format has a different number of bytes.
-						//In our case, the number of bytes is 4 per pixel or RGBA. 
-						byte[] rgbValues = new byte[bytes];
-
-						//Safely copying the data to a managed array
-						System.Runtime.InteropServices.Marshal.Copy(Scan0,
-									   rgbValues, 0, bytes);
-
-						bool hasWater = false;
-						bool hasLand = false;
-						CheckEdges(bmpData.Stride, rgbValues,tileSize, out hasWater, out hasLand);
-
-
-						MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
-
-						//if ((gmapX * tileSize) + tileX == 5 && (gmapY * tileSize) + tileY == 26)
-						//{
-						//    int me = 1;
-						//    me = me + 1;
-						//}
-
-						//Add the edgepoints that each neighbor tile already has
-						mapGraphicsTile = GetNeighborTileEdgePoints(mapGraphicsTile, (gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY);
-
-						if (hasLand && hasWater)
-						{							
-							//Add any additional tiles that the neighbor didnt have.
-							mapGraphicsTile = GenerateMapGraphicsTile(bmpData, rgbValues, tileSize, mapGraphicsTile);							
-						}
-
-						if (hasLand && !hasWater && mapGraphicsTile.ShoreEdgePoints.Count == 0)
-						{
-							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.LandTile);
-
-						}
-						else if (hasWater && !hasLand && mapGraphicsTile.ShoreEdgePoints.Count == 0)
-						{
-							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = new MapTile(_mapGraphicsTileSet.WaterTile);
-						}
-						else
-						{
-							//Set the Tile edge to the neighbors edge
-							mapGraphicsTile = SetTileEdgeByNeighbor(mapGraphicsTile, (gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY);
-							_gameWorld.GameMap[(gmapX * tileSize) + tileX, (gmapY * tileSize) + tileY] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
-						}		
-
-						smallBmp.UnlockBits(bmpData);
+						bmpData.Dispose();
 					}					
 				}
 			}
 		}
 
-		private MapGraphicsTile GetNeighborTileEdgePoints(MapGraphicsTile mapGraphicsTile, int x, int y)
+		private List<Point> ProcessTile(BmpData bmpData, int gameWorldX, int gameWorldY)
+		{			
+			List<Point> edgeTileLocations = new List<Point>();
+
+			bool hasWater = false;
+			bool hasLand = false;
+
+			CheckEdges(bmpData, _graphicsTileSize, out hasWater, out hasLand);
+
+			if (hasLand && hasWater)
+				edgeTileLocations.Add(new Point(gameWorldX, gameWorldY));
+			else if (hasLand)
+				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(_mapGraphicsTileSet.LandTile);
+			else
+				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(_mapGraphicsTileSet.WaterTile);
+
+			//Need to release the locked bits here
+			bmpData.Dispose();
+			return edgeTileLocations;
+		}
+
+		private void ProcessEdgeTiles(List<Point> edgeTilePoints, BmpData bmpData)
 		{
+			foreach (Point gameWorldPoint in edgeTilePoints)
+			{
+				//Add the edgepoints that each neighbor tile already has
+				MapGraphicsTile mapGraphicsTile = GetNeighborTileEdgePoints((int)gameWorldPoint.X, (int)gameWorldPoint.Y);
+
+				//Set the Tile edge to the neighbors edge
+				mapGraphicsTile = SetTileEdgeByNeighbor(mapGraphicsTile, (int)gameWorldPoint.X, (int)gameWorldPoint.Y);
+				//Add any additional tiles that the neighbor didnt have.
+				mapGraphicsTile = GenerateMapGraphicsTile(bmpData, _graphicsTileSize, mapGraphicsTile);
+				//Add the tile to the map
+				_gameWorld.GameMap[(int)gameWorldPoint.X, (int)gameWorldPoint.Y] = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile);
+			}
+		}
+
+		private MapGraphicsTile GetNeighborTileEdgePoints(int x, int y)
+		{
+			MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
+
 			List<byte> foundPoints = new List<byte>();
 			//Left Side
 			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)
@@ -225,8 +208,7 @@ namespace LevelBuilder
 				foundPoints.AddRange(
 					_gameWorld.GameMap[x - 1, y].GraphicsTile.ShoreEdgePoints.FindAll(
 					instance => instance > 3 && instance < 7));		
-			}
-					
+			}					
 
 			//Top Side
 			if (y - 1 > 0 && _gameWorld.GameMap[x, y - 1] != null && _gameWorld.GameMap[x, y - 1].GraphicsTile != null)
@@ -322,7 +304,7 @@ namespace LevelBuilder
 			return mapGraphicsTile;
 		}	
 
-		private void CheckEdges(int stride, byte[] rgbValues, int tileSize, out bool hasWater, out bool hasLand)
+		private void CheckEdges(BmpData bmpData, int tileSize, out bool hasWater, out bool hasLand)
 		{
 			hasWater = false;
 			hasLand = false;
@@ -332,9 +314,9 @@ namespace LevelBuilder
 			{
 				for (int x = 0; x < tileSize; x++)
 				{
-					int position = (y * stride) + (x * 4);
+					int position = (y * bmpData.BitmapData.Stride) + (x * 4);
 
-					Color color = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+					Color color = SetColor(bmpData.RgbValues[position], bmpData.RgbValues[position + 1], bmpData.RgbValues[position + 2]);
 					retval = IsWater(color);
 
 					if (retval == true)
@@ -354,7 +336,7 @@ namespace LevelBuilder
 			}
 		}
 
-		private MapGraphicsTile GenerateMapGraphicsTile(BitmapData bmpData, byte[] rgbValues, int tileSize, MapGraphicsTile currentGraphicsTile)
+		private MapGraphicsTile GenerateMapGraphicsTile(BmpData bmpData, int tileSize, MapGraphicsTile currentGraphicsTile)
 		{			
 			List<Point> edgePoints = new List<Point>();
 			//Loop though all of the pixels on the Y edge
@@ -373,8 +355,8 @@ namespace LevelBuilder
 				Color previousColor = new Color();
 				for (int x = 0; x < tileSize; x++)
 				{
-					int position = (y * bmpData.Stride) + (x * 4);
-					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+					int position = (y * bmpData.BitmapData.Stride) + (x * 4);
+					newColor = SetColor(bmpData.RgbValues[position], bmpData.RgbValues[position + 1], bmpData.RgbValues[position + 2]);
 
 					if (!hasLand && !IsWater(newColor))
 						hasLand = true;
@@ -420,9 +402,9 @@ namespace LevelBuilder
 				//last positions twice.
 				for (int y = 0; y < tileSize; y++)
 				{
-					int position = (y * bmpData.Stride) + (x * 4);
+					int position = (y * bmpData.BitmapData.Stride) + (x * 4);
 
-					newColor = SetColor(rgbValues[position], rgbValues[position + 1], rgbValues[position + 2]);
+					newColor = SetColor(bmpData.RgbValues[position], bmpData.RgbValues[position + 1], bmpData.RgbValues[position + 2]);
 
 					if (!hasLand && !IsWater(newColor))
 						hasLand = true;

@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BmpData.cs" />
     <Compile Include="BuildMap.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

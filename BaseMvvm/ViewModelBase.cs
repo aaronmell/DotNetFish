@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace BaseMvvm
+namespace DotNetFish.BaseMvvm
 {
 	/// <summary>
 	/// Base class for all ViewModel classes in the application.

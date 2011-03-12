@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GameObjects;
+using DotNetFish.GameObjects;
 using System.Runtime.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace LevelBuilder
+namespace DotNetFish.LevelBuilder
 {
 	public static class FileIO
 	{

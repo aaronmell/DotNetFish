@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace BaseMvvm
+namespace DotNetFish.BaseMvvm
 {
 	/// <summary>
 	/// A command whose sole purpose is to 

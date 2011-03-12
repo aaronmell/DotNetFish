@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing.Imaging;
 using System.Drawing;
 
-namespace LevelBuilder
+namespace DotNetFish.LevelBuilder
 {
 	public class BmpData : IDisposable
 	{

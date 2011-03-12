@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 
 
-namespace GameObjects
+namespace DotNetFish.GameObjects
 {
 	/// <summary>
 	/// Holds all of the information needed on one tile of the map on the game world

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using EdgeType = GameObjects.Enums.EdgeType;
+using EdgeType = DotNetFish.GameObjects.Enums.EdgeType;
 
-namespace GameObjects
+namespace DotNetFish.GameObjects
 {
 	[Serializable()]
 	public class MapGraphicsTile
@@ -23,7 +23,7 @@ namespace GameObjects
 		/// A list of integers that makes up the shore edge points
 		/// </summary>
 		public List<byte> ShoreEdgePoints { get; set; }
-		public GameObjects.Enums.TileType TileType { get; set; }
+		public DotNetFish.GameObjects.Enums.TileType TileType { get; set; }
 		/// <summary>
 		/// Represents the Starting Point of the Tile on the Maptiles.Png
 		/// </summary>

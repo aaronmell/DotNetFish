@@ -10,10 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GameObjects;
+using DotNetFish.GameObjects;
 using System.Diagnostics;
 
-namespace LevelDesigner
+namespace DotNetFish.Wpf.LevelDesigner
 {
 	/// <summary>
 	/// Interaction logic for EditLevel.xaml

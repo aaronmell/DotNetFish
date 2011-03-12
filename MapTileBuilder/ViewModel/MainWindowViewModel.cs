@@ -5,11 +5,11 @@ using System.Text;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows;
-using BaseMvvm;
-using GameObjects;
-using GameObjects.Enums;
+using DotNetFish.BaseMvvm;
+using DotNetFish.GameObjects;
+using DotNetFish.GameObjects.Enums;
 
-namespace MapTileBuilder.ViewModel
+namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 {
 	public class MainWindowViewModel : ViewModelBase
 	{
@@ -499,7 +499,7 @@ namespace MapTileBuilder.ViewModel
 		{
 			List<byte> edgePoints = new List<byte>();
 
-			if (TileType == GameObjects.Enums.TileType.Edge)
+			if (TileType == DotNetFish.GameObjects.Enums.TileType.Edge)
 			{
 				if (Edge1)
 					edgePoints.Add(1);

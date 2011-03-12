@@ -9,9 +9,9 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.Windows;
 using System.Xml.Serialization;
-using GameObjects.Enums;
+using DotNetFish.GameObjects.Enums;
 
-namespace GameObjects
+namespace DotNetFish.GameObjects
 {
 	/// <summary>
 	/// Holds all of the methods and properties for returning a set of tiles from a sprite

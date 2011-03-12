@@ -1,4 +1,4 @@
-﻿<Window x:Class="MapTileBuilder.MainWindow"
+﻿<Window x:Class="DotNetFish.Wpf.MapTileBuilder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="575" Width="690">

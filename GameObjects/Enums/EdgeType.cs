@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameObjects.Enums
+namespace DotNetFish.GameObjects.Enums
 {
 	public enum EdgeType
 	{

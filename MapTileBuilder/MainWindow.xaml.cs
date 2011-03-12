@@ -11,10 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GameObjects;
-using GameObjects.Enums;
+using DotNetFish.GameObjects;
+using DotNetFish.GameObjects.Enums;
 
-namespace MapTileBuilder
+namespace DotNetFish.Wpf.MapTileBuilder
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml

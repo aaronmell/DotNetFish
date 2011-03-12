@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MapTileBuilder.Properties {
+namespace DotNetFish.Wpf.MapTileBuilder.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

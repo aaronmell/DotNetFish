@@ -12,11 +12,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GMap.NET;
 using GMap.NET.WindowsPresentation;
-using LevelBuilder;
+using DotNetFish.LevelBuilder;
 using System.ComponentModel;
-using GameObjects;
+using DotNetFish.GameObjects;
 
-namespace LevelDesigner
+namespace DotNetFish.Wpf.LevelDesigner
 {
     /// <summary>
     /// Interaction logic for SelectMapRegion.xaml
@@ -114,7 +114,7 @@ namespace LevelDesigner
              {
 				 GameWorld gameWorld = (GameWorld)e.Result;
 
-				 LevelBuilder.FileIO.SaveMap(_filename, gameWorld) ;
+				 DotNetFish.LevelBuilder.FileIO.SaveMap(_filename, gameWorld) ;
 				 EditLevel editLevel = new EditLevel(gameWorld);
 				 editLevel.Show();
              }

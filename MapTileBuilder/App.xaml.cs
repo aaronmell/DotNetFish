@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using MapTileBuilder.ViewModel;
+using DotNetFish.Wpf.MapTileBuilder.ViewModel;
 
-namespace MapTileBuilder
+namespace DotNetFish.Wpf.MapTileBuilder
 {
 	/// <summary>
 	/// Interaction logic for App.xaml

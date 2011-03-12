@@ -7,15 +7,15 @@ using System.Drawing;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using System.Drawing.Imaging;
-using GameObjects;
+using DotNetFish.GameObjects;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using Point = System.Windows.Point;
-using GameObjects.Enums;
+using DotNetFish.GameObjects.Enums;
 using System.Collections;
 
-namespace LevelBuilder
+namespace DotNetFish.LevelBuilder
 {
     public class BuildMap
     {

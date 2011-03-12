@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace GameObjects
+namespace DotNetFish.GameObjects
 {
 	/// <summary>
 	/// Holds all of the inforamation about the Gameworld itself. 

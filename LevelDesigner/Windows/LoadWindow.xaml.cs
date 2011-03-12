@@ -10,9 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using LevelBuilder;
-using LevelDesigner;
-using GameObjects;
+using DotNetFish.LevelBuilder;
+using DotNetFish.Wpf.LevelDesigner;
+using DotNetFish.GameObjects;
 
 namespace MapBuilder
 {
@@ -45,7 +45,7 @@ namespace MapBuilder
             {
                 // Open document
                 string filename = dlg.FileName;
-				GameWorld gameWorld = LevelBuilder.FileIO.LoadMap(filename);
+				GameWorld gameWorld = DotNetFish.LevelBuilder.FileIO.LoadMap(filename);
 				EditLevel editLevel = new EditLevel(gameWorld);
 				editLevel.Show();
             }

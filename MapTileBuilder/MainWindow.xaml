@@ -3,30 +3,258 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="575" Width="690">
     <Grid>
-		<ComboBox Height="22" HorizontalAlignment="Left" Margin="75,222,0,0" Name="left" VerticalAlignment="Top" Width="120" IsReadOnly="True" ItemsSource="{Binding}" />
-		<ComboBox Height="22" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,222,103,0" Name="right" VerticalAlignment="Top" Width="120" />
-		<ComboBox Height="22" HorizontalAlignment="Left" IsReadOnly="True" Margin="291,72,0,0" Name="top" VerticalAlignment="Top" Width="120" />
-		<ComboBox Height="22" HorizontalAlignment="Left" IsReadOnly="True" Margin="287,352,0,0" Name="bottom" VerticalAlignment="Top" Width="120" />
-		<Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="581,501,0,0" Name="next" VerticalAlignment="Top" Width="75" />
-		<Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="500,501,0,0" Name="previous" VerticalAlignment="Top" Width="75" IsEnabled="False" />
-		<Label Content="Top Edge" Height="28" HorizontalAlignment="Left" Margin="287,50,0,0" Name="label16" VerticalAlignment="Top" />
-		<Label Content="Left Edge" Height="28" HorizontalAlignment="Left" Margin="75,188,0,0" Name="label17" VerticalAlignment="Top" />
-		<Label Content="Right Edge" Height="28" HorizontalAlignment="Left" Margin="445,188,0,0" Name="label18" VerticalAlignment="Top" />
-		<Label Content="Bottom Edge" Height="28" HorizontalAlignment="Left" Margin="287,318,0,0" Name="label19" VerticalAlignment="Top" />
-		<Image Height="128" HorizontalAlignment="Left" Margin="254,142,0,0" Name="tile" Stretch="Fill" VerticalAlignment="Top" Width="128" />
-		<ToggleButton Content="1" Height="20" HorizontalAlignment="Left" Margin="258,276,0,0" Name="button1" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1" />
-		<ToggleButton Content="2" Height="20" HorizontalAlignment="Left" Margin="311,276,0,0" Name="button2" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="3" Height="20" HorizontalAlignment="Left" Margin="363,276,0,0" Name="button3" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="4" Height="20" HorizontalAlignment="Left" Margin="388,0,0,266" Name="button4" VerticalAlignment="Bottom" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="5" Height="20" HorizontalAlignment="Left" Margin="388,196,0,0" Name="button5" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="6" Height="20" HorizontalAlignment="Left" Margin="388,142,0,0" Name="button6" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="7" Height="20" HorizontalAlignment="Left" Margin="359,116,0,0" Name="button7" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="8" Height="20" HorizontalAlignment="Left" Margin="312,116,0,0" Name="button8" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="9" Height="20" HorizontalAlignment="Left" Margin="258,116,0,0" Name="button9" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="10" Height="20" HorizontalAlignment="Left" Margin="229,142,0,0" Name="button10" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="11" Height="20" HorizontalAlignment="Left" Margin="229,196,0,0" Name="button11" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ToggleButton Content="12" Height="20" HorizontalAlignment="Left" Margin="229,250,0,0" Name="button12" VerticalAlignment="Top" Width="19" Background="#FFFFD2C1"/>
-		<ComboBox Height="23" HorizontalAlignment="Left" Margin="512,462,0,0" Name="specialTiles" VerticalAlignment="Top" Width="120" />
-		<Label Content="This tile is:" Height="28" HorizontalAlignment="Left" Margin="512,428,0,0" Name="label1" VerticalAlignment="Top" />
+		<ComboBox
+			Height="22"
+			HorizontalAlignment="Left"
+			Margin="75,222,0,0"
+			Name="left"
+			VerticalAlignment="Top"
+			Width="120"
+			IsReadOnly="True"
+			ItemsSource="{Binding Path=EdgeTypes, Mode=OneTime}"
+			SelectedValue="{Binding Path=LeftEdge}"/>
+		
+		<ComboBox
+			Height="22" 
+			HorizontalAlignment="Right"
+			IsReadOnly="True"
+			Margin="0,222,103,0"
+			Name="right"
+			VerticalAlignment="Top"
+			Width="120"
+			ItemsSource="{Binding Path=EdgeTypes,Mode=OneTime}"
+			SelectedValue="{Binding Path=RightEdge}"/>
+		
+		<ComboBox
+			Height="22"
+			HorizontalAlignment="Left"
+			IsReadOnly="True"
+			Margin="291,72,0,0"
+			Name="top"
+			VerticalAlignment="Top"
+			Width="120"
+			ItemsSource="{Binding Path=EdgeTypes,Mode=OneTime}"
+			SelectedValue="{Binding Path=TopEdge}"/>
+		
+		<ComboBox
+			Height="22"
+			HorizontalAlignment="Left"
+			IsReadOnly="True" 
+			Margin="287,352,0,0"
+			Name="bottom" 
+			VerticalAlignment="Top" 
+			Width="120" 
+			ItemsSource="{Binding Path=EdgeTypes,Mode=OneTime}"
+			SelectedValue="{Binding Path=BottomEdge}"/>
+		
+		<Button
+			Content="Next"
+			Height="23" 
+			HorizontalAlignment="Left" 
+			Margin="581,501,0,0" 
+			Name="next" 
+			VerticalAlignment="Top" 
+			Width="75" Command="{Binding Path=NextCommand}" />
+		
+		<Button 
+			Content="Previous" 
+			Height="23" 
+			HorizontalAlignment="Left" 
+			Margin="500,501,0,0" 
+			Name="previous" 
+			VerticalAlignment="Top"
+			Width="75" 
+			IsEnabled="{Binding Path=PreviousButtonActive}"
+			Command="{Binding Path=BackCommand}" />
+		
+		<ComboBox
+			Height="23"
+			HorizontalAlignment="Left" 
+			Margin="512,462,0,0" 
+			Name="specialTiles" 
+			VerticalAlignment="Top" 
+			Width="120"
+			ItemsSource="{Binding Path=TileTypes,Mode=OneTime}"
+			SelectedValue="{Binding Path=TileType}" />
+
+		<Image 
+			Height="128" 
+			HorizontalAlignment="Left" 
+			Margin="254,142,0,0" Name="tile" 
+			Stretch="Fill" VerticalAlignment="Top" 
+			Width="128"
+			Source="{Binding Path=CurrentTile}"/>
+
+		<Label 
+			Content="Top Edge"
+			Height="28" 
+			HorizontalAlignment="Left" 
+			Margin="287,50,0,0" 
+			Name="label16" 
+			VerticalAlignment="Top" />
+		
+		<Label 
+			Content="Left Edge" 
+			Height="28" 
+			HorizontalAlignment="Left" 
+			Margin="75,188,0,0" 
+			Name="label17" 
+			VerticalAlignment="Top" />
+		
+		<Label 
+			Content="Right Edge" 
+			Height="28" 
+			HorizontalAlignment="Left" 
+			Margin="445,188,0,0" 
+			Name="label18" 
+			VerticalAlignment="Top" />
+		
+		<Label 
+			Content="Bottom Edge" 
+			Height="28" 
+			HorizontalAlignment="Left" 
+			Margin="287,318,0,0" 
+			Name="label19" 
+			VerticalAlignment="Top" />		
+		
+		<ToggleButton 
+			Content="1" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="258,276,0,0" 
+			Name="button1" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge1}"/>
+		
+		<ToggleButton 
+			Content="2" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="311,276,0,0" 
+			Name="button2" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge2}"/>
+		
+		<ToggleButton 
+			Content="3" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="363,276,0,0" 
+			Name="button3" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge3}"/>
+		
+		<ToggleButton 
+			Content="4" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="388,0,0,266" 
+			Name="button4" 
+			VerticalAlignment="Bottom" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge4}"/>
+		
+		<ToggleButton 
+			Content="5" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="388,196,0,0" 
+			Name="button5" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge5}"/>
+		
+		<ToggleButton 
+			Content="6" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="388,142,0,0" 
+			Name="button6" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge6}"/>
+		
+		<ToggleButton 
+			Content="7" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="359,116,0,0" 
+			Name="button7" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge7}"/>
+		
+		<ToggleButton 
+			Content="8" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="312,116,0,0" 
+			Name="button8" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge8}"/>
+		
+		<ToggleButton 
+			Content="9" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="258,116,0,0" 
+			Name="button9" 
+			VerticalAlignment="Top"
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge9}"/>
+		
+		<ToggleButton 
+			Content="10" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="229,142,0,0" 
+			Name="button10" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge10}"/>
+		
+		<ToggleButton 
+			Content="11" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="229,196,0,0" 
+			Name="button11" 
+			VerticalAlignment="Top"
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge11}"/>
+		
+		<ToggleButton 
+			Content="12" 
+			Height="20" 
+			HorizontalAlignment="Left" 
+			Margin="229,250,0,0" 
+			Name="button12" 
+			VerticalAlignment="Top" 
+			Width="19" 
+			Background="#FFFFD2C1"
+			IsChecked="{Binding Path=Edge12}"/>
+		
+		<Label 
+			Content="This tile is:" 
+			Height="28" 
+			HorizontalAlignment="Left" 
+			Margin="512,428,0,0" 
+			Name="label1" 
+			VerticalAlignment="Top" />
 	</Grid>
 </Window>

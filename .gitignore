@@ -9,3 +9,5 @@
 *.suo
 /MapTileBuilder/obj
 /MapTileBuilder/bin
+/BaseMvvm/bin
+/BaseMvvm/obj

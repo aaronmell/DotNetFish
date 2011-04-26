@@ -24,31 +24,6 @@ namespace MapBuilder
         public LoadWindow()
         {
             InitializeComponent();
-        }
-
-        private void uxNewLevel_Click(object sender, RoutedEventArgs e)
-        {
-            SelectMapRegion selectMapRegion = new SelectMapRegion();
-            selectMapRegion.Show();
-            this.Hide();        
-        }       
-
-        private void uxLoadLevel_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();            
-            dlg.DefaultExt = ".dfl"; // Default file extension
-            dlg.Filter = "DotNetFish Level (.dfl)|*.dfl";
-
-            Nullable<bool> result = dlg.ShowDialog();
-          
-            if (result == true)
-            {
-                // Open document
-                string filename = dlg.FileName;
-				GameWorld gameWorld = DotNetFish.LevelBuilder.FileIO.LoadMap(filename);
-				EditLevel editLevel = new EditLevel(gameWorld);
-				editLevel.Show();
-            }
-        }
+        } 
     }
 }

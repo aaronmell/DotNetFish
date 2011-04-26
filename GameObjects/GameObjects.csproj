@@ -8,7 +8,7 @@
     <ProjectGuid>{692D0A8C-CC5E-4573-8F40-40D25AA85F31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameObjects</RootNamespace>
+    <RootNamespace>DotNetFish.GameObjects</RootNamespace>
     <AssemblyName>GameObjects</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

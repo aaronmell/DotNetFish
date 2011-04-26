@@ -8,7 +8,7 @@
     <ProjectGuid>{CDCBCCD6-330C-40B9-98BA-FFCF3EE4858F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseMvvm</RootNamespace>
+    <RootNamespace>DotNetFish.BaseMvvm</RootNamespace>
     <AssemblyName>BaseMvvm</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

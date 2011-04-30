@@ -83,7 +83,18 @@ namespace DotNetFish.GameObjects
 
 			_errorTile = _mapTiles.First(instance => instance.TileType == TileType.Error);
 			_landTile = _mapTiles.First(instance => instance.TileType == TileType.Land);
+
+			_landTile.LeftEdgeType = EdgeType.Land;
+			_landTile.RightEdgeType = EdgeType.Land;
+			_landTile.TopEdgeType = EdgeType.Land;
+			_landTile.BottomEdgeType = EdgeType.Land;
+
 			_waterTile = _mapTiles.First(instance => instance.TileType == TileType.Water);
+
+			_waterTile.LeftEdgeType = EdgeType.Water;
+			_waterTile.RightEdgeType = EdgeType.Water;
+			_waterTile.TopEdgeType = EdgeType.Water;
+			_waterTile.BottomEdgeType = EdgeType.Water;
 		}
 
 		public static void SaveTileSet(List<MapGraphicsTile> mapGraphicsTile, string filename)
@@ -111,12 +122,8 @@ namespace DotNetFish.GameObjects
 			//Getting a list of matching tiles. In the future we will have several tiles
 			//That might fit, so we will take a random one from the list. 
 			var matchingTiles = (from maptile in _mapTiles
-							where
-								maptile.ShoreEdgePoints.OrderBy(i => i).SequenceEqual(mapGraphicsTile.ShoreEdgePoints.OrderBy(i => i)) &&
-								(mapGraphicsTile.LeftEdgeType == Enums.EdgeType.Undefined || maptile.LeftEdgeType == mapGraphicsTile.LeftEdgeType) &&
-								(mapGraphicsTile.RightEdgeType == Enums.EdgeType.Undefined || maptile.RightEdgeType == mapGraphicsTile.RightEdgeType) &&
-								(mapGraphicsTile.TopEdgeType == Enums.EdgeType.Undefined || maptile.TopEdgeType == mapGraphicsTile.TopEdgeType) &&
-								(mapGraphicsTile.BottomEdgeType == Enums.EdgeType.Undefined || maptile.BottomEdgeType == mapGraphicsTile.BottomEdgeType)
+							where								 
+								mapGraphicsTile.Equals(maptile)
 							select maptile).ToList();
 
 			if (matchingTiles.Count == 0)

@@ -495,47 +495,47 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			_graphicsTiles[_currentPoint] = mapGraphicsTile;
 		}
 
-		private List<byte> GetShoreEdgePoints()
+		private List<EdgeConnection> GetShoreEdgePoints()
 		{
-			List<byte> edgePoints = new List<byte>();
+			List<EdgeConnection> edgePoints = new List<EdgeConnection>();
 
 			if (TileType == DotNetFish.GameObjects.Enums.TileType.Edge)
 			{
 				if (Edge1)
-					edgePoints.Add(1);
+					edgePoints.Add(new EdgeConnection(1));
 
 				if (Edge2)
-					edgePoints.Add(2);
+					edgePoints.Add(new EdgeConnection(2));
 
 				if (Edge3)
-					edgePoints.Add(3);
+					edgePoints.Add(new EdgeConnection(3));
 
 				if (Edge4)
-					edgePoints.Add(4);
+					edgePoints.Add(new EdgeConnection(4));
 
 				if (Edge5)
-					edgePoints.Add(5);
+					edgePoints.Add(new EdgeConnection(5));
 
 				if (Edge6)
-					edgePoints.Add(6);
+					edgePoints.Add(new EdgeConnection(6));
 
 				if (Edge7)
-					edgePoints.Add(7);
+					edgePoints.Add(new EdgeConnection(7));
 
 				if (Edge8)
-					edgePoints.Add(8);
+					edgePoints.Add(new EdgeConnection(8));
 
 				if (Edge9)
-					edgePoints.Add(9);
+					edgePoints.Add(new EdgeConnection(9));
 
 				if (Edge10)
-					edgePoints.Add(10);
+					edgePoints.Add(new EdgeConnection(10));
 
 				if (Edge11)
-					edgePoints.Add(11);
+					edgePoints.Add(new EdgeConnection(11));
 
 				if (Edge12)
-					edgePoints.Add(12);
+					edgePoints.Add(new EdgeConnection(12));
 			}
 			return edgePoints;
 		}
@@ -566,61 +566,61 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			}
 		}
 
-		private void SetShoreEdgePoints(List<byte> shoreEdgePoints)
+		private void SetShoreEdgePoints(List<EdgeConnection> shoreEdgePoints)
 		{
-			Edge1 = shoreEdgePoints.Contains(1);
-			Edge2 = shoreEdgePoints.Contains(2);
-			Edge3 = shoreEdgePoints.Contains(3);
-			Edge4 = shoreEdgePoints.Contains(4);
-			Edge5 = shoreEdgePoints.Contains(5);
-			Edge6 = shoreEdgePoints.Contains(6);
-			Edge7 = shoreEdgePoints.Contains(7);
-			Edge8 = shoreEdgePoints.Contains(8);
-			Edge9 = shoreEdgePoints.Contains(9);
-			Edge10 = shoreEdgePoints.Contains(10);
-			Edge11 = shoreEdgePoints.Contains(11);
-			Edge12 = shoreEdgePoints.Contains(12);
+			Edge1 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 1);
+			Edge2 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 2);
+			Edge3 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 3);
+			Edge4 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 4);
+			Edge5 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 5);
+			Edge6 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 6);
+			Edge7 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 7);
+			Edge8 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 8);
+			Edge9 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 9);
+			Edge10 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 10);
+			Edge11 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 11);
+			Edge12 = shoreEdgePoints.Exists(instance => instance.EdgePosition == 12);
 		}
 
 		private void ShiftEdgeValues()
 		{
-			List<byte> edgePoints = new List<byte>();
+			List<EdgeConnection> edgePoints = new List<EdgeConnection>();
 
 			if (Edge1)
-				edgePoints.Add(10);
+				edgePoints.Add(new EdgeConnection(10));
 
 			if (Edge2)
-				edgePoints.Add(11);
+				edgePoints.Add(new EdgeConnection(11));
 
 			if (Edge3)
-				edgePoints.Add(12);
+				edgePoints.Add(new EdgeConnection(12));
 
 			if (Edge4)
-				edgePoints.Add(1);
+				edgePoints.Add(new EdgeConnection(1));
 
 			if (Edge5)
-				edgePoints.Add(2);
+				edgePoints.Add(new EdgeConnection(2));
 
 			if (Edge6)
-				edgePoints.Add(3);
+				edgePoints.Add(new EdgeConnection(3));
 
 			if (Edge7)
-				edgePoints.Add(4);
+				edgePoints.Add(new EdgeConnection(4));
 
 			if (Edge8)
-				edgePoints.Add(5);
+				edgePoints.Add(new EdgeConnection(5));
 
 			if (Edge9)
-				edgePoints.Add(6);
+				edgePoints.Add(new EdgeConnection(6));
 
 			if (Edge10)
-				edgePoints.Add(7);
+				edgePoints.Add(new EdgeConnection(7));
 
 			if (Edge11)
-				edgePoints.Add(8);
+				edgePoints.Add(new EdgeConnection(8));
 
 			if (Edge12)
-				edgePoints.Add(9);
+				edgePoints.Add(new EdgeConnection(9));
 
 			SetShoreEdgePoints(edgePoints);
 		}

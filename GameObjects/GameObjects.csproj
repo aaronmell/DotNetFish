@@ -48,6 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EdgeConnection.cs" />
     <Compile Include="Enums\EdgeType.cs" />
     <Compile Include="Enums\TileType.cs" />
     <Compile Include="GameWorld.cs" />

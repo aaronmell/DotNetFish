@@ -2,8 +2,12 @@
 <ArrayOfMapGraphicsTile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>			
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>			
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -17,8 +21,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -32,8 +40,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -47,8 +59,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -62,8 +78,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -77,8 +97,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -92,8 +116,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -107,8 +135,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -122,8 +154,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -137,8 +173,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -152,8 +192,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -167,8 +211,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -182,8 +230,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -197,8 +249,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -212,8 +268,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -227,8 +287,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -242,8 +306,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -257,8 +325,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -272,8 +344,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -287,8 +363,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -302,8 +382,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -317,8 +401,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -332,8 +420,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -347,8 +439,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>4</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -362,8 +458,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -377,8 +477,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -392,8 +496,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -407,8 +515,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -422,8 +534,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -437,8 +553,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -452,8 +572,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -467,8 +591,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -482,8 +610,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -497,8 +629,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -512,8 +648,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -527,8 +667,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -542,8 +686,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -557,8 +705,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -572,8 +724,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -587,8 +743,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -602,8 +762,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -617,8 +781,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -632,8 +800,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -647,8 +819,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -662,8 +838,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -677,8 +857,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -692,8 +876,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>7</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -707,8 +895,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -722,8 +914,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -737,8 +933,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -752,8 +952,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -767,8 +971,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -782,8 +990,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -797,8 +1009,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -812,8 +1028,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -827,8 +1047,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -842,8 +1066,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -857,8 +1085,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -872,8 +1104,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -887,8 +1123,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -902,8 +1142,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -917,8 +1161,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>10</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -932,8 +1180,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -947,8 +1199,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -962,8 +1218,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>3</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -977,8 +1237,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>10</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -992,8 +1256,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1007,8 +1275,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1022,8 +1294,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>3</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1037,8 +1313,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>10</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1052,8 +1332,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1067,8 +1351,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1082,8 +1370,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>2</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1097,8 +1389,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>10</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1112,8 +1408,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1127,8 +1427,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1142,8 +1446,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>1</unsignedByte>
-      <unsignedByte>2</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>1</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1157,8 +1465,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>10</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>10</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1172,8 +1484,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>7</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>7</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1187,8 +1503,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>4</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>4</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1202,8 +1522,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>11</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1217,8 +1541,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1232,8 +1560,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1247,8 +1579,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>3</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1262,8 +1598,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>11</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1277,8 +1617,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1292,8 +1636,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1307,8 +1655,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>3</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1322,8 +1674,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1337,8 +1693,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1352,8 +1712,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1367,8 +1731,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1382,8 +1750,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1397,8 +1769,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1412,8 +1788,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1427,8 +1807,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1442,8 +1826,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1457,8 +1845,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1472,8 +1864,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1487,8 +1883,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1502,8 +1902,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1517,8 +1921,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1532,8 +1940,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>6</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1547,8 +1959,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1562,8 +1978,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1577,8 +1997,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1592,8 +2016,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1607,8 +2035,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1670,8 +2102,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1685,8 +2121,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1700,8 +2140,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1715,8 +2159,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1730,8 +2178,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1745,8 +2197,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>9</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1760,8 +2216,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1775,8 +2235,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1790,8 +2254,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1805,8 +2273,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1820,8 +2292,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1835,8 +2311,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1850,8 +2330,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>12</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>12</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1865,8 +2349,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>9</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>9</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1880,8 +2368,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>6</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>6</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1895,8 +2387,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>3</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>3</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1910,8 +2406,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1925,8 +2425,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1940,8 +2444,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1955,8 +2463,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1970,8 +2482,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>8</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -1985,8 +2501,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2000,8 +2520,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>5</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2015,8 +2539,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2030,8 +2558,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2045,8 +2577,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2060,8 +2596,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>2</unsignedByte>
-      <unsignedByte>8</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>2</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>8</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>
@@ -2075,8 +2615,12 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints>
-      <unsignedByte>5</unsignedByte>
-      <unsignedByte>11</unsignedByte>
+      <EdgeConnection>
+				<EdgePosition>5</EdgePosition>
+			</EdgeConnection>
+      <EdgeConnection>
+				<EdgePosition>11</EdgePosition>
+			</EdgeConnection>
     </ShoreEdgePoints>
     <TileType>Edge</TileType>
     <TileStartPoint>

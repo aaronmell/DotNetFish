@@ -47,11 +47,30 @@ namespace DotNetFish.GameObjects
 			if (tile.BottomEdgeType != EdgeType.Undefined && tile.BottomEdgeType != this.BottomEdgeType)
 				return false;
 
-			foreach (EdgeConnection edgeConnection in tile.ShoreEdgePoints)
-				if (!this.ShoreEdgePoints.Exists(i => i.EdgePosition == edgeConnection.EdgePosition))
+			foreach (EdgeConnection edgeConnection in ShoreEdgePoints)
+			{
+				if (!tile.ShoreEdgePoints.Exists(i => i.EdgePosition == edgeConnection.EdgePosition))
 					return false;
+			}
+				
 
 			return true;
+		}
+		
+		public void SetTileEdgeTypeByEdgeConnections()
+		{
+			foreach (EdgeConnection edgeConnection in ShoreEdgePoints)
+			{
+				if (edgeConnection.EdgePosition > 0 && edgeConnection.EdgePosition < 4)
+					BottomEdgeType = EdgeType.Both;
+				else if (edgeConnection.EdgePosition > 3 && edgeConnection.EdgePosition < 7)
+					RightEdgeType = EdgeType.Both;
+				else if (edgeConnection.EdgePosition > 6 && edgeConnection.EdgePosition < 10)
+					TopEdgeType = EdgeType.Both;
+				else if (edgeConnection.EdgePosition > 9 && edgeConnection.EdgePosition < 13)
+					LeftEdgeType = EdgeType.Both;
+
+			}
 		}
 	}
 }

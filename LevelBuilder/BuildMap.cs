@@ -23,6 +23,7 @@ namespace DotNetFish.LevelBuilder
 		//it with a 64x64 tile. This allows us to get the size map we want. 
 		const int _graphicsTileSize = 16;
 
+		Random rnd = new Random();
         private BackgroundWorker _backgroundWorker;
         private List<PointLatLng> _points;
 		private GameWorld _gameWorld;
@@ -193,6 +194,8 @@ namespace DotNetFish.LevelBuilder
 				//We generate the edge connections for each tile just like they are by themselves.
 				//After all of the tiles are processed we will do a second pass to ensure everything is connected.
 				MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
+				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(mapGraphicsTile);
+				mapGraphicsTile.TileType = TileType.Edge;
 				mapGraphicsTile.ShoreEdgePoints.AddRange(GenerateMapGraphicsTileEdgePoints(bmpData, _graphicsTileSize, mapGraphicsTile));
 
 				_edgeTileLocations.Add(new Point(gameWorldX, gameWorldY), mapGraphicsTile);
@@ -222,67 +225,306 @@ namespace DotNetFish.LevelBuilder
 				if (count % 20 == 0)
 					_backgroundWorker.ReportProgress(1, "Processing EdgeTile: " + count + " of " + _edgeTileLocations.Count);
 				count++;
+				
+				bool isMissingEdgeConnections = false;
+
 				//Loop through each edgepoint and calculate a path.
 				foreach (EdgeConnection edgeConnection in kvp.Value.ShoreEdgePoints)
 				{
+
+					if (!edgeConnection.IsConnected)
+						edgeConnection.IsConnected = IsEdgeConnectionOnMapEdge(edgeConnection.EdgePosition,kvp.Key);
+
 					if (edgeConnection.IsConnected)
 						continue;
 
-					bool hasNeighborConnection = false;
-
-					//CheckDown
-					if (edgeConnection.EdgePosition > 0 &&
-							edgeConnection.EdgePosition < 4 &&
-							_edgeTileLocations.ContainsKey(new Point(kvp.Key.X, kvp.Key.Y + 1)))
-					{
-						CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(kvp.Key.X, kvp.Key.Y + 1)], edgeConnection);
-						hasNeighborConnection = true;
+					if (!NeighborHasEdgeConnections(kvp, edgeConnection))
+					{										
+						isMissingEdgeConnections = true;
+						break;
 					}
-					else if (edgeConnection.EdgePosition > 3 &&
-								edgeConnection.EdgePosition < 7 &&
-								_edgeTileLocations.ContainsKey(new Point(kvp.Key.X + 1, kvp.Key.Y)))
-					{
-						CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(kvp.Key.X + 1, kvp.Key.Y)], edgeConnection);
-						hasNeighborConnection = true;
-					}
-					else if (edgeConnection.EdgePosition > 6 &&
-								edgeConnection.EdgePosition < 10 &&
-								_edgeTileLocations.ContainsKey(new Point(kvp.Key.X, kvp.Key.Y - 1)))
-					{
-						CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(kvp.Key.X, kvp.Key.Y - 1)], edgeConnection);
-						hasNeighborConnection = true;
-					}
-					else if (edgeConnection.EdgePosition > 6 &&
-								edgeConnection.EdgePosition < 10 &&
-								_edgeTileLocations.ContainsKey(new Point(kvp.Key.X - 1, kvp.Key.Y)))
-					{
-						CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(kvp.Key.X - 1, kvp.Key.Y)], edgeConnection);
-						hasNeighborConnection = true;
-					}
-
-					if (!hasNeighborConnection)
-						CalculatePath(edgeConnection, kvp.Key.X,kvp.Key.Y);
+					else
+						edgeConnection.IsConnected = true;					
+						
 				}
-				SetTileEdgeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
-				_gameWorld.GameMap[kvp.Key.X,kvp.Key.Y] = _mapGraphicsTileSet.GetMatchingTile(kvp.Value);
+				//If we are missing edge Connections then we need to Calculate the path for the missing connections.
+				if (isMissingEdgeConnections) ;
+
+					//CalculatePath(kvp);	
+				else
+				{
+					SetTileEdgeTypeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
+					_gameWorld.GameMap[kvp.Key.X, kvp.Key.Y] = _mapGraphicsTileSet.GetMatchingTile(kvp.Value);
+
+				}
 			}
+		}
+
+		private bool NeighborHasEdgeConnections(KeyValuePair<Point,MapGraphicsTile> mapGraphicsTile, EdgeConnection edgeConnection)
+		{
+			//CheckDown
+			if (edgeConnection.EdgePosition > 0 &&
+					edgeConnection.EdgePosition < 4 &&
+					_edgeTileLocations.ContainsKey(new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)))
+			{
+				CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)], edgeConnection);
+				return true;
+			}
+			else if (edgeConnection.EdgePosition > 3 &&
+						edgeConnection.EdgePosition < 7 &&
+						_edgeTileLocations.ContainsKey(new Point(mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y)))
+			{
+				CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y)], edgeConnection);
+				return true;
+			}
+			else if (edgeConnection.EdgePosition > 6 &&
+						edgeConnection.EdgePosition < 10 &&
+						_edgeTileLocations.ContainsKey(new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1)))
+			{
+				CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1)], edgeConnection);
+				return true;
+			}
+			else if (edgeConnection.EdgePosition > 6 &&
+						edgeConnection.EdgePosition < 10 &&
+						_edgeTileLocations.ContainsKey(new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)))
+			{
+				CheckNeighborForMatchingEdgePoint(_edgeTileLocations[new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)], edgeConnection);
+				return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks an edge connection to ensure that it doesnt border the MapEdge. 
+		/// If it does, then that edge point should not be processed. 
+		/// </summary>
+		/// <param name="edgeConnection"></param>
+		/// <param name="tileLocation"></param>
+		/// <returns></returns>
+		private bool IsEdgeConnectionOnMapEdge(int edgeConnection, Point tileLocation)
+		{
+			if (tileLocation.Y == 0 && edgeConnection > 6 && edgeConnection < 10)
+				return true;
+			else if (tileLocation.Y == _gameWorld.GameMap.GetLength(1) && edgeConnection > 0 && edgeConnection < 4)
+				return true;
+			else if (tileLocation.X == 0 && edgeConnection > 9 && edgeConnection < 13)
+				return true;
+			else if (tileLocation.Y == _gameWorld.GameMap.GetLength(0) && edgeConnection > 3 && edgeConnection < 7)
+				return true;
+
+			return false;
 		}		
 
-		private void CalculatePath(EdgeConnection edgeConnection, int x, int y)
+		/// <summary>
+		/// Calculates the best path available for tiles that need to be connected. 
+		/// </summary>
+		/// <param name="currentTile"></param>
+		private void CalculatePath(KeyValuePair<Point,MapGraphicsTile> currentTile)
 		{
-			//List<Point> openTiles = new List<Point> { new Point(x, y) };
+			//if (CheckTileForLoop(currentTile)
 
-			//for (int i = x - 1; i < x + 2; x++)
-			//{
-			//    for (int j = y - 1; i < y + 2; y++)
-			//    {
-			//        if (i == x && j == y)
-			//            continue;
+			//First we need to get a list of tiles that we can build a path to. 
+			List<Point> OpenTiles = (from tiles in _edgeTileLocations
+									 where tiles.Key != currentTile.Key && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
+									 (tiles.Key.X > (currentTile.Key.X - 5) && tiles.Key.X < (currentTile.Key.X + 5)) && (tiles.Key.Y > (currentTile.Key.Y - 5) && tiles.Key.Y < (currentTile.Key.Y + 5))
+									 select tiles.Key).ToList();
 
-			//        if (_gameWorld.GameMap[i , j].GraphicsTile.TileType == TileType.Edge &&
-			//            !_gameWorld.GameMap[i, j].GraphicsTile.IsUsed)
-			//            openTiles.Add(new Point(i, j));
-			//    }			//}
+			PathTile bestPath = null;
+			foreach (Point point in OpenTiles)
+			{				
+				PathTile pathTile = FindPath(currentTile.Key, point);
+
+				if (pathTile != null && (bestPath == null || pathTile.Score < bestPath.Score))
+					bestPath = pathTile;
+			}
+
+			if (bestPath != null)
+				BuildPath(bestPath);
+			else
+				_gameWorld.GameMap[currentTile.Key.X,currentTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
+		}
+
+		private void BuildPath(PathTile bestPath)
+		{
+			PathTile currentPathTile = bestPath;
+			EdgeConnection parentEdgeConnection = null;
+			Dictionary<Point,MapGraphicsTile> tilesToAdd = new Dictionary<Point,MapGraphicsTile>();
+
+			while (true)
+			{
+				MapGraphicsTile currentMapTile;
+				//create a new mapTile
+				if (_edgeTileLocations.ContainsKey(currentPathTile.TileLocation))
+				{
+					currentMapTile = _edgeTileLocations[currentPathTile.TileLocation];
+					foreach (EdgeConnection edgeConnection in currentMapTile.ShoreEdgePoints)
+						NeighborHasEdgeConnections(new KeyValuePair<Point, MapGraphicsTile>(currentPathTile.TileLocation, _edgeTileLocations[currentPathTile.TileLocation]), edgeConnection);
+
+					//get rid of all of the edgepoints that are not a match, as we cannot used them. 		
+					currentMapTile.ShoreEdgePoints.RemoveAll(i => i.IsConnected == false);							
+				}
+				else
+					currentMapTile = new MapGraphicsTile();
+
+				//add the previous parent translated to they connect
+				if (parentEdgeConnection != null)
+					currentMapTile.ShoreEdgePoints.Add(new EdgeConnection(parentEdgeConnection.TranslateConnectionForNeighbor(), true));
+
+				//Get the parentEdgeConnection
+				parentEdgeConnection = GetParentTileEdgeConnection(currentPathTile);
+			
+				if (parentEdgeConnection != null)
+					currentMapTile.ShoreEdgePoints.Add(parentEdgeConnection);
+
+				tilesToAdd.Add(currentPathTile.TileLocation, currentMapTile);
+
+				//if the current tile doesnt have a parentTile we are done.
+				if (currentPathTile.ParentTile == null)
+					break;				
+				currentPathTile = currentPathTile.ParentTile;
+			}
+
+			foreach (KeyValuePair<Point,MapGraphicsTile> kvp in tilesToAdd)
+			{
+				//Add the new tile to the map
+				SetTileEdgeTypeByNeighbor(kvp.Value, currentPathTile.TileLocation.X, currentPathTile.TileLocation.Y);
+				kvp.Value.SetTileEdgeTypeByEdgeConnections();
+				_gameWorld.GameMap[kvp.Key.X,kvp.Key.Y] = _mapGraphicsTileSet.GetMatchingTile(kvp.Value);
+			}
+		}
+
+		
+
+		private EdgeConnection GetParentTileEdgeConnection(PathTile currentPathTile)
+		{
+			if (currentPathTile.ParentTile == null)
+				return null;
+
+			//ParentTile is Above Current Tile
+			if (currentPathTile.ParentTile.TileLocation.Y < currentPathTile.TileLocation.Y)
+				return new EdgeConnection((byte)rnd.Next(7, 9),true);
+			//Parent Tile is below current tile
+			else if (currentPathTile.ParentTile.TileLocation.Y > currentPathTile.TileLocation.Y)
+				return new EdgeConnection((byte)rnd.Next(1, 3),true);
+			//Parent tile is to the left of current tile
+			else if (currentPathTile.ParentTile.TileLocation.X < currentPathTile.TileLocation.X)
+				return new EdgeConnection((byte)rnd.Next(10, 12),true);
+			//Parent tile is to the right of current tile
+			else 
+				return new EdgeConnection((byte)rnd.Next(4, 6));
+		}
+
+		private PathTile FindPath(Point startTilePoint, Point targetTilePoint)
+		{
+			PathTile currentTile = new PathTile(startTilePoint, 10);
+
+			List<PathTile> openTiles = new List<PathTile>();
+			List<PathTile> closedTiles = new List<PathTile>();
+
+			while (true)
+			{
+				closedTiles.Add(currentTile);
+
+				openTiles.AddRange(GetOpenTiles(currentTile, targetTilePoint, openTiles,closedTiles));
+
+				if (openTiles.Count == 0)
+					return null;
+
+				openTiles.Sort();
+
+				currentTile = openTiles[0];
+				openTiles.RemoveAt(0);
+
+				if (currentTile.TileLocation == targetTilePoint)
+					return currentTile;
+			}
+		}
+
+		private List<PathTile> GetOpenTiles(PathTile currentTile, Point targetTile, List<PathTile> openTiles, List<PathTile> closedTiles)
+		{
+			List<Point> openPoints = new List<Point>();
+
+			//First check the gameworl to see if the cardinal directions are open
+			//North Tile
+			if (currentTile.TileLocation.Y - 1 >= 0 &&
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y - 1) &&
+				_gameWorld.GameMap[currentTile.TileLocation.X, currentTile.TileLocation.Y - 1].GraphicsTile.TileType != TileType.Edge ||
+					(_edgeTileLocations.ContainsKey(new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y - 1)) &&
+						_edgeTileLocations[new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y - 1)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				openPoints.Add(new Point(currentTile.TileLocation.X, currentTile.TileLocation.Y - 1));
+
+			//south Tile
+			if (currentTile.TileLocation.Y + 1 < _gameWorld.GameMap.GetLength(1) &&
+				!closedTiles.Exists(i => i.TileLocation.X == currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y + 1) &&
+				_gameWorld.GameMap[currentTile.TileLocation.X, currentTile.TileLocation.Y + 1].GraphicsTile.TileType != TileType.Edge ||
+					(_edgeTileLocations.ContainsKey(new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y + 1)) &&
+						_edgeTileLocations[new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y + 1)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				openPoints.Add(new Point(currentTile.TileLocation.X, currentTile.TileLocation.Y + 1));
+
+			//East Tile
+			if (currentTile.TileLocation.X - 1 >= 0 &&
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X - 1 && i.TileLocation.Y == currentTile.TileLocation.Y) &&
+				_gameWorld.GameMap[currentTile.TileLocation.X - 1, currentTile.TileLocation.Y].GraphicsTile.TileType != TileType.Edge ||
+					(_edgeTileLocations.ContainsKey(new Point(currentTile.TileLocation.X - 1,currentTile.TileLocation.Y)) &&
+						_edgeTileLocations[new Point(currentTile.TileLocation.X - 1,currentTile.TileLocation.Y)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				openPoints.Add(new Point(currentTile.TileLocation.X - 1, currentTile.TileLocation.Y));
+
+			//West Tile
+			if (currentTile.TileLocation.X + 1 < _gameWorld.GameMap.GetLength(0) &&
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X + 1 && i.TileLocation.Y == currentTile.TileLocation.Y) &&
+				_gameWorld.GameMap[currentTile.TileLocation.X + 1, currentTile.TileLocation.Y].GraphicsTile.TileType != TileType.Edge ||
+					(_edgeTileLocations.ContainsKey(new Point(currentTile.TileLocation.X + 1,currentTile.TileLocation.Y)) &&
+						_edgeTileLocations[new Point(currentTile.TileLocation.X + 1,currentTile.TileLocation.Y)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				openPoints.Add(new Point(currentTile.TileLocation.X + 1, currentTile.TileLocation.Y));
+
+			List<PathTile> tiles = new List<PathTile>();
+			foreach (Point location in openPoints)
+			{
+				int score = CalculateScore(currentTile.ParentTile, location, targetTile);
+
+				//If it doesnt exist on the open list we want to create a new item.
+				if (!openTiles.Exists(i => i.TileLocation.X == location.X && i.TileLocation.Y == location.Y))
+				{					
+					PathTile potentialPathTile = new PathTile(location, score, currentTile);
+					tiles.Add(potentialPathTile);
+				}
+				else
+				{
+					PathTile existingTile = openTiles.First(i => i.TileLocation.X == location.X && i.TileLocation.Y == location.Y);
+					existingTile.ParentTile = currentTile;
+					existingTile.Score = score;
+				}
+				
+			}
+			return tiles;
+		}
+
+		private int CalculateScore(PathTile parentTile, Point location, Point targetTile)
+		{
+			//Path Score F = G + H
+			//G = the Cost to move plus the Parents cost to mvoe
+			//H = the estimated cost to the targetTile
+			//Using the Manhatten method to calculate the H oost
+
+			int G = 10;
+			
+			if (parentTile != null)
+				G+=parentTile.Score;
+			
+			int H = 0;
+
+			if (location.X >= targetTile.X)
+				H += location.X - targetTile.X;
+			else
+				H+= targetTile.X - location.X;
+
+			if (location.Y >= targetTile.Y)
+				H += location.Y - targetTile.Y;
+			else
+				H+= targetTile.Y - location.Y;
+
+			return G + H;
 
 		}	
 
@@ -397,7 +639,7 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="x"></param>
 		/// <param name="y"></param>
 		/// <returns></returns>
-		private MapGraphicsTile SetTileEdgeByNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
+		private MapGraphicsTile SetTileEdgeTypeByNeighbor(MapGraphicsTile mapGraphicsTile, int x, int y)
 		{
 			//Left Side
 			if (x - 1 > 0 && _gameWorld.GameMap[x - 1, y] != null && _gameWorld.GameMap[x - 1, y].GraphicsTile != null)

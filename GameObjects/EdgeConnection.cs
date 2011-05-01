@@ -9,15 +9,15 @@ namespace DotNetFish.GameObjects
 	[Serializable]
 	public class EdgeConnection
 	{
-		public EdgeConnection(byte edgePosition)
+		public EdgeConnection(byte edgePosition, bool isConnected)
 		{
-			EdgePosition = edgePosition;			
+			EdgePosition = edgePosition;
+			IsConnected = isConnected;
 		}
 
-		public EdgeConnection()
-		{
-			IsConnected = true;
-		}
+		public EdgeConnection(byte edgePosition) : this(edgePosition, false) { }
+
+		public EdgeConnection() : this(0,true) { }		
 
 		public byte EdgePosition { get; set; }
 		[XmlIgnore]

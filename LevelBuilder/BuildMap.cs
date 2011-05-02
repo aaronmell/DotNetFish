@@ -122,11 +122,9 @@ namespace DotNetFish.LevelBuilder
 
 					Exception ex;
 					WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
-
-					if (ex != null)
-					{						
+					
+					if (ex != null)		
 						return true;
-					}
 					else if (tile != null)
 					{
 						using (tile)
@@ -139,7 +137,7 @@ namespace DotNetFish.LevelBuilder
 								ProcessGmapTiles(x, y, bitmap);
 							}
 						}
-					}
+					}					
 				}
 			}
 			ProcessEdgeTiles();
@@ -164,10 +162,11 @@ namespace DotNetFish.LevelBuilder
 					{
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 							gfx.DrawImage(gmapBitmap,new Rectangle(0,0,16,16),tileX * _graphicsTileSize,tileY * _graphicsTileSize,16,16,GraphicsUnit.Pixel);
-#if DEBUG
-						smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * _graphicsTileSize) + tileX) + "-" + ((gmapY * _graphicsTileSize) + tileY) + ".jpg");
-#endif
+//#if DEBUG
+						//smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * _graphicsTileSize) + tileX) + "-" + ((gmapY * _graphicsTileSize) + tileY) + ".jpg");
+//#endif
 						BmpData bmpData = new BmpData(smallBmp, _graphicsTileSize);						
+						
 						ProcessTile(bmpData, (gmapX * _graphicsTileSize) + tileX, (gmapY * _graphicsTileSize) + tileY);
 						bmpData.Dispose();
 					}					
@@ -248,9 +247,8 @@ namespace DotNetFish.LevelBuilder
 						
 				}
 				//If we are missing edge Connections then we need to Calculate the path for the missing connections.
-				if (isMissingEdgeConnections) ;
-
-					//CalculatePath(kvp);	
+				if (isMissingEdgeConnections)
+					CalculatePath(kvp);	
 				else
 				{
 					SetTileEdgeTypeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
@@ -322,27 +320,68 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="currentTile"></param>
 		private void CalculatePath(KeyValuePair<Point,MapGraphicsTile> currentTile)
 		{
-			//if (CheckTileForLoop(currentTile)
+			for (int i = 0; i < currentTile.Value.ShoreEdgePoints.Count; i++) //(EdgeConnection edgeConnection in currentTile.Value.ShoreEdgePoints)
+			{
+				if (currentTile.Value.ShoreEdgePoints[i].IsConnected == true)
+					continue;
 
-			//First we need to get a list of tiles that we can build a path to. 
-			List<Point> OpenTiles = (from tiles in _edgeTileLocations
-									 where tiles.Key != currentTile.Key && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
-									 (tiles.Key.X > (currentTile.Key.X - 5) && tiles.Key.X < (currentTile.Key.X + 5)) && (tiles.Key.Y > (currentTile.Key.Y - 5) && tiles.Key.Y < (currentTile.Key.Y + 5))
-									 select tiles.Key).ToList();
+				//if (CheckTileForLoop(currentTile)
+				List<Point> targetTiles = GetTargetEndingTiles(currentTile.Value.ShoreEdgePoints[i], currentTile.Key);				
 
-			PathTile bestPath = null;
-			foreach (Point point in OpenTiles)
-			{				
-				PathTile pathTile = FindPath(currentTile.Key, point);
+				PathTile bestPath = null;
+				foreach (Point point in targetTiles)
+				{
+					PathTile pathTile = FindPath(currentTile.Key, point);
 
-				if (pathTile != null && (bestPath == null || pathTile.Score < bestPath.Score))
-					bestPath = pathTile;
+					if (pathTile != null && (bestPath == null || pathTile.Score < bestPath.Score))
+						bestPath = pathTile;
+				}
+
+				if (bestPath != null)
+					BuildPath(bestPath);
+				else
+					_gameWorld.GameMap[currentTile.Key.X, currentTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
+			}			
+		}
+
+		private List<Point> GetTargetEndingTiles(EdgeConnection edgeConnection, Point currentTileLocation)
+		{
+			List<Point> targetPoints = new List<Point>();
+
+			//Up
+			if (edgeConnection.EdgePosition > 6 && edgeConnection.EdgePosition < 10)
+			{
+				targetPoints = (from tiles in _edgeTileLocations
+										 where tiles.Key != currentTileLocation&& tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
+										 (tiles.Key.X > (currentTileLocation.X - 5) && tiles.Key.X < (currentTileLocation.X + 5)) && (tiles.Key.Y > (currentTileLocation.Y - 9) && tiles.Key.Y < (currentTileLocation.Y))
+										 select tiles.Key).ToList();
+			}
+			//Down
+			else if (edgeConnection.EdgePosition > 0 && edgeConnection.EdgePosition < 4)
+			{
+				targetPoints = (from tiles in _edgeTileLocations
+										 where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
+										 (tiles.Key.X > (currentTileLocation.X - 5) && tiles.Key.X < (currentTileLocation.X + 5)) && (tiles.Key.Y > currentTileLocation.Y && tiles.Key.Y < (currentTileLocation.Y + 9))
+										 select tiles.Key).ToList();
+			}
+			//Left
+			else if (edgeConnection.EdgePosition > 9 && edgeConnection.EdgePosition < 13)
+			{
+				targetPoints = (from tiles in _edgeTileLocations
+										 where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
+										 (tiles.Key.X > (currentTileLocation.X - 9) && tiles.Key.X < (currentTileLocation.X)) && (tiles.Key.Y > (currentTileLocation.Y - 5) && tiles.Key.Y < (currentTileLocation.Y + 5))
+										 select tiles.Key).ToList();
+			}
+			//Right
+			else if (edgeConnection.EdgePosition > 3 && edgeConnection.EdgePosition < 7)
+			{
+				targetPoints = (from tiles in _edgeTileLocations
+								where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
+								(tiles.Key.X > (currentTileLocation.X) && tiles.Key.X < (currentTileLocation.X + 9)) && (tiles.Key.Y > (currentTileLocation.Y - 5) && tiles.Key.Y < (currentTileLocation.Y + 5))
+								select tiles.Key).ToList();
 			}
 
-			if (bestPath != null)
-				BuildPath(bestPath);
-			else
-				_gameWorld.GameMap[currentTile.Key.X,currentTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
+			return targetPoints;
 		}
 
 		private void BuildPath(PathTile bestPath)
@@ -394,8 +433,6 @@ namespace DotNetFish.LevelBuilder
 			}
 		}
 
-		
-
 		private EdgeConnection GetParentTileEdgeConnection(PathTile currentPathTile)
 		{
 			if (currentPathTile.ParentTile == null)
@@ -426,7 +463,7 @@ namespace DotNetFish.LevelBuilder
 			{
 				closedTiles.Add(currentTile);
 
-				openTiles.AddRange(GetOpenTiles(currentTile, targetTilePoint, openTiles,closedTiles));
+				openTiles.AddRange(GetOpenPathTiles(currentTile, targetTilePoint, openTiles,closedTiles));
 
 				if (openTiles.Count == 0)
 					return null;
@@ -441,7 +478,7 @@ namespace DotNetFish.LevelBuilder
 			}
 		}
 
-		private List<PathTile> GetOpenTiles(PathTile currentTile, Point targetTile, List<PathTile> openTiles, List<PathTile> closedTiles)
+		private List<PathTile> GetOpenPathTiles(PathTile currentTile, Point targetTile, List<PathTile> openTiles, List<PathTile> closedTiles)
 		{
 			List<Point> openPoints = new List<Point>();
 

@@ -33,7 +33,7 @@ namespace DotNetFish.Wpf.LevelDesigner
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            mapCanvas.MoveCanvas(e.Key);
+            mapCanvas.MoveCanvas(e.Key);			
         }
 	}
 }

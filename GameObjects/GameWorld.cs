@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using System.Drawing;
 
 namespace DotNetFish.GameObjects
 {
@@ -20,8 +21,11 @@ namespace DotNetFish.GameObjects
 
         public string Description { get; set; }
 
+		public List<Point> ErrorTiles { get; set; }
+
 		public GameWorld()
 		{
+			ErrorTiles = new List<Point>();
 		}
 
 		public GameWorld(SerializationInfo info, StreamingContext context)
@@ -29,6 +33,7 @@ namespace DotNetFish.GameObjects
 			Name = info.GetString("Name");
 			Description = info.GetString("Location");
 			GameMap = (MapTile[,])info.GetValue("GameMap", typeof(MapTile[,]));
+			ErrorTiles = (List<Point>)info.GetValue("ErrorTiles", typeof(List<Point>));
 		}
 		
 		public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -37,6 +42,7 @@ namespace DotNetFish.GameObjects
 			info.AddValue("Location", Location);
 			info.AddValue("Description", Description);
 			info.AddValue("GameMap", GameMap);
+			info.AddValue("ErrorTiles", ErrorTiles);
 		}
     }
 }

@@ -13,7 +13,7 @@ namespace DotNetFish.GameObjects
 	[Serializable()]
     public class GameWorld : ISerializable
     {
-        public MapTile[,] GameMap { get; set; }
+        public MapTile[,] GameMap { get; set; } 
 
         public string Name { get; set; }
 

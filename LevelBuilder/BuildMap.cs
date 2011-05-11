@@ -33,6 +33,8 @@ namespace DotNetFish.LevelBuilder
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
 		Dictionary<Point, MapGraphicsTile> _errorTiles;
         Dictionary<Point, MapGraphicsTile> _noNeighborTiles;
+        DateTime _startTime;
+        DateTime _endTime;
 
         public BackgroundWorker BackgroundWorker
         {
@@ -74,6 +76,8 @@ namespace DotNetFish.LevelBuilder
 		/// <returns></returns>
 		private bool Main()
 		{
+            _startTime = DateTime.Now;
+
 			//Gmap Setup stuff
 			MapType type = MapType.GoogleMap;
 			PureProjection prj = null;
@@ -121,8 +125,11 @@ namespace DotNetFish.LevelBuilder
 			{
 				for (int y = 0; y < gmapTilesHeight; y++)
 				{
+                    if (gmapTilesProcessed % 20 == 0)
+                        _backgroundWorker.ReportProgress(1, "ProcessingTile: " + gmapTilesProcessed + " of " + gmapTilesHeight * gmapTilesWidth);
+
 					gmapTilesProcessed++;
-					_backgroundWorker.ReportProgress(1, "ProcessingTile: " + gmapTilesProcessed + " of " + gmapTilesHeight * gmapTilesWidth);
+					
 
 					Exception ex;
 					WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
@@ -147,6 +154,7 @@ namespace DotNetFish.LevelBuilder
 			ProcessEdgeTiles(_edgeTiles);
 			//Give all of the errors tiles a second pass.
 			//ProcessEdgeTiles(_errorTiles);
+            _endTime = DateTime.Now;
 			return false;
 		}
 
@@ -157,7 +165,12 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="gmapY"></param>
 		/// <param name="gmapBitmap"></param>
 		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
-		{	
+		{
+            bool hasTransition = CheckGmapTilesForTransitions(gmapX, gmapY,gmapBitmap);
+
+            if (!hasTransition)
+                return;
+
 			//The bitmap coming in as 256x256 This needs to be broken down further into 16x16 sized
 			//tiles in order to get the proper size of the map
 			for (int tileX = 0; tileX < _graphicsTileSize; tileX++)
@@ -179,6 +192,44 @@ namespace DotNetFish.LevelBuilder
 				}
 			}
 		}
+
+        /// <summary>
+        /// Detemines if a GmapTile contains a transition in it. 
+        /// </summary>
+        /// <param name="gmapX"></param>
+        /// <param name="gmapY"></param>
+        /// <param name="gmapBitmap"></param>
+        /// <returns></returns>
+        private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap)
+        {          
+            bool hasWater = false;
+            bool hasLand = false;
+            using (BmpData largeBmpData = new BmpData(gmapBitmap, 256))
+                CheckEdges(largeBmpData, 256, out hasWater, out hasLand);
+
+            //if we have land and water on the tile, then we need to Process it normally, otherwise we can skip all of that. 
+            if (hasLand && hasWater)
+                return true;
+
+            MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();           
+
+            if (hasLand)
+                 mapGraphicsTile= _mapGraphicsTileSet.LandTile;
+            else
+                mapGraphicsTile= _mapGraphicsTileSet.WaterTile;
+
+                MapTile mapTile = new MapTile(mapGraphicsTile);
+
+            for (int x = 0; x < _graphicsTileSize; x++)
+            {
+                for (int y = 0; y < _graphicsTileSize; y++)
+                {
+                    _gameWorld.GameMap[(gmapX * _graphicsTileSize) + x, (gmapY * _graphicsTileSize) + y] = mapTile;
+                }
+            }
+
+            return false;
+        }
 
 		/// <summary>
 		/// Processes all of the Tiles and determines if they are an edge or not. Edgetiles get added to the list, and the 

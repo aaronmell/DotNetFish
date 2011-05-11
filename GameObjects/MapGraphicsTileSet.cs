@@ -141,7 +141,7 @@ namespace DotNetFish.GameObjects
 			{
 				_mapTiles = LoadMapTileSet(_filename);
 			}
-			BitmapImage map = new BitmapImage(new Uri(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles64x64.png"));
+			BitmapImage map = new BitmapImage(new Uri(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.png"));
 
 			foreach (MapGraphicsTile tile in _mapTiles)
 			{

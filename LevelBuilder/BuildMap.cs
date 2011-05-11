@@ -32,6 +32,7 @@ namespace DotNetFish.LevelBuilder
 		private int _gameWorldHeight;
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
 		Dictionary<Point, MapGraphicsTile> _errorTiles;
+        Dictionary<Point, MapGraphicsTile> _noNeighborTiles;
 
         public BackgroundWorker BackgroundWorker
         {
@@ -82,6 +83,7 @@ namespace DotNetFish.LevelBuilder
 			GMaps.Instance.Mode = AccessMode.ServerOnly;
 			GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
 			_edgeTiles = new Dictionary<Point, MapGraphicsTile>();
+            _noNeighborTiles = new Dictionary<Point, MapGraphicsTile>();
 			_errorTiles = new Dictionary<Point, MapGraphicsTile>();
 
 			//Convert the PointLatLng to GPoints
@@ -198,9 +200,7 @@ namespace DotNetFish.LevelBuilder
 				//After all of the tiles are processed we will do a second pass to ensure everything is connected.
 				MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
 				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(mapGraphicsTile);
-				mapGraphicsTile.TileType = TileType.Edge;
-				//mapGraphicsTile.ShoreEdgePoints.AddRange(GenerateMapGraphicsTileEdgePoints(bmpData, _graphicsTileSize, mapGraphicsTile));
-
+				mapGraphicsTile.TileType = TileType.Edge;				
 				_edgeTiles.Add(new Point(gameWorldX, gameWorldY), mapGraphicsTile);
 			}
 				
@@ -222,85 +222,180 @@ namespace DotNetFish.LevelBuilder
 		private void ProcessEdgeTiles(Dictionary<Point,MapGraphicsTile> tilesToProcess)
 		{
 			int count = 0;
-			foreach (KeyValuePair<Point,MapGraphicsTile> kvp in tilesToProcess)
-			{
-				
-				if (count % 20 == 0)
-					_backgroundWorker.ReportProgress(1, "Processing EdgeTile: " + count + " of " + _edgeTiles.Count);
-				count++;
-				
-				//First Set the neighborConnections on the tile.
-				CheckNeighborsForEdgeConnections(kvp);
-				//SetTileEdgeTypeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
-				
-				
-				//bool isMissingEdgeConnections = false;
+            foreach (KeyValuePair<Point, MapGraphicsTile> mapGraphicsTile in tilesToProcess)
+            {
+                if (count % 20 == 0)
+                    _backgroundWorker.ReportProgress(1, "Processing EdgeTile: " + count + " of " + _edgeTiles.Count);
+                count++;
 
-							
+                //First Set the neighborConnections on the tile.
+                CheckNeighborsForEdgeConnections(mapGraphicsTile);
+                SetTileEdgeTypeByNeighbor(mapGraphicsTile);
 
-				//    if (!edgeConnection.IsConnected)
-				//        edgeConnection.IsConnected = IsEdgeConnectionOnMapEdge(edgeConnection.EdgePosition,kvp.Key);
+                //If a tile has less than two connections, then we will add it to the list of non-neighborTiles
+                if (NumberOfSidesWithConnections(mapGraphicsTile.Value) < 2)
+                {
+                    _noNeighborTiles.Add(mapGraphicsTile.Key, mapGraphicsTile.Value);
+                }
+                else
+                {
+                    //Add the mapTile to the GameWorld
+                    MapTile mapTile = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile.Value);
+                    _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = mapTile;
+                }
 
-				//    if (edgeConnection.IsConnected)
-				//        continue;
+            }
 
-				//    if (!NeighborHasEdgeConnections(kvp, edgeConnection))
-				//    {										
-				//        isMissingEdgeConnections = true;
-				//        break;
-				//    }
-				//    else
-				//        edgeConnection.IsConnected = true;					
-						
-				//}
-				////If we are missing edge Connections then we need to Calculate the path for the missing connections.
-				//if (isMissingEdgeConnections)
-				//    CalculatePath(kvp);	
-				//else
-				//{
-				//    SetTileEdgeTypeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
-				//    MapTile mapTile = _mapGraphicsTileSet.GetMatchingTile(kvp.Value);								
-
-				//    if (mapTile.GraphicsTile.TileType != TileType.Error)
-				//        _gameWorld.GameMap[kvp.Key.X, kvp.Key.Y] = mapTile;
-				//    else
-				//    {
-				//        if (_errorTiles.ContainsKey(kvp.Key))
-				//        {
-				//            _gameWorld.ErrorTiles.Add(kvp.Key);
-				//            _gameWorld.GameMap[kvp.Key.X, kvp.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
-				//        }
-				//        else
-				//            _errorTiles.Add(kvp.Key, kvp.Value);
-				//    }
-				//}
-			}
+            foreach (KeyValuePair<Point, MapGraphicsTile> mapGraphicsTile in _noNeighborTiles)
+            {
+                if (NumberOfSidesWithConnections(mapGraphicsTile.Value) < 2)
+                {
+                    CalculateTilePath(mapGraphicsTile);
+                }                
+            }
 		}
 
+        /// <summary>
+        /// Determines how Connections with other tiles a side has. 
+        /// </summary>
+        /// <param name="mapGraphicsTile"></param>
+        /// <returns></returns>
+        private int NumberOfSidesWithConnections(MapGraphicsTile mapGraphicsTile)
+        {
+            int count = 0;
+
+            if (mapGraphicsTile.BottomEdgeType == EdgeType.Both)
+                count++;
+            if  (mapGraphicsTile.LeftEdgeType == EdgeType.Both)
+                count++;
+            if (mapGraphicsTile.RightEdgeType == EdgeType.Both)
+                count++;
+            if (mapGraphicsTile.TopEdgeType == EdgeType.Both) 
+                count++;
+
+            return count;           
+        }
+
 		/// <summary>
-		/// Check each direction for EdgeConnection
+		/// Check each direction for EdgeConnection. If it has an edge Connection then set it
 		/// </summary>
 		/// <param name="mapGraphicsTile"></param>
 		private void CheckNeighborsForEdgeConnections(KeyValuePair<Point, MapGraphicsTile> mapGraphicsTile)
 		{
 			//CheckDown
-			if (_edgeTiles.ContainsKey(new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)))
-				GetNeighborsEdgeConnection(mapGraphicsTile.Value,_edgeTiles[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)]);
+            if (_edgeTiles.ContainsKey(new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)))
+                GetNeighborsEdgeConnection(mapGraphicsTile.Value, _edgeTiles[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1)], EdgeDirection.Bottom);
+            else if (mapGraphicsTile.Key.Y == _gameWorld.GameMap.GetLength(1) - 1)
+            {
+                mapGraphicsTile.Value.ShoreEdgePoints.Add(new EdgeConnection(CreateEdgeConnection(EdgeDirection.Bottom), true));
+                mapGraphicsTile.Value.BottomEdgeType = EdgeType.Both;
+            }
+                
 			//Check Up
 			if (_edgeTiles.ContainsKey(new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1)))
-				GetNeighborsEdgeConnection(mapGraphicsTile.Value,_edgeTiles[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1)]);
+				GetNeighborsEdgeConnection(mapGraphicsTile.Value,_edgeTiles[new Point(mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1)],EdgeDirection.Top);
+            else if (mapGraphicsTile.Key.Y == 0)
+            {
+                mapGraphicsTile.Value.ShoreEdgePoints.Add(new EdgeConnection(CreateEdgeConnection(EdgeDirection.Top), true));
+                mapGraphicsTile.Value.TopEdgeType = EdgeType.Both;
+            }
 			//Check Left
 			if (_edgeTiles.ContainsKey(new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)))
-				GetNeighborsEdgeConnection(mapGraphicsTile.Value,_edgeTiles[new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)]);
+				GetNeighborsEdgeConnection(mapGraphicsTile.Value,_edgeTiles[new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)],EdgeDirection.Left);
+            else if (mapGraphicsTile.Key.X == 0)
+            {
+                mapGraphicsTile.Value.ShoreEdgePoints.Add(new EdgeConnection(CreateEdgeConnection(EdgeDirection.Left), true));
+                mapGraphicsTile.Value.LeftEdgeType = EdgeType.Both;
+            }
 			//Check Right
 			if (_edgeTiles.ContainsKey(new Point(mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y)))
-				GetNeighborsEdgeConnection(mapGraphicsTile.Value, _edgeTiles[new Point(mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y)]);
+				GetNeighborsEdgeConnection(mapGraphicsTile.Value, _edgeTiles[new Point(mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y)],EdgeDirection.Right);
+            else if (mapGraphicsTile.Key.X == _gameWorld.GameMap.GetLength(0) - 1)
+            {
+                mapGraphicsTile.Value.ShoreEdgePoints.Add(new EdgeConnection(CreateEdgeConnection(EdgeDirection.Right), true));
+                mapGraphicsTile.Value.RightEdgeType = EdgeType.Both;
+            }
 		}
 
-		private void GetNeighborsEdgeConnection(MapGraphicsTile mapGraphicsTile, MapGraphicsTile mapGraphicsTile_2)
+        /// <summary>
+        ///  Creates a random edge connection
+        /// </summary>
+        /// <param name="mapGraphicsTile"></param>
+        /// <param name="edgeDirection"></param>
+        private byte CreateEdgeConnection(EdgeDirection edgeDirection)
+        {
+            int min = 0;
+            int max = 0;
+
+            if (edgeDirection == EdgeDirection.Bottom)
+            {
+                min = 1;
+                max = 3;
+            }
+            else if (edgeDirection == EdgeDirection.Top)
+            {
+                min = 7;
+                max = 9;
+            }
+            else if (edgeDirection == EdgeDirection.Right)
+            {
+                min = 4;
+                max = 6;
+            }
+            else if (edgeDirection == EdgeDirection.Left)
+            {
+                min = 10;
+                max = 12;
+            }
+
+            return (byte)rnd.Next(min, max);
+        }
+
+        /// <summary>
+        /// Sets the Neighbors Edge Connection based on 
+        /// </summary>
+        /// <param name="currentMapGraphicsTile"></param>
+        /// <param name="neighborsMapGraphicsTile"></param>
+        /// <param name="edgeDirection"></param>
+		private void GetNeighborsEdgeConnection(MapGraphicsTile currentMapGraphicsTile, MapGraphicsTile neighborsMapGraphicsTile, EdgeDirection edgeDirection)
 		{
-			throw new NotImplementedException();
+            if (edgeDirection == EdgeDirection.Top && !neighborsMapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 0 && x.EdgePosition < 3))
+            {
+                CreateEdgeConnectionBetweenNeighbors(currentMapGraphicsTile, neighborsMapGraphicsTile, edgeDirection);
+                currentMapGraphicsTile.TopEdgeType = EdgeType.Both;
+            }
+
+            else if (edgeDirection == EdgeDirection.Bottom && !neighborsMapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 6 && x.EdgePosition < 10))
+            {
+                CreateEdgeConnectionBetweenNeighbors(currentMapGraphicsTile, neighborsMapGraphicsTile, edgeDirection);
+                currentMapGraphicsTile.BottomEdgeType = EdgeType.Both;
+            }
+
+            else if (edgeDirection == EdgeDirection.Left && !neighborsMapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 3 && x.EdgePosition < 7))
+            {
+                CreateEdgeConnectionBetweenNeighbors(currentMapGraphicsTile, neighborsMapGraphicsTile, edgeDirection);
+                currentMapGraphicsTile.BottomEdgeType = EdgeType.Both;
+            }               
+
+            else if (edgeDirection == EdgeDirection.Right && !neighborsMapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 9 && x.EdgePosition < 13))
+            {
+                CreateEdgeConnectionBetweenNeighbors(currentMapGraphicsTile, neighborsMapGraphicsTile, edgeDirection);
+                currentMapGraphicsTile.BottomEdgeType = EdgeType.Both;
+            }               
 		}
+
+        /// <summary>
+        /// Creates an edge connection between two neighbors. 
+        /// </summary>
+        /// <param name="currentMapGraphicsTile"></param>
+        /// <param name="neighborsMapGraphicsTile"></param>
+        /// <param name="edgeDirection"></param>
+        private void CreateEdgeConnectionBetweenNeighbors(MapGraphicsTile currentMapGraphicsTile, MapGraphicsTile neighborsMapGraphicsTile, EdgeDirection edgeDirection)
+        {
+            EdgeConnection edgeConnection = new EdgeConnection(CreateEdgeConnection(edgeDirection),true);
+            currentMapGraphicsTile.ShoreEdgePoints.Add(edgeConnection);
+            neighborsMapGraphicsTile.ShoreEdgePoints.Add(new EdgeConnection(edgeConnection.TranslateConnectionForNeighbor(), true));
+        }
 
 		private bool SetNeighborEdgeConnections(KeyValuePair<Point,MapGraphicsTile> mapGraphicsTile, EdgeConnection edgeConnection)
 		{
@@ -335,63 +430,32 @@ namespace DotNetFish.LevelBuilder
 			}
 
 			return false;
-		}
-
-		/// <summary>
-		/// Checks an edge connection to ensure that it doesnt border the MapEdge. 
-		/// If it does, then that edge point should not be processed. 
-		/// </summary>
-		/// <param name="edgeConnection"></param>
-		/// <param name="tileLocation"></param>
-		/// <returns></returns>
-		private bool IsEdgeConnectionOnMapEdge(int edgeConnection, Point tileLocation)
-		{
-			if (tileLocation.Y == 0 && edgeConnection > 6 && edgeConnection < 10)
-				return true;
-			else if (tileLocation.Y == _gameWorld.GameMap.GetLength(1) && edgeConnection > 0 && edgeConnection < 4)
-				return true;
-			else if (tileLocation.X == 0 && edgeConnection > 9 && edgeConnection < 13)
-				return true;
-			else if (tileLocation.Y == _gameWorld.GameMap.GetLength(0) && edgeConnection > 3 && edgeConnection < 7)
-				return true;
-
-			return false;
 		}		
 
 		/// <summary>
 		/// Calculates the best path available for tiles that need to be connected. 
 		/// </summary>
 		/// <param name="currentTile"></param>
-		private void CalculatePath(KeyValuePair<Point,MapGraphicsTile> currentTile)
-		{
-			for (int i = 0; i < currentTile.Value.ShoreEdgePoints.Count; i++) //(EdgeConnection edgeConnection in currentTile.Value.ShoreEdgePoints)
+		private void CalculateTilePath(KeyValuePair<Point,MapGraphicsTile> currentTile)
+		{	
+			List<Point> targetTiles = GetTargetPathEndingTiles(currentTile.Key);				
+
+			TilePath bestTilePath = null;
+			foreach (Point point in targetTiles)
 			{
-				if (currentTile.Value.ShoreEdgePoints[i].IsConnected == true)
-					continue;
+				TilePath currentTilePath = FindPath(currentTile.Key, point);
 
-				//if (CheckTileForLoop(currentTile)
-				List<Point> targetTiles = GetTargetEndingTiles(currentTile.Value.ShoreEdgePoints[i], currentTile.Key);				
-
-				PathTile bestPath = null;
-				foreach (Point point in targetTiles)
-				{
-					PathTile pathTile = FindPath(currentTile.Key, point);
-
-					if (pathTile != null && (bestPath == null || pathTile.Score < bestPath.Score))
-						bestPath = pathTile;
-				}
-
-				if (bestPath != null)
-					BuildPath(bestPath);
-				else
-					if (_errorTiles.ContainsKey(currentTile.Key))
-					{
-						_gameWorld.ErrorTiles.Add(currentTile.Key);
-						_gameWorld.GameMap[currentTile.Key.X, currentTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
-					}						
-					else
-						_errorTiles.Add(currentTile.Key,currentTile.Value);
+				if (currentTilePath != null && (bestTilePath== null || currentTilePath.Score < bestTilePath.Score))
+					bestTilePath = currentTilePath;
 			}
+
+			if (bestTilePath != null)
+				BuildPath(bestTilePath);
+			else
+            {
+                _gameWorld.ErrorTiles.Add(currentTile.Key);
+				_gameWorld.GameMap[currentTile.Key.X, currentTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);							
+            }	
 		}
 
 		/// <summary>
@@ -400,42 +464,18 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="edgeConnection"></param>
 		/// <param name="currentTileLocation"></param>
 		/// <returns></returns>
-		private List<Point> GetTargetEndingTiles(EdgeConnection edgeConnection, Point currentTileLocation)
+		private List<Point> GetTargetPathEndingTiles(Point currentTileLocation)
 		{
 			List<Point> targetPoints = new List<Point>();
 
-			//Up
-			if (edgeConnection.EdgePosition > 6 && edgeConnection.EdgePosition < 10)
-			{
-				targetPoints = (from tiles in _edgeTiles
-										 where tiles.Key != currentTileLocation&& tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
-										 (tiles.Key.X > (currentTileLocation.X - 5) && tiles.Key.X < (currentTileLocation.X + 5)) && (tiles.Key.Y > (currentTileLocation.Y - 9) && tiles.Key.Y < (currentTileLocation.Y))
-										 select tiles.Key).ToList();
-			}
-			//Down
-			else if (edgeConnection.EdgePosition > 0 && edgeConnection.EdgePosition < 4)
-			{
-				targetPoints = (from tiles in _edgeTiles
-										 where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
-										 (tiles.Key.X > (currentTileLocation.X - 5) && tiles.Key.X < (currentTileLocation.X + 5)) && (tiles.Key.Y > currentTileLocation.Y && tiles.Key.Y < (currentTileLocation.Y + 9))
-										 select tiles.Key).ToList();
-			}
-			//Left
-			else if (edgeConnection.EdgePosition > 9 && edgeConnection.EdgePosition < 13)
-			{
-				targetPoints = (from tiles in _edgeTiles
-										 where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
-										 (tiles.Key.X > (currentTileLocation.X - 9) && tiles.Key.X < (currentTileLocation.X)) && (tiles.Key.Y > (currentTileLocation.Y - 5) && tiles.Key.Y < (currentTileLocation.Y + 5))
-										 select tiles.Key).ToList();
-			}
-			//Right
-			else if (edgeConnection.EdgePosition > 3 && edgeConnection.EdgePosition < 7)
-			{
-				targetPoints = (from tiles in _edgeTiles
-								where tiles.Key != currentTileLocation && tiles.Value.ShoreEdgePoints.Exists(i => i.IsConnected == false) &&
-								(tiles.Key.X > (currentTileLocation.X) && tiles.Key.X < (currentTileLocation.X + 9)) && (tiles.Key.Y > (currentTileLocation.Y - 5) && tiles.Key.Y < (currentTileLocation.Y + 5))
-								select tiles.Key).ToList();
-			}
+            targetPoints = (from tiles in _noNeighborTiles
+                                where tiles.Key.X > (currentTileLocation.X - 20) &&
+                                tiles.Key.X < (currentTileLocation.X + 20) &&
+                                tiles.Key.Y > (currentTileLocation.Y - 20) &&
+                                tiles.Key.Y < (currentTileLocation.Y + 20) &&
+                                tiles.Key.Y != currentTileLocation.Y &&
+                                tiles.Key.X != currentTileLocation.X
+                                select tiles.Key).ToList();	
 
 			return targetPoints;
 		}
@@ -444,9 +484,9 @@ namespace DotNetFish.LevelBuilder
 		/// Generates the tiles that occur along a path that has been found between two tiles that do not connecte.
 		/// </summary>
 		/// <param name="bestPath"></param>
-		private void BuildPath(PathTile bestPath)
+		private void BuildPath(TilePath bestPath)
 		{
-			PathTile currentPathTile = bestPath;
+			TilePath currentPathTile = bestPath;
 			EdgeConnection parentEdgeConnection = null;
 			Dictionary<Point,MapGraphicsTile> tilesToAdd = new Dictionary<Point,MapGraphicsTile>();
 
@@ -454,14 +494,14 @@ namespace DotNetFish.LevelBuilder
 			{
 				MapGraphicsTile currentMapTile;
 				//create a new mapTile
-				if (_edgeTiles.ContainsKey(currentPathTile.TileLocation))
+                if (_noNeighborTiles.ContainsKey(currentPathTile.TileLocation))
 				{
-					currentMapTile = _edgeTiles[currentPathTile.TileLocation];
-					foreach (EdgeConnection edgeConnection in currentMapTile.ShoreEdgePoints)
-						SetNeighborEdgeConnections(new KeyValuePair<Point, MapGraphicsTile>(currentPathTile.TileLocation, _edgeTiles[currentPathTile.TileLocation]), edgeConnection);
+                    currentMapTile = _noNeighborTiles[currentPathTile.TileLocation];
+					//foreach (EdgeConnection edgeConnection in currentMapTile.ShoreEdgePoints)
+					//	SetNeighborEdgeConnections(new KeyValuePair<Point, MapGraphicsTile>(currentPathTile.TileLocation, _edgeTiles[currentPathTile.TileLocation]), edgeConnection);
 
 					//get rid of all of the edgepoints that are not a match, as we cannot used them. 		
-					currentMapTile.ShoreEdgePoints.RemoveAll(i => i.IsConnected == false);							
+					//currentMapTile.ShoreEdgePoints.RemoveAll(i => i.IsConnected == false);							
 				}
 				else
 					currentMapTile = new MapGraphicsTile();
@@ -484,27 +524,27 @@ namespace DotNetFish.LevelBuilder
 				currentPathTile = currentPathTile.ParentTile;
 			}
 
-			foreach (KeyValuePair<Point,MapGraphicsTile> kvp in tilesToAdd)
+			foreach (KeyValuePair<Point,MapGraphicsTile> mapGraphicsTile in tilesToAdd)
 			{
-				SetTileEdgeTypeByNeighbor(kvp.Value, kvp.Key.X, kvp.Key.Y);
-				MapTile mapTile = _mapGraphicsTileSet.GetMatchingTile(kvp.Value);
+				SetTileEdgeTypeByNeighbor(mapGraphicsTile);
+				MapTile mapTile = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile.Value);
 
 				if (mapTile.GraphicsTile.TileType != TileType.Error)
-					_gameWorld.GameMap[kvp.Key.X, kvp.Key.Y] = mapTile;
+					_gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = mapTile;
 				else
 				{
-					if (_errorTiles.ContainsKey(kvp.Key))
+					if (_errorTiles.ContainsKey(mapGraphicsTile.Key))
 					{
-						_gameWorld.ErrorTiles.Add(kvp.Key);
-						_gameWorld.GameMap[kvp.Key.X, kvp.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
+						_gameWorld.ErrorTiles.Add(mapGraphicsTile.Key);
+						_gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
 					}
 					else
-						_errorTiles.Add(kvp.Key, kvp.Value);
+						_errorTiles.Add(mapGraphicsTile.Key, mapGraphicsTile.Value);
 				}
 			}
 		}
 
-		private EdgeConnection GetParentTileEdgeConnection(PathTile currentPathTile)
+		private EdgeConnection GetParentTileEdgeConnection(TilePath currentPathTile)
 		{
 			if (currentPathTile.ParentTile == null)
 				return null;
@@ -529,12 +569,12 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="startTilePoint"></param>
 		/// <param name="targetTilePoint"></param>
 		/// <returns></returns>
-		private PathTile FindPath(Point startTilePoint, Point targetTilePoint)
+		private TilePath FindPath(Point startTilePoint, Point targetTilePoint)
 		{
-			PathTile currentTile = new PathTile(startTilePoint, 10);
+			TilePath currentTile = new TilePath(startTilePoint, 10);
 
-			List<PathTile> openTiles = new List<PathTile>();
-			List<PathTile> closedTiles = new List<PathTile>();
+			List<TilePath> openTiles = new List<TilePath>();
+			List<TilePath> closedTiles = new List<TilePath>();
 
 			while (true)
 			{
@@ -563,44 +603,31 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="openTiles"></param>
 		/// <param name="closedTiles"></param>
 		/// <returns></returns>
-		private List<PathTile> GetOpenPathTiles(PathTile currentTile, Point targetTile, List<PathTile> openTiles, List<PathTile> closedTiles)
+		private List<TilePath> GetOpenPathTiles(TilePath currentTile, Point targetTile, List<TilePath> openTiles, List<TilePath> closedTiles)
 		{
 			List<Point> openPoints = new List<Point>();
-
-			//First check the gameworl to see if the cardinal directions are open
+			
 			//North Tile
 			if (currentTile.TileLocation.Y - 1 >= 0 &&
-				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y - 1) &&
-				_gameWorld.GameMap[currentTile.TileLocation.X, currentTile.TileLocation.Y - 1].GraphicsTile.TileType != TileType.Edge ||
-					(_edgeTiles.ContainsKey(new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y - 1)) &&
-						_edgeTiles[new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y - 1)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y - 1))			
 				openPoints.Add(new Point(currentTile.TileLocation.X, currentTile.TileLocation.Y - 1));
 
 			//south Tile
 			if (currentTile.TileLocation.Y + 1 < _gameWorld.GameMap.GetLength(1) &&
-				!closedTiles.Exists(i => i.TileLocation.X == currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y + 1) &&
-				_gameWorld.GameMap[currentTile.TileLocation.X, currentTile.TileLocation.Y + 1].GraphicsTile.TileType != TileType.Edge ||
-					(_edgeTiles.ContainsKey(new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y + 1)) &&
-						_edgeTiles[new Point(currentTile.TileLocation.X,currentTile.TileLocation.Y + 1)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				!closedTiles.Exists(i => i.TileLocation.X == currentTile.TileLocation.X && i.TileLocation.Y == currentTile.TileLocation.Y + 1))			
 				openPoints.Add(new Point(currentTile.TileLocation.X, currentTile.TileLocation.Y + 1));
 
 			//East Tile
 			if (currentTile.TileLocation.X - 1 >= 0 &&
-				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X - 1 && i.TileLocation.Y == currentTile.TileLocation.Y) &&
-				_gameWorld.GameMap[currentTile.TileLocation.X - 1, currentTile.TileLocation.Y].GraphicsTile.TileType != TileType.Edge ||
-					(_edgeTiles.ContainsKey(new Point(currentTile.TileLocation.X - 1,currentTile.TileLocation.Y)) &&
-						_edgeTiles[new Point(currentTile.TileLocation.X - 1,currentTile.TileLocation.Y)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X - 1 && i.TileLocation.Y == currentTile.TileLocation.Y))
 				openPoints.Add(new Point(currentTile.TileLocation.X - 1, currentTile.TileLocation.Y));
 
 			//West Tile
 			if (currentTile.TileLocation.X + 1 < _gameWorld.GameMap.GetLength(0) &&
-				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X + 1 && i.TileLocation.Y == currentTile.TileLocation.Y) &&
-				_gameWorld.GameMap[currentTile.TileLocation.X + 1, currentTile.TileLocation.Y].GraphicsTile.TileType != TileType.Edge ||
-					(_edgeTiles.ContainsKey(new Point(currentTile.TileLocation.X + 1,currentTile.TileLocation.Y)) &&
-						_edgeTiles[new Point(currentTile.TileLocation.X + 1,currentTile.TileLocation.Y)] .ShoreEdgePoints.Exists(i => i.IsConnected == false)))
+				!closedTiles.Exists(i => i.TileLocation.X ==  currentTile.TileLocation.X + 1 && i.TileLocation.Y == currentTile.TileLocation.Y)) 
 				openPoints.Add(new Point(currentTile.TileLocation.X + 1, currentTile.TileLocation.Y));
 
-			List<PathTile> tiles = new List<PathTile>();
+			List<TilePath> tiles = new List<TilePath>();
 			foreach (Point location in openPoints)
 			{
 				int score = CalculateScore(currentTile.ParentTile, location, targetTile);
@@ -608,12 +635,12 @@ namespace DotNetFish.LevelBuilder
 				//If it doesnt exist on the open list we want to create a new item.
 				if (!openTiles.Exists(i => i.TileLocation.X == location.X && i.TileLocation.Y == location.Y))
 				{					
-					PathTile potentialPathTile = new PathTile(location, score, currentTile);
+					TilePath potentialPathTile = new TilePath(location, score, currentTile);
 					tiles.Add(potentialPathTile);
 				}
 				else
 				{
-					PathTile existingTile = openTiles.First(i => i.TileLocation.X == location.X && i.TileLocation.Y == location.Y);
+					TilePath existingTile = openTiles.First(i => i.TileLocation.X == location.X && i.TileLocation.Y == location.Y);
 					existingTile.ParentTile = currentTile;
 					existingTile.Score = score;
 				}
@@ -629,7 +656,7 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="location"></param>
 		/// <param name="targetTile"></param>
 		/// <returns></returns>
-		private int CalculateScore(PathTile parentTile, Point location, Point targetTile)
+		private int CalculateScore(TilePath parentTile, Point location, Point targetTile)
 		{
 			//Path Score F = G + H
 			//G = the Cost to move plus the Parents cost to mvoe
@@ -768,35 +795,32 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="TileX"></param>
 		/// <param name="TileY"></param>
 		/// <returns></returns>
-		private MapGraphicsTile SetTileEdgeTypeByNeighbor(MapGraphicsTile mapGraphicsTile, int TileX, int TileY)
+		private void SetTileEdgeTypeByNeighbor(KeyValuePair<Point,MapGraphicsTile> mapGraphicsTile)
 		{
 			//Left Side
-			if (mapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 9 && x.EdgePosition < 13))
-				mapGraphicsTile.LeftEdgeType = EdgeType.Both;
-			else if (TileX - 1 > 0 && _gameWorld.GameMap[TileX - 1, TileY] != null && _gameWorld.GameMap[TileX - 1, TileY].GraphicsTile != null)
-				mapGraphicsTile.LeftEdgeType = _gameWorld.GameMap[TileX - 1, TileY].GraphicsTile.RightEdgeType;
+			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 9 && x.EdgePosition < 13))
+				mapGraphicsTile.Value.LeftEdgeType = EdgeType.Both;
+			else if (mapGraphicsTile.Key.X - 1 > 0 && _gameWorld.GameMap[mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y].GraphicsTile != null)
+				mapGraphicsTile.Value.LeftEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X - 1, mapGraphicsTile.Key.Y].GraphicsTile.RightEdgeType;
 
 			//Top Side
-			if (mapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 6 && x.EdgePosition < 10))
-				mapGraphicsTile.TopEdgeType = EdgeType.Both;
-			else if (TileY - 1 > 0 && _gameWorld.GameMap[TileX, TileY - 1] != null && _gameWorld.GameMap[TileX, TileY - 1].GraphicsTile != null)
-				mapGraphicsTile.TopEdgeType = _gameWorld.GameMap[TileX, TileY - 1].GraphicsTile.BottomEdgeType;
+			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 6 && x.EdgePosition < 10))
+				mapGraphicsTile.Value.TopEdgeType = EdgeType.Both;
+			else if (mapGraphicsTile.Key.Y - 1 > 0 && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1].GraphicsTile != null)
+				mapGraphicsTile.Value.TopEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y - 1].GraphicsTile.BottomEdgeType;
 
 			//right Side
-			if (mapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 3 && x.EdgePosition < 7))
-				mapGraphicsTile.RightEdgeType = EdgeType.Both;
-			else if (TileX + 1 < _gameWorldWidth && _gameWorld.GameMap[TileX + 1, TileY] != null && _gameWorld.GameMap[TileX + 1, TileY].GraphicsTile != null)
-				mapGraphicsTile.RightEdgeType = _gameWorld.GameMap[TileX + 1, TileY].GraphicsTile.LeftEdgeType;
+			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 3 && x.EdgePosition < 7))
+				mapGraphicsTile.Value.RightEdgeType = EdgeType.Both;
+			else if (mapGraphicsTile.Key.X + 1 < _gameWorldWidth && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y].GraphicsTile != null)
+				mapGraphicsTile.Value.RightEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y].GraphicsTile.LeftEdgeType;
 
 			//Bottom Side
-			if (mapGraphicsTile.ShoreEdgePoints.Exists(x => x.EdgePosition > 0 && x.EdgePosition < 4))
-				mapGraphicsTile.BottomEdgeType = EdgeType.Both;
-			else if (TileY + 1 < _gameWorldHeight && _gameWorld.GameMap[TileX, TileY + 1] != null && _gameWorld.GameMap[TileX, TileY + 1].GraphicsTile != null)
-				mapGraphicsTile.BottomEdgeType = _gameWorld.GameMap[TileX, TileY + 1].GraphicsTile.TopEdgeType;
-
-			return mapGraphicsTile;
+			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 0 && x.EdgePosition < 4))
+				mapGraphicsTile.Value.BottomEdgeType = EdgeType.Both;
+			else if (mapGraphicsTile.Key.Y + 1 < _gameWorldHeight && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1].GraphicsTile != null)
+				mapGraphicsTile.Value.BottomEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1].GraphicsTile.TopEdgeType;
 		}	
-
 
 		/// <summary>
 		/// Checks the Edges of a Tile to determine if the tile contains land,water or both
@@ -838,146 +862,6 @@ namespace DotNetFish.LevelBuilder
 		}
 
 		/// <summary>
-		/// Generates the Edge Points for a MapGraphics Tile
-		/// </summary>
-		/// <param name="bmpData"></param>
-		/// <param name="tileSize"></param>
-		/// <param name="currentGraphicsTile"></param>
-		/// <returns></returns>
-		private List<EdgeConnection> GenerateMapGraphicsTileEdgePoints(BmpData bmpData, int tileSize, MapGraphicsTile currentGraphicsTile)
-		{			
-			List<Point> edgePoints = new List<Point>();
-			//Loop though all of the pixels on the Y edge
-			for (int y = 0; y < tileSize; y+=tileSize - 1)
-			{
-				if (y ==0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance.EdgePosition > 6 && instance.EdgePosition < 10) > 0)
-					continue;
-				if (y != 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance.EdgePosition > 0 && instance.EdgePosition < 4) > 0)
-					continue;
-
-				//Using these two values to determine if the edge is water, land, or both
-				bool hasLand = false;
-				bool hasWater = false;
-
-				Color newColor = new Color();
-				Color previousColor = new Color();
-				for (int x = 0; x < tileSize; x++)
-				{
-					int position = (y * bmpData.BitmapData.Stride) + (x * 4);
-					newColor = SetColor(bmpData.RgbValues[position], bmpData.RgbValues[position + 1], bmpData.RgbValues[position + 2]);
-
-					if (!hasLand && !IsWater(newColor))
-						hasLand = true;
-
-					if (!hasWater && IsWater(newColor))
-						hasWater = true;
-
-					if (previousColor != new Color() && IsLandWaterTransition(newColor,previousColor))
-					{
-						//If the point is on a corner of the tile, we want to move
-						//it off the corner so the correct Tile Edge is selected. 
-						if (x == 15)
-							edgePoints.Add(new Point(x -1, y));						
-						else
-							edgePoints.Add(new Point(x, y));
-					}
-					previousColor = newColor;
-				}
-
-				if (y == 0)
-					currentGraphicsTile.TopEdgeType = GetTileEdgeType(hasLand, hasWater);
-				else
-					currentGraphicsTile.BottomEdgeType = GetTileEdgeType(hasLand, hasWater);
-
-			}
-			
-			//Loop though all of the pixels on the X edge
-			for (int x = 0; x < tileSize; x+=tileSize - 1)
-			{
-				if (x != 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance.EdgePosition > 3 && instance.EdgePosition < 7) > 0)
-					continue;
-				if (x == 0 && currentGraphicsTile.ShoreEdgePoints.Count(instance => instance.EdgePosition > 9 && instance.EdgePosition < 13) > 0)
-					continue;
-
-				//Using these two values to determine if the edge is water, land, or both
-				bool hasLand = false;
-				bool hasWater = false;
-
-				Color newColor = new Color();
-				Color previousColor = new Color();				
-
-				//Starting and ending the count early. Because we dont want to check the first and
-				//last positions twice.
-				for (int y = 0; y < tileSize; y++)
-				{
-					int position = (y * bmpData.BitmapData.Stride) + (x * 4);
-
-					newColor = SetColor(bmpData.RgbValues[position], bmpData.RgbValues[position + 1], bmpData.RgbValues[position + 2]);
-
-					if (!hasLand && !IsWater(newColor))
-						hasLand = true;
-
-					if (!hasWater && IsWater(newColor))
-						hasWater = true;
-
-					if (previousColor != new Color() && IsLandWaterTransition(newColor, previousColor))
-					{
-						//If the point is on a corner of the tile, we want to move
-						//it off the corner so the correct Tile Edge is selected. 
-						if (y == 15)
-							edgePoints.Add(new Point(x, y - 1));						
-						else
-							edgePoints.Add(new Point(x, y));
-					}
-					previousColor = newColor;
-				}
-
-				if (x == 0)
-					currentGraphicsTile.LeftEdgeType = GetTileEdgeType(hasLand, hasWater);
-				else
-					currentGraphicsTile.RightEdgeType = GetTileEdgeType(hasLand, hasWater);
-			}	
-			return ConvertEdgeCoordinatesToEdgePoints(edgePoints);
-		}
-
-		/// <summary>
-		/// Returns the EdgeType of a tile
-		/// </summary>
-		/// <param name="hasLand"></param>
-		/// <param name="hasWater"></param>
-		/// <returns></returns>
-		private EdgeType GetTileEdgeType(bool hasLand, bool hasWater)
-		{			
-
-			if (hasLand && hasWater)
-				return EdgeType.Both;
-			else if (hasLand)
-				return EdgeType.Land;
-			else if (hasWater)
-				return EdgeType.Water;
-			else
-				throw new ArgumentOutOfRangeException("tile Doesn't have land or water");
-		}
-
-		/// <summary>
-		/// Determines if two colors are a land to water transition
-		/// </summary>
-		/// <param name="newColor"></param>
-		/// <param name="previousColor"></param>
-		/// <returns></returns>
-		private bool IsLandWaterTransition(Color newColor, Color previousColor)
-		{
-			bool isNewColorWater = IsWater(newColor);
-			bool isPreviousColorWater = IsWater(previousColor);
-
-			if (isNewColorWater != isPreviousColorWater)
-				return true;
-			else
-				return false;
-
-		}
-
-		/// <summary>
 		/// Determines if a Color is water based on the color
 		/// </summary>
 		/// <param name="color"></param>
@@ -1004,58 +888,6 @@ namespace DotNetFish.LevelBuilder
 		{
 			return Color.FromArgb(255,red,green,blue);	
 		}
-
-		/// <summary>
-		/// Converts the X,Y coordinate where there is a shift from land to water into an EdgePoint
-		/// </summary>
-		/// <param name="edgePoints"></param>
-		/// <returns></returns>
-		private List<EdgeConnection> ConvertEdgeCoordinatesToEdgePoints(List<Point> edgePoints)
-		{
-			List<EdgeConnection> tileEdgeConnections = new List<EdgeConnection>();
-
-			foreach (Point p in edgePoints)
-			{
-				if (p.X == 0)
-				{
-					if (p.Y <= 4)
-						tileEdgeConnections.Add(new EdgeConnection(10));
-					else if (p.Y > 4 && p.Y <= 9)
-						tileEdgeConnections.Add(new EdgeConnection(11));
-					else
-						tileEdgeConnections.Add(new EdgeConnection(12));
-				}
-				else if (p.X == 15)
-				{
-					if (p.Y <= 4)
-						tileEdgeConnections.Add(new EdgeConnection(6));
-					else if (p.Y > 4 && p.Y <= 9)
-						tileEdgeConnections.Add(new EdgeConnection(5));
-					else
-						tileEdgeConnections.Add(new EdgeConnection(4));
-				}
-				else if (p.Y == 0)
-				{
-					if (p.X <= 4)
-						tileEdgeConnections.Add(new EdgeConnection(9));
-					else if (p.X > 4 && p.X <= 9)
-						tileEdgeConnections.Add(new EdgeConnection(8));
-					else
-						tileEdgeConnections.Add(new EdgeConnection(7));
-				}
-				else if (p.Y == 15)
-				{
-					if (p.X <= 4)
-						tileEdgeConnections.Add(new EdgeConnection(1));
-					else if (p.X > 4 && p.X <= 9)
-						tileEdgeConnections.Add(new EdgeConnection(2));
-					else
-						tileEdgeConnections.Add(new EdgeConnection(3));
-				}				
-			}
-
-			return tileEdgeConnections;
-		} 
             
    		/// <summary>
    		/// Gets to End Gmap Tile (Bottom Right)

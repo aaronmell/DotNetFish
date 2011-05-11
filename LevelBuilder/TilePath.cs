@@ -6,27 +6,27 @@ using System.Drawing;
 
 namespace DotNetFish.LevelBuilder
 {
-	public class PathTile : IComparable<PathTile>
+	public class TilePath : IComparable<TilePath>
 	{
 		public Point TileLocation { get; set; }
 		public int Score { get; set; }
-		public PathTile ParentTile { get; set; }
+		public TilePath ParentTile { get; set; }
 	
-		public PathTile(Point location, int score, PathTile parent)
+		public TilePath(Point location, int score, TilePath parent)
 		{
 			TileLocation = location;
 			Score = score;
 			ParentTile = parent;
 		}
 
-		public PathTile(Point location, int score)
+		public TilePath(Point location, int score)
 		{
 			TileLocation = location;
 			Score = score;
 			ParentTile = null;
 		}
 
-		public int CompareTo(PathTile obj)
+		public int CompareTo(TilePath obj)
 		{
 			return Score.CompareTo(obj.Score);
 		}

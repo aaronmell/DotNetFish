@@ -22,6 +22,7 @@ namespace DotNetFish.LevelBuilder
 		//The default size of the tile we are checking from gmap. we are taking the 16x16 tile and replacing
 		//it with a 64x64 tile. This allows us to get the size map we want. 
 		const int _graphicsTileSize = 16;
+        const MapType _mapType = MapType.GoogleMap;
 
 		Random rnd = new Random();
         private BackgroundWorker _backgroundWorker;
@@ -30,11 +31,11 @@ namespace DotNetFish.LevelBuilder
 		private MapGraphicsTileSet _mapGraphicsTileSet;
 		private int _gameWorldWidth;
 		private int _gameWorldHeight;
+        private int _gmapTilesProcessed;
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
 		Dictionary<Point, MapGraphicsTile> _errorTiles;
         Dictionary<Point, MapGraphicsTile> _noNeighborTiles;
-        DateTime _startTime;
-        DateTime _endTime;
+       
 
         public BackgroundWorker BackgroundWorker
         {
@@ -76,19 +77,19 @@ namespace DotNetFish.LevelBuilder
 		/// <returns></returns>
 		private bool Main()
 		{
-            _startTime = DateTime.Now;
-
 			//Gmap Setup stuff
 			MapType type = MapType.GoogleMap;
 			PureProjection prj = null;
 			int maxZoom;
-			int zoom = 22;
+			int zoom = 18;
 			GMaps.Instance.AdjustProjection(type, ref prj, out maxZoom);
 			GMaps.Instance.Mode = AccessMode.ServerOnly;
 			GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
+
 			_edgeTiles = new Dictionary<Point, MapGraphicsTile>();
             _noNeighborTiles = new Dictionary<Point, MapGraphicsTile>();
 			_errorTiles = new Dictionary<Point, MapGraphicsTile>();
+            _gmapTilesProcessed = 0;
 
 			//Convert the PointLatLng to GPoints
 			List<GPoint> gPoints = new List<GPoint>();
@@ -101,13 +102,8 @@ namespace DotNetFish.LevelBuilder
 			GPoint gmapStartTile = getGmapStartTile(gPoints);
 			GPoint gmapEndTile = getGmapEndTile(gPoints);
 
-			//The gmap tile stuff
-			int gmapTilesHeight = gmapEndTile.Y - gmapStartTile.Y + 1;
-			int gmapTilesWidth = gmapEndTile.X - gmapStartTile.X + 1;
-			int gmapTilesProcessed = 0;
-
-			_gameWorldWidth = gmapTilesWidth * 16;
-			_gameWorldHeight = gmapTilesHeight * 16;
+            _gameWorldWidth = (gmapEndTile.X - gmapStartTile.X + 1) * 16 * 16;
+            _gameWorldHeight = (gmapEndTile.Y - gmapStartTile.Y + 1) * 16 * 16;
 			_gameWorld.GameMap = new MapTile[_gameWorldWidth, _gameWorldHeight];
 
 #if DEBUG
@@ -118,45 +114,69 @@ namespace DotNetFish.LevelBuilder
 			{
 				File.Delete(s);
 			}
+
+            if (LoopThroughTiles(gmapStartTile,gmapEndTile ,18))
+                return true;
 #endif
-
-			//Loop through each tile and add it to the array         
-			for (int x = 0; x < gmapTilesWidth; x++)
-			{
-				for (int y = 0; y < gmapTilesHeight; y++)
-				{
-                    if (gmapTilesProcessed % 20 == 0)
-                        _backgroundWorker.ReportProgress(1, "ProcessingTile: " + gmapTilesProcessed + " of " + gmapTilesHeight * gmapTilesWidth);
-
-					gmapTilesProcessed++;
-					
-
-					Exception ex;
-					WindowsFormsImage tile = GMaps.Instance.GetImageFrom(type, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoom, out ex) as WindowsFormsImage;
-					
-					if (ex != null)		
-						return true;
-					else if (tile != null)
-					{
-						using (tile)
-						{
-							using (Bitmap bitmap = new Bitmap(tile.Img))
-							{
-#if DEBUG
-								//bitmap.Save("C:\\tiles\\Largetile" + x + "-" + y + ".jpg");
-#endif
-								ProcessGmapTiles(x, y, bitmap);
-							}
-						}
-					}					
-				}
-			}
+            			
 			ProcessEdgeTiles(_edgeTiles);
-			//Give all of the errors tiles a second pass.
-			//ProcessEdgeTiles(_errorTiles);
-            _endTime = DateTime.Now;
 			return false;
 		}
+
+        //Recursive Function
+        private bool LoopThroughTiles(GPoint gmapStartTile, GPoint gmapEndTile ,int zoomLevel)
+        {
+            
+            //Loop through each tile and add it to the array         
+            for (int x = 0; x < gmapEndTile.X - gmapStartTile.X + 1; x++)
+            {
+                for (int y = 0; y <  gmapEndTile.Y - gmapStartTile.Y + 1; y++)
+                {
+                    if (zoomLevel == 18)
+                    {
+                        _backgroundWorker.ReportProgress(1, "ProcessingTile: " + _gmapTilesProcessed + " of " + (gmapEndTile.X - gmapStartTile.X + 1) * (gmapEndTile.Y - gmapStartTile.Y + 1));
+                        _gmapTilesProcessed++;
+                    }
+
+                    Exception ex;
+                    WindowsFormsImage tile = GMaps.Instance.GetImageFrom(_mapType, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoomLevel, out ex) as WindowsFormsImage;
+
+                    if (ex != null)
+                        return true;
+                    else if (tile != null)
+                    {
+                        using (tile)
+                        {
+                            using (Bitmap bitmap = new Bitmap(tile.Img))
+                            {
+#if DEBUG
+                                bitmap.Save("C:\\tiles\\Largetile" + x + "-" + y + ".jpg");
+#endif
+                                bool hasTransition = CheckGmapTilesForTransitions(x, y, bitmap, zoomLevel);
+
+                                if (!hasTransition)
+                                    continue;
+                                else
+                                {
+                                    if (zoomLevel != 22)
+                                    {
+                                        GPoint newStartTile = new GPoint(gmapStartTile.X  * 2, gmapStartTile.Y * 2);
+                                        GPoint newEndTile = new GPoint((gmapStartTile.X  * 2) + 1, (gmapStartTile.Y * 2) + 1);
+                                        LoopThroughTiles(newStartTile, newEndTile, zoomLevel + 1);
+                                    }                                        
+                                    else
+                                        ProcessGmapTiles(x, y, bitmap);
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
 
 		/// <summary>
 		/// Processes all of the Large Gmap Tiles
@@ -165,12 +185,7 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="gmapY"></param>
 		/// <param name="gmapBitmap"></param>
 		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
-		{
-            bool hasTransition = CheckGmapTilesForTransitions(gmapX, gmapY,gmapBitmap);
-
-            if (!hasTransition)
-                return;
-
+		{ 
 			//The bitmap coming in as 256x256 This needs to be broken down further into 16x16 sized
 			//tiles in order to get the proper size of the map
 			for (int tileX = 0; tileX < _graphicsTileSize; tileX++)
@@ -200,8 +215,9 @@ namespace DotNetFish.LevelBuilder
         /// <param name="gmapY"></param>
         /// <param name="gmapBitmap"></param>
         /// <returns></returns>
-        private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap)
-        {          
+        private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap, int zoomLevel)
+        {
+            int offset = getOffSet(zoomLevel);
             bool hasWater = false;
             bool hasLand = false;
             using (BmpData largeBmpData = new BmpData(gmapBitmap, 256))
@@ -220,15 +236,31 @@ namespace DotNetFish.LevelBuilder
 
                 MapTile mapTile = new MapTile(mapGraphicsTile);
 
-            for (int x = 0; x < _graphicsTileSize; x++)
+            for (int x = 0; x < _graphicsTileSize * offset; x++)
             {
-                for (int y = 0; y < _graphicsTileSize; y++)
+                for (int y = 0; y < _graphicsTileSize * offset; y++)
                 {
-                    _gameWorld.GameMap[(gmapX * _graphicsTileSize) + x, (gmapY * _graphicsTileSize) + y] = mapTile;
+                    _gameWorld.GameMap[(gmapX * _graphicsTileSize * offset) + x, (gmapY * _graphicsTileSize * offset) + y] = mapTile;
                 }
             }
 
             return false;
+        }
+
+        private int getOffSet(int zoomLevel)
+        {
+            if (zoomLevel == 18)
+                return 16;
+            else if (zoomLevel == 19)
+                return 8;
+            else if (zoomLevel == 20)
+                return 4;
+            else if (zoomLevel == 21)
+                return 2;
+            else if (zoomLevel == 22)
+                return 1;
+
+            throw new Exception("Incorrect Zoom Level");
         }
 
 		/// <summary>

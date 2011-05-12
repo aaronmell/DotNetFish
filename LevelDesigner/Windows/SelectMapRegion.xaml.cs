@@ -45,7 +45,7 @@ namespace DotNetFish.Wpf.LevelDesigner
             gmapControl.Position = new PointLatLng(35.2276723549358, -97.22351074);
             gmapControl.MapType = MapType.GoogleMap;
             gmapControl.MinZoom = 1;
-            gmapControl.MaxZoom = 22;
+            gmapControl.MaxZoom = 18;
             gmapControl.Zoom = 10;
 			gmapControl.ShowTileGridLines = true;
 

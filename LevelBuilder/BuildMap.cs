@@ -115,7 +115,7 @@ namespace DotNetFish.LevelBuilder
 				File.Delete(s);
 			}
 
-            if (LoopThroughTiles(gmapStartTile,gmapEndTile ,18))
+            if (LoopThroughTiles(gmapStartTile,gmapEndTile,new Point(0,0),18))
                 return true;
 #endif
             			
@@ -124,9 +124,10 @@ namespace DotNetFish.LevelBuilder
 		}
 
         //Recursive Function
-        private bool LoopThroughTiles(GPoint gmapStartTile, GPoint gmapEndTile ,int zoomLevel)
+        private bool LoopThroughTiles(GPoint gmapStartTile, GPoint gmapEndTile ,Point absolutePosition, int zoomLevel)
         {
-            
+            int currentOffset = getOffSet(zoomLevel);
+
             //Loop through each tile and add it to the array         
             for (int x = 0; x < gmapEndTile.X - gmapStartTile.X + 1; x++)
             {
@@ -134,9 +135,11 @@ namespace DotNetFish.LevelBuilder
                 {
                     if (zoomLevel == 18)
                     {
+						_gmapTilesProcessed++;
                         _backgroundWorker.ReportProgress(1, "ProcessingTile: " + _gmapTilesProcessed + " of " + (gmapEndTile.X - gmapStartTile.X + 1) * (gmapEndTile.Y - gmapStartTile.Y + 1));
-                        _gmapTilesProcessed++;
                     }
+
+					Point currentAbsolutePosition = new Point(absolutePosition.X + (currentOffset * x), absolutePosition.Y + (currentOffset * y));
 
                     Exception ex;
                     WindowsFormsImage tile = GMaps.Instance.GetImageFrom(_mapType, new GPoint(gmapStartTile.X + x, gmapStartTile.Y + y), zoomLevel, out ex) as WindowsFormsImage;
@@ -150,9 +153,10 @@ namespace DotNetFish.LevelBuilder
                             using (Bitmap bitmap = new Bitmap(tile.Img))
                             {
 #if DEBUG
-                                bitmap.Save("C:\\tiles\\Largetile" + x + "-" + y + ".jpg");
+                                //bitmap.Save("C:\\tiles\\Largetile" + currentAbsolutePosition.X + "-" + currentAbsolutePosition.Y + "ZoomLevel" + zoomLevel + "Gmap Coordinates " + gmapStartTile.X + x + "-" + gmapStartTile.Y + y + ".jpg");
+
 #endif
-                                bool hasTransition = CheckGmapTilesForTransitions(x, y, bitmap, zoomLevel);
+                                bool hasTransition = CheckGmapTilesForTransitions(x, y, bitmap, zoomLevel, currentAbsolutePosition);
 
                                 if (!hasTransition)
                                     continue;
@@ -160,12 +164,12 @@ namespace DotNetFish.LevelBuilder
                                 {
                                     if (zoomLevel != 22)
                                     {
-                                        GPoint newStartTile = new GPoint(gmapStartTile.X  * 2, gmapStartTile.Y * 2);
-                                        GPoint newEndTile = new GPoint((gmapStartTile.X  * 2) + 1, (gmapStartTile.Y * 2) + 1);
-                                        LoopThroughTiles(newStartTile, newEndTile, zoomLevel + 1);
+                                        GPoint newStartTile = new GPoint((gmapStartTile.X + x)  * 2, (gmapStartTile.Y + y) * 2);
+                                        GPoint newEndTile = new GPoint(newStartTile.X + 1, newStartTile.Y + 1);
+										LoopThroughTiles(newStartTile, newEndTile, currentAbsolutePosition, zoomLevel + 1);
                                     }                                        
                                     else
-                                        ProcessGmapTiles(x, y, bitmap);
+                                        ProcessGmapTiles(currentAbsolutePosition.X, currentAbsolutePosition.Y, bitmap);
                                 }
                                 
                             }
@@ -215,7 +219,7 @@ namespace DotNetFish.LevelBuilder
         /// <param name="gmapY"></param>
         /// <param name="gmapBitmap"></param>
         /// <returns></returns>
-        private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap, int zoomLevel)
+        private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap, int zoomLevel, Point currentAbsolutePosition)
         {
             int offset = getOffSet(zoomLevel);
             bool hasWater = false;
@@ -236,11 +240,11 @@ namespace DotNetFish.LevelBuilder
 
                 MapTile mapTile = new MapTile(mapGraphicsTile);
 
-            for (int x = 0; x < _graphicsTileSize * offset; x++)
+            for (int x = currentAbsolutePosition.X * _graphicsTileSize; x < (currentAbsolutePosition.X * _graphicsTileSize) + (_graphicsTileSize * offset); x++)
             {
-                for (int y = 0; y < _graphicsTileSize * offset; y++)
+                for (int y = currentAbsolutePosition.Y * _graphicsTileSize; y < (currentAbsolutePosition.Y * _graphicsTileSize) + (_graphicsTileSize * offset); y++)
                 {
-                    _gameWorld.GameMap[(gmapX * _graphicsTileSize * offset) + x, (gmapY * _graphicsTileSize * offset) + y] = mapTile;
+                    _gameWorld.GameMap[x,y] = mapTile;					
                 }
             }
 

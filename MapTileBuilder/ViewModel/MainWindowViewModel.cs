@@ -5,9 +5,10 @@ using System.Text;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows;
-using DotNetFish.BaseMvvm;
 using DotNetFish.GameObjects;
 using DotNetFish.GameObjects.Enums;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 {
@@ -53,7 +54,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			_graphicsTiles = new Dictionary<Point, MapGraphicsTile>();
 			LoadFile();
 			_currentPoint = new Point(0, 0);
-			DrawImageOnCanvas(_currentPoint);
+			DrawImageOnCanvas(_currentPoint);           
 		}
 		
 		#region [Properties]
@@ -63,7 +64,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			get
 			{
 				if (_nextCommand == null)
-					_nextCommand = new RelayCommand(param => this.OnNextCommand());
+					_nextCommand = new RelayCommand(() => this.OnNextCommand());
 
 				return _nextCommand;
 			}
@@ -74,7 +75,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			get
 			{
 				if (_backCommand == null)
-					_backCommand = new RelayCommand(param => this.OnPreviousCommand());
+					_backCommand = new RelayCommand(() => this.OnPreviousCommand());
 
 				return _backCommand;
 			}
@@ -85,7 +86,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			get
 			{
 				if (_drawCanvas == null)
-					_drawCanvas = new RelayCommand(param => this.DrawImageOnCanvas(_currentPoint));
+					_drawCanvas = new RelayCommand(() => this.DrawImageOnCanvas(_currentPoint));
 
 				return _drawCanvas;
 			}
@@ -101,7 +102,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			get
 			{
 				if (_closeCommand == null)
-					_closeCommand = new RelayCommand(param => this.OnRequestClose());
+					_closeCommand = new RelayCommand(() => this.OnRequestClose());
 
 				return _closeCommand;
 			}
@@ -151,7 +152,8 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_currentTile = value;
 
-				OnPropertyChanged("CurrentTile");
+				RaisePropertyChanged("CurrentTile");
+               
 			}
 		}
 
@@ -164,7 +166,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			set
 			{
 				_previousButtonActive = value;
-				OnPropertyChanged("PreviousButtonActive");
+				RaisePropertyChanged("PreviousButtonActive");
 			}
 		}
 
@@ -178,7 +180,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_topEdge = value;
 
-				OnPropertyChanged("TopEdge");
+				RaisePropertyChanged("TopEdge");
 			}
 		}
 
@@ -192,7 +194,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_bottomEdge = value;
 
-				OnPropertyChanged("BottomEdge");
+				RaisePropertyChanged("BottomEdge");
 			}
 		}
 
@@ -206,7 +208,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_leftEdge = value;
 
-				OnPropertyChanged("LeftEdge");
+				RaisePropertyChanged("LeftEdge");
 			}
 		}
 
@@ -220,7 +222,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_rightEdge = value;
 
-				OnPropertyChanged("RightEdge");
+				RaisePropertyChanged("RightEdge");
 			}
 		}
 
@@ -234,7 +236,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_tileType = value;
 
-				OnPropertyChanged("TileType");
+				RaisePropertyChanged("TileType");
 			}
 		}
 
@@ -260,7 +262,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge1 = value;
 
-				OnPropertyChanged("Edge1");
+				RaisePropertyChanged("Edge1");
 			}
 		}
 
@@ -274,7 +276,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge2 = value;
 
-				OnPropertyChanged("Edge2");
+				RaisePropertyChanged("Edge2");
 			}
 		}
 
@@ -288,7 +290,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge3 = value;
 
-				OnPropertyChanged("Edge3");
+				RaisePropertyChanged("Edge3");
 			}
 		}
 
@@ -302,7 +304,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge4 = value;
 
-				OnPropertyChanged("Edge4");
+				RaisePropertyChanged("Edge4");
 			}
 		}		
 
@@ -316,7 +318,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge5 = value;
 
-				OnPropertyChanged("Edge5");
+				RaisePropertyChanged("Edge5");
 			}
 		}
 
@@ -330,7 +332,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge6 = value;
 
-				OnPropertyChanged("Edge6");
+				RaisePropertyChanged("Edge6");
 			}
 		}
 
@@ -344,7 +346,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge7 = value;
 
-				OnPropertyChanged("Edge7");
+				RaisePropertyChanged("Edge7");
 			}
 		}
 
@@ -358,7 +360,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge8 = value;
 
-				OnPropertyChanged("Edge8");
+				RaisePropertyChanged("Edge8");
 			}
 		}
 
@@ -372,7 +374,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge9 = value;
 
-				OnPropertyChanged("Edge9");
+				RaisePropertyChanged("Edge9");
 			}
 		}
 
@@ -386,7 +388,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge10 = value;
 
-				OnPropertyChanged("Edge10");
+				RaisePropertyChanged("Edge10");
 			}
 		}
 
@@ -400,7 +402,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge11 = value;
 
-				OnPropertyChanged("Edge11");
+				RaisePropertyChanged("Edge11");
 			}
 		}
 
@@ -414,7 +416,7 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 			{
 				_edge12 = value;
 
-				OnPropertyChanged("Edge12");
+				RaisePropertyChanged("Edge12");
 			}
 		}
 

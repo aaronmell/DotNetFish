@@ -1,0 +1,25 @@
+﻿<Window x:Class="DotNetFish.Wpf.LevelDesigner.EditLevel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:src="clr-namespace:DotNetFish.Wpf.LevelDesigner"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+        xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        Title="EditLevel" Height="768" Width="1024">
+    <Grid>
+		<src:MapCanvas 
+            x:Name="mapCanvas" 
+            Margin="12,29,198,173"            
+            GameWorldObject="{Binding Path=GameWorld, Mode=TwoWay}"
+            CurrentPointObject="{Binding Path=CurrentPoint, Mode=TwoWay}"
+            TileSetObject="{Binding Path=MapGraphicsTileSet, Mode=TwoWay}"
+            TilesWideObject="{Binding Path=MapCanvasTilesWidth, Mode=TwoWay}"
+            TilesHighObject="{Binding Path=MapCanvasTilesHeight, Mode=TwoWay}"
+            />		
+	</Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyDown">
+            <cmd:EventToCommand Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Window>

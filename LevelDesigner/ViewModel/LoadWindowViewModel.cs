@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DotNetFish.BaseMvvm;
 using DotNetFish.GameObjects;
 using System.Windows.Input;
+using System.Windows;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 {
@@ -25,7 +27,7 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 			get
 			{
 				if (_openNewMap == null)
-					_openNewMap = new RelayCommand(param => OpenNewMapCommand());
+					_openNewMap = new RelayCommand(() => OpenNewMapCommand());
 
 				return _openNewMap;
 				
@@ -37,7 +39,7 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 			get
 			{
 				if (_openExistingMap == null)
-					_openExistingMap = new RelayCommand(param => OpenExistingMapCommand());
+					_openExistingMap = new RelayCommand(() => OpenExistingMapCommand());
 
 				return _openExistingMap;
 
@@ -49,7 +51,7 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 			get
 			{
 				if (_closeCommand == null)
-					_closeCommand = new RelayCommand(param => this.OnRequestClose());
+					_closeCommand = new RelayCommand(() => this.OnRequestClose());
 
 				return _closeCommand;
 			}
@@ -68,18 +70,20 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 				// Open document
 				string filename = dlg.FileName;
 				GameWorld gameWorld = DotNetFish.LevelBuilder.FileIO.LoadMap(filename);
+
 				EditLevel editLevel = new EditLevel(gameWorld);
+                Point currentPoint = new Point(gameWorld.GameMap.GetLength(0) / 2, gameWorld.GameMap.GetLength(1) / 2);              
+                editLevel.DataContext = new EditLevelViewModel(gameWorld,currentPoint);
 				editLevel.Show();
 			}
 		}
 
 		private void OpenNewMapCommand()
 		{
-			SelectMapRegion selectMapRegion = new SelectMapRegion();
-			SelectMapRegionViewModel viewModel = new SelectMapRegionViewModel();
-			selectMapRegion.DataContext = viewModel;
+			SelectMapRegion selectMapRegion = new SelectMapRegion();			
 			selectMapRegion.Show();
-			//this.Hide();  
+
+           OnRequestClose();
 		}
 
 		void OnRequestClose()

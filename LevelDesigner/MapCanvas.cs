@@ -13,46 +13,145 @@ using System.Windows.Input;
 namespace DotNetFish.Wpf.LevelDesigner
 {
 	public class MapCanvas : Canvas
-	{
-		private GameWorld _gameWorld;
-		private Point _currentTile;
-		private Dictionary<Point,BitmapSource> _tileSet;
-        private int _tilesWide;
-        private int _tilesHigh;
+	{ 
+        //private int _tilesWide;
+        //private int _tilesHigh;
+        private Dictionary<Point, BitmapSource> _mapTiles;
         private int _mapWidth;
         private int _mapHeight;
+        private bool _isInitialized;
 
-		public void LoadWorld(GameWorld gameWorld, Point startPoint, MapGraphicsTileSet mapGraphicsTileSet)
-		{
-			_gameWorld = gameWorld;
-			_currentTile = startPoint;
-			_tileSet = mapGraphicsTileSet.GetTileImages();           
-            _mapWidth = _gameWorld.GameMap.GetUpperBound(0);
-            _mapHeight = _gameWorld.GameMap.GetUpperBound(1);
-		}       
 
-		public GameWorld Gameworld
-		{
-			get
-			{
-				return _gameWorld;
-			}
-		}
+
+        public Point CurrentPointObject
+        {
+            get
+            {
+                return (Point)GetValue(CurrentPointCommandProperty);
+            }
+            set
+            {
+                SetValue(CurrentPointCommandProperty, value);
+                this.InvalidateVisual();
+            }
+        }
+        public GameWorld GameWorldObject
+        {
+            get
+            {
+                return (GameWorld)GetValue(GameWorldCommandProperty);
+            }
+            set
+            {
+                SetValue(GameWorldCommandProperty, value);
+            }
+        }
+        public MapGraphicsTileSet TileSetObject
+        {
+            get
+            {
+                return (MapGraphicsTileSet)GetValue(TileSetCommandProperty);
+            }   
+            set
+            {
+                SetValue(TileSetCommandProperty, value);
+            }
+        }    
+        
+        public int TilesWideObject
+        {
+            get 
+            {
+                return (int)GetValue(TilesWideCommandProperty);
+            }
+            set
+            {
+                SetValue(TilesWideCommandProperty, value);
+            }
+        }
+
+        public int TilesHighObject
+        {
+            get 
+            {
+                return (int)GetValue(TilesHighCommandProperty);
+            }
+            set
+            {
+                SetValue(TilesHighCommandProperty, value);
+            }
+        }
+        public static readonly DependencyProperty CurrentPointCommandProperty =
+        DependencyProperty.Register(
+            "CurrentPointObject",
+            typeof(Point),
+            typeof(MapCanvas),
+            new PropertyMetadata(new PropertyChangedCallback(OnPropertyChanges))
+            );
+
+        public static readonly DependencyProperty GameWorldCommandProperty =
+        DependencyProperty.Register(
+            "GameWorldObject",
+            typeof(GameWorld),
+            typeof(MapCanvas),
+            new PropertyMetadata(new PropertyChangedCallback(OnPropertyChanges))
+        );
+
+        public static readonly DependencyProperty TileSetCommandProperty =
+            DependencyProperty.Register(
+                "TileSetObject",
+                typeof(MapGraphicsTileSet),
+                typeof(MapCanvas),
+                 new PropertyMetadata(new PropertyChangedCallback(OnPropertyChanges))
+            );
+
+        public static readonly DependencyProperty TilesHighCommandProperty =
+            DependencyProperty.Register(
+                "TilesHighObject",
+                typeof(int),
+                typeof(MapCanvas)
+            );
+
+         public static readonly DependencyProperty TilesWideCommandProperty =
+            DependencyProperty.Register(
+                "TilesWideObject",
+                typeof(int),
+                typeof(MapCanvas)
+            );
+
+        private static void OnPropertyChanges(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            (obj as MapCanvas).InvalidateVisual();
+        }
 
 		protected override void OnRender(System.Windows.Media.DrawingContext dc)
 		{
 			base.OnRender(dc);
 
-			DrawTiles(dc);
+            if (GameWorldObject != null && TileSetObject != null)
+            {
+                if (!_isInitialized)
+                    Initialize();
+
+                DrawTiles(dc);
+            }			    
 		}
+
+        private void Initialize()
+        {            
+            _mapHeight = GameWorldObject.GameMap.GetLength(1);            
+            _mapWidth = GameWorldObject.GameMap.GetLength(0);            
+            _mapTiles = TileSetObject.GetTileImages();
+            _isInitialized = true;
+        }
         
 		private void DrawTiles(System.Windows.Media.DrawingContext dc)
-		{
-            _tilesWide = (int)(this.ActualWidth / 64) + 1;
-            _tilesHigh = (int)(this.ActualHeight / 64) + 1;
+		{ 
+            TilesWideObject = (int)(this.ActualWidth / 64) + 1;
+            TilesHighObject = (int)(this.ActualHeight / 64) + 1;
 
-			int startX = (int)_currentTile.X - (_tilesWide / 2);
-			int startY = (int)_currentTile.Y - (_tilesHigh / 2);
+			int startX = (int)CurrentPointObject.X - (TilesWideObject / 2);
+			int startY = (int)CurrentPointObject.Y - (TilesHighObject / 2);
 
             if (startX < 0)
                 startX = 0;
@@ -60,29 +159,29 @@ namespace DotNetFish.Wpf.LevelDesigner
             if (startY < 0)
                 startY = 0;
 
-            int endX = startX + _tilesWide;
-            int endY = startY + _tilesHigh;
+            int endX = startX + TilesWideObject;
+            int endY = startY + TilesHighObject;
 
             if (endX > _mapWidth)
 			{
                 endX = _mapWidth;
-				startX = endX - _tilesWide;
+				startX = endX - TilesWideObject;
 			}
 			else if (startX < 0)
 			{
 				startX = 0;
-				endX = _tilesWide;
+				endX = TilesWideObject;
 			}
 
             if (endY > _mapHeight)
 			{
                 endY = _mapHeight;
-				startY = endY - _tilesHigh;
+				startY = endY - TilesHighObject;
 			}
 			else if (startY < 0)
 			{
 				startY = 0;
-				endY = _tilesHigh;
+				endY = TilesHighObject;
 			}                
 
             int CountX = 0;
@@ -92,7 +191,7 @@ namespace DotNetFish.Wpf.LevelDesigner
 			{
 			    for (int y = startY; y < endY; y++)
 			    {
-			        dc.DrawImage(_tileSet[_gameWorld.GameMap[x,y].GraphicsTile.TileStartPoint],new Rect(CountX * 64,CountY*64,64,64));
+			        dc.DrawImage(_mapTiles[GameWorldObject.GameMap[x,y].GraphicsTile.TileStartPoint],new Rect(CountX * 64,CountY*64,64,64));
 #if DEBUG
 					dc.DrawText(
 						new System.Windows.Media.FormattedText(
@@ -114,19 +213,5 @@ namespace DotNetFish.Wpf.LevelDesigner
 
 
 		}
-
-        internal void MoveCanvas(System.Windows.Input.Key key)
-        {
-            if (key == Key.Down && (int)_currentTile.Y + (_tilesHigh / 2) + 1 < _mapHeight)			
-				_currentTile.Y+=1;
-            if (key == Key.Up && (int)_currentTile.Y - (_tilesHigh / 2) - 1 >= 0)
-				_currentTile.Y-=1;
-			if (key == Key.Left && (int)_currentTile.X - (_tilesWide / 2) -1 >= 0)
-				_currentTile.X-=1;
-            if (key == Key.Right && (int)_currentTile.X + (_tilesWide / 2) + 1 < _mapWidth)
-				_currentTile.X+=1;			
-			
-			this.InvalidateVisual();
-        }
     }
 }

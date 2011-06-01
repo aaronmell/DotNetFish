@@ -11,7 +11,8 @@
     <RootNamespace>DotNetFish.Wpf.LevelDesigner</RootNamespace>
     <AssemblyName>LevelDesigner</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -36,6 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4">
+      <HintPath>..\..\..\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF4">
+      <HintPath>..\..\..\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
     <Reference Include="GMap.NET.Core">
       <HintPath>..\Gmap\GMap.NET.Core.dll</HintPath>
     </Reference>
@@ -44,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,20 +70,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MapCanvas.cs" />
+    <Compile Include="ViewModel\BaseEditorViewModel.cs" />
     <Compile Include="ViewModel\EditLevelViewModel.cs" />
     <Compile Include="ViewModel\LoadWindowViewModel.cs" />
-    <Compile Include="ViewModel\SelectMapRegionViewModel.cs" />
-    <Compile Include="Windows\EditLevel.xaml.cs">
+    <Compile Include="View\EditLevel.xaml.cs">
       <DependentUpon>EditLevel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SelectMapRegion.xaml.cs">
+    <Compile Include="View\SelectMapRegion.xaml.cs">
       <DependentUpon>SelectMapRegion.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\EditLevel.xaml">
+    <Page Include="View\EditLevel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LoadWindow.xaml">
+    <Page Include="View\LoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,10 +91,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\LoadWindow.xaml.cs">
+    <Compile Include="View\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\SelectMapRegion.xaml">
+    <Page Include="View\SelectMapRegion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,10 +125,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseMvvm\BaseMvvm.csproj">
-      <Project>{CDCBCCD6-330C-40B9-98BA-FFCF3EE4858F}</Project>
-      <Name>BaseMvvm</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameObjects\GameObjects.csproj">
       <Project>{692D0A8C-CC5E-4573-8F40-40D25AA85F31}</Project>
       <Name>GameObjects</Name>

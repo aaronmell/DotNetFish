@@ -1,9 +1,0 @@
-﻿<Window x:Class="DotNetFish.Wpf.LevelDesigner.EditLevel"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:src="clr-namespace:DotNetFish.Wpf.LevelDesigner"
-        Title="EditLevel" Height="768" Width="1024">
-    <Grid>
-		<src:MapCanvas x:Name="mapCanvas" Margin="12,29,198,173"></src:MapCanvas>		
-	</Grid>
-</Window>

@@ -41,6 +41,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.WPF4">
+      <HintPath>..\..\..\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WPF4\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,10 +101,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseMvvm\BaseMvvm.csproj">
-      <Project>{CDCBCCD6-330C-40B9-98BA-FFCF3EE4858F}</Project>
-      <Name>BaseMvvm</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameObjects\GameObjects.csproj">
       <Project>{692D0A8C-CC5E-4573-8F40-40D25AA85F31}</Project>
       <Name>GameObjects</Name>

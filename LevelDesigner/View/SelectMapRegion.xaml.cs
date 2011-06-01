@@ -21,6 +21,8 @@ namespace DotNetFish.Wpf.LevelDesigner
     /// <summary>
     /// Interaction logic for SelectMapRegion.xaml
     /// </summary>
+    /// Unforunately this view cannot be convereted into the MVVM pattern.
+    /// This is because the Gmapcontrol does not support it. 
     public partial class SelectMapRegion : Window
     {
         private PointLatLng _startPosition;

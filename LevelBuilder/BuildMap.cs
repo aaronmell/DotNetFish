@@ -29,8 +29,7 @@ namespace DotNetFish.LevelBuilder
         private List<PointLatLng> _points;
 		private GameWorld _gameWorld;
 		private MapGraphicsTileSet _mapGraphicsTileSet;
-		private int _gameWorldWidth;
-		private int _gameWorldHeight;
+		
         private int _gmapTilesProcessed;
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
 		Dictionary<Point, MapGraphicsTile> _errorTiles;
@@ -102,9 +101,7 @@ namespace DotNetFish.LevelBuilder
 			GPoint gmapStartTile = getGmapStartTile(gPoints);
 			GPoint gmapEndTile = getGmapEndTile(gPoints);
 
-            _gameWorldWidth = (gmapEndTile.X - gmapStartTile.X + 1) * 16 * 16;
-            _gameWorldHeight = (gmapEndTile.Y - gmapStartTile.Y + 1) * 16 * 16;
-			_gameWorld.GameMap = new MapTile[_gameWorldWidth, _gameWorldHeight];
+			_gameWorld.GameMap = new MapTile[(gmapEndTile.X - gmapStartTile.X + 1) * 16 * 16, (gmapEndTile.Y - gmapStartTile.Y + 1) * 16 * 16];
 
 #if DEBUG
 			if (!Directory.Exists("C:\\tiles"))
@@ -899,13 +896,13 @@ namespace DotNetFish.LevelBuilder
 			//right Side
 			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 3 && x.EdgePosition < 7))
 				mapGraphicsTile.Value.RightEdgeType = EdgeType.Both;
-			else if (mapGraphicsTile.Key.X + 1 < _gameWorldWidth && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y].GraphicsTile != null)
+			else if (mapGraphicsTile.Key.X + 1 < GameWorld.GameMapHeight && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y].GraphicsTile != null)
 				mapGraphicsTile.Value.RightEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X + 1, mapGraphicsTile.Key.Y].GraphicsTile.LeftEdgeType;
 
 			//Bottom Side
 			if (mapGraphicsTile.Value.ShoreEdgePoints.Exists(x => x.EdgePosition > 0 && x.EdgePosition < 4))
 				mapGraphicsTile.Value.BottomEdgeType = EdgeType.Both;
-			else if (mapGraphicsTile.Key.Y + 1 < _gameWorldHeight && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1].GraphicsTile != null)
+			else if (mapGraphicsTile.Key.Y + 1 < GameWorld.GameMapWidth && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1] != null && _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1].GraphicsTile != null)
 				mapGraphicsTile.Value.BottomEdgeType = _gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y + 1].GraphicsTile.TopEdgeType;
 		}	
 

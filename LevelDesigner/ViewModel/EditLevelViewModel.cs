@@ -13,15 +13,11 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
         public EditLevelViewModel(GameWorld gameWorld, Point currentPoint)
         {
             CurrentPoint = currentPoint;
-            GameWorld = gameWorld;
-            _gameWorldHeight = gameWorld.GameMap.GetLength(0);
-            _gameWorldWidth = gameWorld.GameMap.GetLength(1);
+            GameWorld = gameWorld;            
             MapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.xml");
         }
 
-        private RelayCommand<KeyEventArgs> _onKeyDown;
-        private int _gameWorldHeight;
-        private int _gameWorldWidth;
+        private RelayCommand<KeyEventArgs> _onKeyDown;        
 
         public ICommand OnKeyDown
         {
@@ -48,13 +44,13 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
 
         private void MoveCanvas(Key key)
         {
-            if (key == Key.Down && (int)CurrentPoint.Y + (MapCanvasTilesHeight / 2) + 1 < _gameWorldHeight)
+            if (key == Key.Down && (int)CurrentPoint.Y + (MapCanvasTilesHeight / 2) + 1 < GameWorld.GameMapHeight)
                 CurrentPoint = new Point(CurrentPoint.X, CurrentPoint.Y + 1);                
             if (key == Key.Up && (int)CurrentPoint.Y - (MapCanvasTilesHeight / 2) - 1 >= 0)
                 CurrentPoint = new Point(CurrentPoint.X, CurrentPoint.Y - 1);
 			if (key == Key.Left && (int)CurrentPoint.X - (MapCanvasTilesWidth / 2) -1 >= 0)
                 CurrentPoint = new Point(CurrentPoint.X - 1, CurrentPoint.Y);
-            if (key == Key.Right && (int)CurrentPoint.X + (MapCanvasTilesWidth / 2) + 1 < _gameWorldWidth)
+            if (key == Key.Right && (int)CurrentPoint.X + (MapCanvasTilesWidth / 2) + 1 < GameWorld.GameMapWidth)
                 CurrentPoint = new Point(CurrentPoint.X + 1, CurrentPoint.Y);
         }
 	}

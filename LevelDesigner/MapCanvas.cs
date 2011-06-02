@@ -16,9 +16,7 @@ namespace DotNetFish.Wpf.LevelDesigner
 	{ 
         //private int _tilesWide;
         //private int _tilesHigh;
-        private Dictionary<Point, BitmapSource> _mapTiles;
-        private int _mapWidth;
-        private int _mapHeight;
+        private Dictionary<Point, BitmapSource> _mapTiles;        
         private bool _isInitialized;
 
 
@@ -81,6 +79,7 @@ namespace DotNetFish.Wpf.LevelDesigner
                 SetValue(TilesHighCommandProperty, value);
             }
         }
+        
         public static readonly DependencyProperty CurrentPointCommandProperty =
         DependencyProperty.Register(
             "CurrentPointObject",
@@ -138,9 +137,7 @@ namespace DotNetFish.Wpf.LevelDesigner
 		}
 
         private void Initialize()
-        {            
-            _mapHeight = GameWorldObject.GameMap.GetLength(1);            
-            _mapWidth = GameWorldObject.GameMap.GetLength(0);            
+        {           
             _mapTiles = TileSetObject.GetTileImages();
             _isInitialized = true;
         }
@@ -162,9 +159,9 @@ namespace DotNetFish.Wpf.LevelDesigner
             int endX = startX + TilesWideObject;
             int endY = startY + TilesHighObject;
 
-            if (endX > _mapWidth)
+            if (endX > GameWorldObject.GameMapWidth)
 			{
-                endX = _mapWidth;
+                endX = GameWorldObject.GameMapWidth;
 				startX = endX - TilesWideObject;
 			}
 			else if (startX < 0)
@@ -173,9 +170,9 @@ namespace DotNetFish.Wpf.LevelDesigner
 				endX = TilesWideObject;
 			}
 
-            if (endY > _mapHeight)
+            if (endY > GameWorldObject.GameMapHeight)
 			{
-                endY = _mapHeight;
+                endY = GameWorldObject.GameMapHeight;
 				startY = endY - TilesHighObject;
 			}
 			else if (startY < 0)

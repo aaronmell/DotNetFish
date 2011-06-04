@@ -5,21 +5,57 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
         xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-        Title="EditLevel" Height="768" Width="1024">
+        Title="EditLevel" Height="768" Width="1024">    
     <Grid>
-		<src:MapCanvas 
-            x:Name="mapCanvas" 
-            Margin="12,29,198,173"            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="178"/>
+            <RowDefinition Height="422" />
+            <RowDefinition Height="29*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="42*" />
+        </Grid.ColumnDefinitions>
+        <ToolBarTray 
+            DockPanel.Dock="Left"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">            
+            <!--<ToolBar Name="ErrorTiles">
+                <Button>Next Error</Button>
+                <Button>Last Error</Button>                
+            </ToolBar>-->
+        </ToolBarTray>
+		<src:MainEditorCanvas 
+            x:Name="mapCanvas"                       
             GameWorldObject="{Binding Path=GameWorld, Mode=TwoWay}"
             CurrentPointObject="{Binding Path=CurrentPoint, Mode=TwoWay}"
             TileSetObject="{Binding Path=MapGraphicsTileSet, Mode=TwoWay}"
             TilesWideObject="{Binding Path=MapCanvasTilesWidth, Mode=TwoWay}"
-            TilesHighObject="{Binding Path=MapCanvasTilesHeight, Mode=TwoWay}"
-            />		
-	</Grid>
+            TilesHighObject="{Binding Path=MapCanvasTilesHeight, Mode=TwoWay}" 
+            Width="700"                   
+            Grid.Row="1" Grid.RowSpan="2"></src:MainEditorCanvas>
+        <src:SmallMapCanvas
+            x:Name="SmallMapCanvas"
+            GameWorldObject="{Binding Path=GameWorld, Mode=TwoWay}"
+            CurrentPointObject="{Binding Path=CurrentPoint, Mode=TwoWay}"
+            TileSetObject="{Binding Path=MapGraphicsTileSet, Mode=TwoWay}"
+            TilesWideObject="{Binding Path=MapCanvasTilesWidth, Mode=TwoWay}"
+            TilesHighObject="{Binding Path=MapCanvasTilesHeight, Mode=TwoWay}" 
+            Grid.Row="1"
+            Grid.Column="2"
+            Height="250" 
+            VerticalAlignment="Top" Grid.RowSpan="2" />
+    </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="KeyDown">
             <cmd:EventToCommand Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="KeyUp">
+            <cmd:EventToCommand Command="{Binding OnKeyUp}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 </Window>

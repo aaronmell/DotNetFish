@@ -69,7 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MapCanvas.cs" />
+    <Compile Include="MainEditorCanvas.cs" />
+    <Compile Include="SmallMapCanvas.cs" />
     <Compile Include="ViewModel\BaseEditorViewModel.cs" />
     <Compile Include="ViewModel\EditLevelViewModel.cs" />
     <Compile Include="ViewModel\LoadWindowViewModel.cs" />

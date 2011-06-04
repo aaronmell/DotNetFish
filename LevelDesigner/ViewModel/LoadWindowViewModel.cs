@@ -75,6 +75,7 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
                 Point currentPoint = new Point(gameWorld.GameMap.GetLength(0) / 2, gameWorld.GameMap.GetLength(1) / 2);              
                 editLevel.DataContext = new EditLevelViewModel(gameWorld,currentPoint);
 				editLevel.Show();
+                this.OnRequestClose();
 			}
 		}
 

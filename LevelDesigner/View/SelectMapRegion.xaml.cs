@@ -15,6 +15,7 @@ using GMap.NET.WindowsPresentation;
 using DotNetFish.LevelBuilder;
 using System.ComponentModel;
 using DotNetFish.GameObjects;
+using DotNetFish.Wpf.LevelDesigner.ViewModel;
 
 namespace DotNetFish.Wpf.LevelDesigner
 {
@@ -116,9 +117,11 @@ namespace DotNetFish.Wpf.LevelDesigner
              {
 				 GameWorld gameWorld = (GameWorld)e.Result;
 
-				 DotNetFish.LevelBuilder.FileIO.SaveMap(_filename, gameWorld) ;
-				 EditLevel editLevel = new EditLevel(gameWorld);
-				 editLevel.Show();
+                 EditLevel editLevel = new EditLevel(gameWorld);
+                 Point currentPoint = new Point(gameWorld.GameMap.GetLength(0) / 2, gameWorld.GameMap.GetLength(1) / 2);
+                 editLevel.DataContext = new EditLevelViewModel(gameWorld, currentPoint);
+                 editLevel.Show();
+                 this.Close();
              }
              status.Content = "";
         }

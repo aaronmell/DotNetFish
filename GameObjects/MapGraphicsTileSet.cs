@@ -133,9 +133,9 @@ namespace DotNetFish.GameObjects
 			return new MapTile(matchingTiles[rnd.Next(0, matchingTiles.Count)]);
 		}
 
-		public Dictionary<System.Windows.Point,BitmapSource> GetTileImages()
+		public Dictionary<System.Windows.Point,CachedBitmap> GetTileImages()
 		{
-			Dictionary<System.Windows.Point, BitmapSource> retval = new Dictionary<System.Windows.Point, BitmapSource>();
+			Dictionary<System.Windows.Point, CachedBitmap> retval = new Dictionary<System.Windows.Point, CachedBitmap>();
 			
 			if (_mapTiles.Count == 0)
 			{
@@ -144,9 +144,11 @@ namespace DotNetFish.GameObjects
 			BitmapImage map = new BitmapImage(new Uri(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.png"));
 
 			foreach (MapGraphicsTile tile in _mapTiles)
-			{
+			{            
 				BitmapSource bmpSource = new CroppedBitmap(map, new Int32Rect((int)tile.TileStartPoint.X, (int)tile.TileStartPoint.Y, 64, 64));
-				retval.Add(tile.TileStartPoint, bmpSource);
+
+                CachedBitmap cachedBitmap = new CachedBitmap(bmpSource, BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnDemand);
+                retval.Add(tile.TileStartPoint, cachedBitmap);
 			}
 
 			return retval;

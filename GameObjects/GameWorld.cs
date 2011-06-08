@@ -69,5 +69,17 @@ namespace DotNetFish.GameObjects
 			info.AddValue("GameMap", GameMap);
 			info.AddValue("ErrorTiles", ErrorTiles);
 		}
+
+        public void CreateTileLists()
+        {
+            for (int x = 0; x < GameMapWidth; x++)
+            {
+                for (int y = 0; y < GameMapHeight; y++)
+                {
+                    if (GameMap[x, y].GraphicsTile.TileType == Enums.TileType.Error)
+                        ErrorTiles.Add(new Point(x, y));
+                }
+            }
+        }
     }
 }

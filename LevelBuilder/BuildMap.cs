@@ -32,7 +32,6 @@ namespace DotNetFish.LevelBuilder
 		
         private int _gmapTilesProcessed;
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
-		Dictionary<Point, MapGraphicsTile> _errorTiles;
         Dictionary<Point, MapGraphicsTile> _noNeighborTiles;
        
 
@@ -86,8 +85,7 @@ namespace DotNetFish.LevelBuilder
 			GMaps.Instance.ImageProxy = new WindowsFormsImageProxy();
 
 			_edgeTiles = new Dictionary<Point, MapGraphicsTile>();
-            _noNeighborTiles = new Dictionary<Point, MapGraphicsTile>();
-			_errorTiles = new Dictionary<Point, MapGraphicsTile>();
+            _noNeighborTiles = new Dictionary<Point, MapGraphicsTile>();			
             _gmapTilesProcessed = 0;
 
 			//Convert the PointLatLng to GPoints
@@ -117,6 +115,7 @@ namespace DotNetFish.LevelBuilder
 #endif
             			
 			ProcessEdgeTiles(_edgeTiles);
+            GameWorld.CreateTileLists();
 			return false;
 		}
 
@@ -614,17 +613,7 @@ namespace DotNetFish.LevelBuilder
 				MapTile mapTile = _mapGraphicsTileSet.GetMatchingTile(mapGraphicsTile.Value);
 
 				if (mapTile.GraphicsTile.TileType != TileType.Error)
-					_gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = mapTile;
-				else
-				{
-					if (_errorTiles.ContainsKey(mapGraphicsTile.Key))
-					{
-						_gameWorld.ErrorTiles.Add(mapGraphicsTile.Key);
-						_gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = new MapTile(_mapGraphicsTileSet.ErrorTile);
-					}
-					else
-						_errorTiles.Add(mapGraphicsTile.Key, mapGraphicsTile.Value);
-				}
+					_gameWorld.GameMap[mapGraphicsTile.Key.X, mapGraphicsTile.Key.Y] = mapTile;				
 			}
 		}
 

@@ -24,10 +24,16 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3">            
-            <!--<ToolBar Name="ErrorTiles">
-                <Button>Next Error</Button>
-                <Button>Last Error</Button>                
-            </ToolBar>-->
+            <ToolBar Name="ErrorTiles">
+                <Button
+                    Command="{Binding Path=NextErrorTile}">
+                    Next Error
+                </Button>
+                <Button
+                    Command="{Binding Path=LastErrorTile}">
+                    Last Error
+                </Button>                
+            </ToolBar>
         </ToolBarTray>
 		<src:MainEditorCanvas 
             x:Name="mapCanvas"                       

@@ -15,12 +15,16 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
             CurrentPoint = currentPoint;
             GameWorld = gameWorld;            
             MapGraphicsTileSet = new MapGraphicsTileSet(System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\MapTiles.xml");
+            _errorTilePosition = -1;
         }
 
         private RelayCommand<KeyEventArgs> _onKeyDown;
         private RelayCommand<KeyEventArgs> _onKeyUp;
+        private RelayCommand _nextErrorTile;
+        private RelayCommand _lastErrorTile;
         private bool _isShiftKeyDown;
         private bool _isCtrlKeyDown;
+        private int _errorTilePosition;
 
         public ICommand OnKeyDown
         {
@@ -44,9 +48,43 @@ namespace DotNetFish.Wpf.LevelDesigner.ViewModel
             }
         }
 
+        public ICommand NextErrorTile
+        {
+            get
+            {
+                if (_nextErrorTile == null)
+                    _nextErrorTile= new RelayCommand(() => CycleErrorTiles(1));
+
+                return _nextErrorTile;
+            }
+        }
+
+        public ICommand LastErrorTile
+        {
+            get
+            {
+                if (_lastErrorTile == null)
+                    _lastErrorTile = new RelayCommand(() => CycleErrorTiles(-1));
+
+                return _lastErrorTile;
+            }
+        }
+
+        private void CycleErrorTiles(int direction)
+        {
+            _errorTilePosition += direction;
+
+            if (_errorTilePosition < 0)
+                _errorTilePosition = GameWorld.ErrorTiles.Count - 1;
+
+            if (_errorTilePosition > GameWorld.ErrorTiles.Count - 1)
+                _errorTilePosition = 0;
+
+            CurrentPoint = new Point(GameWorld.ErrorTiles[_errorTilePosition].X,GameWorld.ErrorTiles[_errorTilePosition].Y);
+        }
+
         public int MapCanvasTilesWidth {get; set;}
         public int MapCanvasTilesHeight { get; set; }
-
 
         private void OnKeyDownCommand(KeyEventArgs e)
         {

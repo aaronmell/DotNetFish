@@ -77,9 +77,33 @@ namespace DotNetFish.GameObjects
                 for (int y = 0; y < GameMapHeight; y++)
                 {
                     if (GameMap[x, y].GraphicsTile.TileType == Enums.TileType.Error)
+                    {
                         ErrorTiles.Add(new Point(x, y));
+                        continue;
+                    }
+                    else if (GameMap[x, y].GraphicsTile.TileType == Enums.TileType.Edge)
+                    {
+                        int numberOfEdgeConnections = 0;
+
+                        //Check Top Tile
+                        if (x > 0 && GameMap[x - 1, y].GraphicsTile.TileType == Enums.TileType.Edge)
+                            numberOfEdgeConnections++;
+
+                        //Check Left TIle
+                        if (y > 0 && GameMap[x, y - 1].GraphicsTile.TileType == Enums.TileType.Edge)
+                            numberOfEdgeConnections++;
+                        if (x < GameMapWidth - 1 && GameMap[x + 1, y].GraphicsTile.TileType == Enums.TileType.Edge)
+                            numberOfEdgeConnections++;
+
+                        if (y < GameMapHeight - 1 && GameMap[x, y + 1].GraphicsTile.TileType == Enums.TileType.Edge)
+                            numberOfEdgeConnections++;
+
+                        //Add the tile that doesnt have 2 edge connections
+                        if (numberOfEdgeConnections != 2)
+                            ErrorTiles.Add(new Point(x, y));
+                    }                    
                 }
             }
-        }
+        }  
     }
 }

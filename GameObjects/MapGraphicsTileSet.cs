@@ -22,7 +22,8 @@ namespace DotNetFish.GameObjects
 		private string _filename;		
 		private MapGraphicsTile _waterTile;
         private MapGraphicsTile _landTile;
-		private MapGraphicsTile _errorTile;		
+		private MapGraphicsTile _errorTile;
+        private MapGraphicsTile _edgePlaceholder;
 
 		public List<MapGraphicsTile> MapTiles
 		{
@@ -36,7 +37,7 @@ namespace DotNetFish.GameObjects
 		{
 			get
 			{
-				if (_errorTile == null)
+				if (_waterTile == null)
 					SetSpecialTiles();
 
 				return _waterTile;
@@ -47,7 +48,7 @@ namespace DotNetFish.GameObjects
 		{
 			get
 			{
-				if (_errorTile == null)
+				if (_landTile == null)
 					SetSpecialTiles();
 
 				return _landTile;
@@ -63,6 +64,18 @@ namespace DotNetFish.GameObjects
 				return _errorTile;
 			}
 		}
+
+        public MapGraphicsTile EdgePlaceHolder
+        {
+            get
+            {
+
+                if (_edgePlaceholder == null)
+                    SetSpecialTiles();
+                return _edgePlaceholder;
+            }
+        }
+
 
 		public MapGraphicsTileSet(string filename)
 		{
@@ -80,6 +93,8 @@ namespace DotNetFish.GameObjects
 				throw new Exception("TileSet Does not have a Land Tile");
 			if (!MapTiles.Exists(instance => instance.TileType == TileType.Water))
 				throw new Exception("TileSet Does not have a Water Tile");
+            if (!MapTiles.Exists(instance => instance.TileType == TileType.EdgePlaceHolder))
+                throw new Exception("TileSet Does not have a Blank Tile");
 
 			_errorTile = _mapTiles.First(instance => instance.TileType == TileType.Error);
 			_landTile = _mapTiles.First(instance => instance.TileType == TileType.Land);
@@ -95,6 +110,12 @@ namespace DotNetFish.GameObjects
 			_waterTile.RightEdgeType = EdgeType.Water;
 			_waterTile.TopEdgeType = EdgeType.Water;
 			_waterTile.BottomEdgeType = EdgeType.Water;
+
+            _edgePlaceholder = _mapTiles.First(instance => instance.TileType == TileType.EdgePlaceHolder);
+            _edgePlaceholder.LeftEdgeType = EdgeType.Undefined;
+            _edgePlaceholder.RightEdgeType = EdgeType.Undefined;
+            _edgePlaceholder.TopEdgeType = EdgeType.Undefined;
+            _edgePlaceholder.BottomEdgeType = EdgeType.Undefined;
 		}
 
 		public static void SaveTileSet(List<MapGraphicsTile> mapGraphicsTile, string filename)

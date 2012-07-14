@@ -12,6 +12,7 @@ namespace DotNetFish.GameObjects.Enums
 		Water = 3,
 		Land = 4,
 		Error = 5,
-		Blank = 6
+		Blank = 6,
+        EdgePlaceHolder = 7,
 	}
 }

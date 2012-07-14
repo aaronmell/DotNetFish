@@ -136,7 +136,8 @@ namespace DotNetFish.Wpf.MapTileBuilder.ViewModel
 						TileType.Land,
 						TileType.Water,
 						TileType.Error,
-						TileType.Blank
+						TileType.Blank,
+                        TileType.EdgePlaceHolder
 					};
 				return _tileTypes;
 			}

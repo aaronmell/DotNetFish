@@ -2670,7 +2670,7 @@
   </MapGraphicsTile>
   <MapGraphicsTile>
     <ShoreEdgePoints />
-    <TileType>Blank</TileType>
+    <TileType>EdgePlaceHolder</TileType>
     <TileStartPoint>
       <X>448</X>
       <Y>1088</Y>

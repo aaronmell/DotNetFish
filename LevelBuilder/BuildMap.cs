@@ -17,6 +17,12 @@ using System.Collections;
 
 namespace DotNetFish.LevelBuilder
 {
+    /// <summary>
+    /// This class is responsible for actually building the map. These are the steps that it takes to build the map
+    /// 1. Convert the map into three different tile types (Land, Water, Edge)
+    /// 2. After converting the map go back over all the edge tiles and set them all up. 
+    /// 3. IF any tiles cannot find an edge, then set them to an error tile state.
+    /// </summary>
     public class BuildMap
     {
 		//The default size of the tile we are checking from gmap. we are taking the 16x16 tile and replacing
@@ -34,7 +40,9 @@ namespace DotNetFish.LevelBuilder
 		Dictionary<Point,MapGraphicsTile> _edgeTiles;
         Dictionary<Point, MapGraphicsTile> _noNeighborTiles;
        
-
+        /// <summary>
+        /// The Backgroundworker object used when this class is invoked. 
+        /// </summary>
         public BackgroundWorker BackgroundWorker
         {
             get
@@ -43,6 +51,9 @@ namespace DotNetFish.LevelBuilder
             }
         }
 
+        /// <summary>
+        /// The gameworld created by the BuildMap Function
+        /// </summary>
         public GameWorld GameWorld
         {
 			get
@@ -51,6 +62,10 @@ namespace DotNetFish.LevelBuilder
 			}
         }
 
+        /// <summary>
+        /// Contstructor Method
+        /// </summary>
+        /// <param name="points">A list of points used to determine where to grab tiles from</param>
         public BuildMap(List<PointLatLng> points)
         {
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -72,7 +87,7 @@ namespace DotNetFish.LevelBuilder
 		/// <summary>
 		/// Main function called by the background worker.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>a value indicating if the processing was successful</returns>
 		private bool Main()
 		{
 			//Gmap Setup stuff
@@ -101,7 +116,9 @@ namespace DotNetFish.LevelBuilder
 
 			_gameWorld.GameMap = new MapTile[(gmapEndTile.X - gmapStartTile.X + 1) * 16 * 16, (gmapEndTile.Y - gmapStartTile.Y + 1) * 16 * 16];
 
+       
 #if DEBUG
+            //In debug mode we want to see each tile we are processing. 
 			if (!Directory.Exists("C:\\tiles"))
 				Directory.CreateDirectory("C:\\tiles");
 
@@ -109,17 +126,26 @@ namespace DotNetFish.LevelBuilder
 			{
 				File.Delete(s);
 			}
+#endif
 
+            //If the loop is not successful then return true. 
             if (LoopThroughTiles(gmapStartTile,gmapEndTile,new Point(0,0),18))
                 return true;
-#endif
-            			
-			ProcessEdgeTiles(_edgeTiles);
+
+
+            ProcessEdgeTiles(_edgeTiles);
             GameWorld.CreateTileLists();
 			return false;
 		}
 
-        //Recursive Function
+        /// <summary>
+        /// Interates over the tiles on the map.
+        /// </summary>
+        /// <param name="gmapStartTile">The startTile point</param>
+        /// <param name="gmapEndTile">The endTile point</param>
+        /// <param name="absolutePosition">the current absolute position on the map. </param>
+        /// <param name="zoomLevel">the number of levels we are zoomed in</param>
+        /// <returns>a value indicating if the tiling was successful.</returns>
         private bool LoopThroughTiles(GPoint gmapStartTile, GPoint gmapEndTile ,Point absolutePosition, int zoomLevel)
         {
             int currentOffset = getOffSet(zoomLevel);
@@ -149,7 +175,7 @@ namespace DotNetFish.LevelBuilder
                             using (Bitmap bitmap = new Bitmap(tile.Img))
                             {
 #if DEBUG
-                                //bitmap.Save("C:\\tiles\\Largetile" + currentAbsolutePosition.X + "-" + currentAbsolutePosition.Y + "ZoomLevel" + zoomLevel + "Gmap Coordinates " + gmapStartTile.X + x + "-" + gmapStartTile.Y + y + ".jpg");
+                                bitmap.Save("C:\\tiles\\Largetile" + currentAbsolutePosition.X + "-" + currentAbsolutePosition.Y + "ZoomLevel" + zoomLevel + "Gmap Coordinates " + gmapStartTile.X + x + "-" + gmapStartTile.Y + y + ".jpg");
 
 #endif
                                 bool hasTransition = CheckGmapTilesForTransitions(x, y, bitmap, zoomLevel, currentAbsolutePosition);
@@ -179,11 +205,11 @@ namespace DotNetFish.LevelBuilder
 
 
 		/// <summary>
-		/// Processes all of the Large Gmap Tiles
+		/// Processes the gmap tile. splits the gmap tile up into smaller tiles and then checks each tile for the transitions.
 		/// </summary>
-		/// <param name="gmapX"></param>
-		/// <param name="gmapY"></param>
-		/// <param name="gmapBitmap"></param>
+		/// <param name="gmapX">The google maps X coordinates</param>
+		/// <param name="gmapY">The google maps Y coordinates</param>
+		/// <param name="gmapBitmap">The bitmap we are processing</param>
 		private void ProcessGmapTiles(int gmapX, int gmapY, Bitmap gmapBitmap)
 		{ 
 			//The bitmap coming in as 256x256 This needs to be broken down further into 16x16 sized
@@ -197,7 +223,7 @@ namespace DotNetFish.LevelBuilder
 						using (Graphics gfx = Graphics.FromImage(smallBmp))
 							gfx.DrawImage(gmapBitmap,new Rectangle(0,0,16,16),tileX * _graphicsTileSize,tileY * _graphicsTileSize,16,16,GraphicsUnit.Pixel);
 //#if DEBUG
-						//smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * _graphicsTileSize) + tileX) + "-" + ((gmapY * _graphicsTileSize) + tileY) + ".jpg");
+						smallBmp.Save("C:\\tiles\\smalltile" + ((gmapX * _graphicsTileSize) + tileX) + "-" + ((gmapY * _graphicsTileSize) + tileY) + ".jpg");
 //#endif
 						BmpData bmpData = new BmpData(smallBmp, _graphicsTileSize);						
 						
@@ -211,10 +237,10 @@ namespace DotNetFish.LevelBuilder
         /// <summary>
         /// Detemines if a GmapTile contains a transition in it. 
         /// </summary>
-        /// <param name="gmapX"></param>
-        /// <param name="gmapY"></param>
-        /// <param name="gmapBitmap"></param>
-        /// <returns></returns>
+        /// <param name="gmapX">The google maps X coordinates</param>
+        /// <param name="gmapY">The google maps Y coordinates</param>
+        /// <param name="gmapBitmap">The bitmap we are processing</param>
+        /// <returns>a value indicating if a tile has a transition in it. </returns>
         private bool CheckGmapTilesForTransitions(int gmapX, int gmapY, Bitmap gmapBitmap, int zoomLevel, Point currentAbsolutePosition)
         {
             int offset = getOffSet(zoomLevel);
@@ -267,9 +293,9 @@ namespace DotNetFish.LevelBuilder
 		/// Processes all of the Tiles and determines if they are an edge or not. Edgetiles get added to the list, and the 
 		/// other tiles get water / land added to them. 
 		/// </summary>
-		/// <param name="bmpData"></param>
-		/// <param name="gameWorldX"></param>
-		/// <param name="gameWorldY"></param>		
+		/// <param name="bmpData">The bmp data we arew processing</param>
+		/// <param name="gameWorldX">The game's x coordinate</param>
+		/// <param name="gameWorldY">The game's y coordinate</param>		
 		private void ProcessTile(BmpData bmpData, int gameWorldX, int gameWorldY)
 		{
 			bool hasWater = false;
@@ -282,8 +308,8 @@ namespace DotNetFish.LevelBuilder
 				//We generate the edge connections for each tile just like they are by themselves.
 				//After all of the tiles are processed we will do a second pass to ensure everything is connected.
 				MapGraphicsTile mapGraphicsTile = new MapGraphicsTile();
-				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(mapGraphicsTile);
-				mapGraphicsTile.TileType = TileType.Edge;				
+				_gameWorld.GameMap[gameWorldX, gameWorldY] = new MapTile(_mapGraphicsTileSet.EdgePlaceHolder);
+				mapGraphicsTile.TileType = TileType.EdgePlaceHolder;				
 				_edgeTiles.Add(new Point(gameWorldX, gameWorldY), mapGraphicsTile);
 			}
 				
@@ -334,7 +360,7 @@ namespace DotNetFish.LevelBuilder
                 if (NumberOfSidesWithConnections(mapGraphicsTile.Value) < 2)
                 {
                     CalculateTilePath(mapGraphicsTile);
-                }                
+                }
             }
 		}
 
@@ -564,7 +590,7 @@ namespace DotNetFish.LevelBuilder
 		}
 
 		/// <summary>
-		/// Generates the tiles that occur along a path that has been found between two tiles that do not connecte.
+		/// Generates the tiles that occur along a path that has been found between two tiles that do not connect.
 		/// </summary>
 		/// <param name="bestPath"></param>
 		private void BuildPath(TilePath bestPath)
@@ -940,15 +966,21 @@ namespace DotNetFish.LevelBuilder
 		/// <param name="color"></param>
 		/// <returns></returns>
 		private bool IsWater(Color color)
-		{		
-			if (color.R == 153 && color.B == 204 && color.G == 179 ||
-				color.R == 175 && color.B == 207 && color.G == 189||
-				color.R == 196 && color.B == 210 && color.G == 204||
-				color.R == 217 && color.B == 217 && color.G == 217)
-				return true;
+		{				
+            if ((IntInRange(color.R,153,15) && IntInRange(color.B,204,15) && IntInRange(color.G,179,15)) ||
+               (IntInRange(color.R,175,15) && IntInRange(color.B,207,15) && IntInRange(color.G,179,15)) ||
+               (IntInRange(color.R,196,15) && IntInRange(color.B,210,15) && IntInRange(color.G,179,15)) ||
+               (IntInRange(color.R,217,15) && IntInRange(color.B,217,15) && IntInRange(color.G,179,15)) ||
+               (IntInRange(color.R,164,15) && IntInRange(color.B,2220,15) && IntInRange(color.G,179,15)))
+            	return true;
 			else
 				return false;
 		}
+
+        private bool IntInRange(int value, int testvalue, int range )
+        {
+            return value > (testvalue - range) && value < (testvalue + range);
+        }
 
 		/// <summary>
 		/// Returns a color based on the RBG values
